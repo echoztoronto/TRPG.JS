@@ -1,6 +1,6 @@
 
 
-let aPanel = new AttributePanel('attribute-panel', {
+const aPanel = new AttributePanel('attribute-panel', {
                                 'attributes' : {
                                     hp: 1000,
                                     mp: 500
@@ -12,7 +12,7 @@ let aPanel = new AttributePanel('attribute-panel', {
 
 
 
-let aBar = new AttributeBar('attribute-bar', {
+const aBar = new AttributeBars('attribute-bar', {
                                 'attributes' : {  //{name: [value, maxValue, barColor]}
                                     hp: [1000,2000,'pink'],
                                     mp: [500,800,'rgb(155, 198, 255)']
@@ -23,5 +23,5 @@ let aBar = new AttributeBar('attribute-bar', {
                                 'labelColor': {
                                     hp: "white"
                                 },
-                                });
+                              });
 

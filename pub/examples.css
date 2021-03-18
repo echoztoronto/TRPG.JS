@@ -7,16 +7,20 @@
     display: inline-block;
 }
 
+.demo-block {
+    min-width: 450px;
+}
+
 .buttons {
     margin-left: 20px;
     border: solid 2px black;
     padding: 20px 20px 20px 20px;
     font-size: 20px;
+    min-width: 700px;
 }
 
 #attribute-panel {
-    width: 300px;
-    height: 200px;
+    height: 100px;
     background: rgb(224, 223, 223);
     border: ridge rgb(238, 220, 220) 5px;
 }
@@ -29,6 +33,7 @@ button {
     height: 30px;
     min-width: 30px;
     font-size: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 button:hover {
@@ -36,9 +41,18 @@ button:hover {
 }
 
 #attribute-bar {
-    width: 300px;
-    height: 300px;
+    height: 250px;
     background: rgb(255, 255, 255);
     border: ridge rgb(238, 220, 220) 5px;
 }
 
+.demo-code {
+    padding-left: 10px;
+    font-size: 20px;
+    border: solid 2px black;
+    margin-bottom: 10px;
+}
+
+code {
+    font-size: 15px;
+}

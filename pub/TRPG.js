@@ -86,7 +86,7 @@ class AttributePanel {
 
 //  ------------------------------- Attribute Bar  ------------------------------
 
-class AttributeBar {
+class AttributeBars {
     attributes = {};      //  {name: [value, maxValue, barColor]}
     attributesMax = {};
     barColor = {};
