@@ -1,6 +1,48 @@
+.title {
+    padding-left: 200px;
+    font-size: 40px;
+    text-shadow: 2px 2px #b4b4b4;
+    padding-bottom: 50px;
+}
+
+.menu {
+    font-size: 30px;
+    width: 700px;
+    min-height: 500px;
+    text-align: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: rgb(90, 91, 97);
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.back{
+    text-decoration: none;
+    color: black;
+    display: block;
+    font-size: 25px;
+    margin-bottom: 100px;
+    padding-left: 300px;
+    padding-bottom: 20px;
+    border-bottom: double 5px black;
+}
+
+.back:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .section-container {
     display: flex;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .demo-block .buttons {
@@ -21,8 +63,7 @@
 
 #attribute-panel {
     height: 100px;
-    background: rgb(224, 223, 223);
-    border: ridge rgb(238, 220, 220) 5px;
+    border: ridge rgb(104, 159, 228) 5px;
 }
 
 button {
@@ -42,8 +83,7 @@ button:hover {
 
 #attribute-bar {
     height: 250px;
-    background: rgb(255, 255, 255);
-    border: ridge rgb(238, 220, 220) 5px;
+    border: ridge rgb(104, 159, 228) 5px;
 }
 
 .demo-code {
@@ -55,4 +95,23 @@ button:hover {
 
 code {
     font-size: 15px;
+}
+
+.section-title {
+    font-size: 30px;
+    padding: 10px 20px 10px 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    color: black;
+    text-shadow: 2px 2px #b4b4b4;
+}
+
+
+.eg {
+    font-size:25px;
+    padding: 10px 20px 10px 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    color: rgb(51, 51, 182);
+    text-shadow: 2px 2px #b4b4b4;
 }

@@ -10,8 +10,21 @@
     <title> Demo for TRPG.JS </title>
 </head>
 <body>
+    <a id="sec-0"> </a>
+    <div class="title"> TRPG.JS PlayGround </div>
+    <div class="menu"> 
+        Menu 
+        <br><br>
+        <a href="#sec-1">Attribute Panel</a>
+        <br>
+        <a href="#sec-2">Attribute Bars</a>
+    </div>
+    
+
     <div class="section-container"> 
         <div class="demo-block"> 
+            <a id="sec-1"> </a>
+            <div class="section-title"> Attribute Panel</div>
             <div class="demo-code"> 
                 <pre>
                     <code>
@@ -28,6 +41,7 @@ const aPanel = new AttributePanel(
                     </code>
                 </pre>
             </div>
+            <div class="eg"> Example </div>
             <div id="attribute-panel"> </div>
         </div>
         <div class="buttons">  
@@ -65,10 +79,13 @@ const aPanel = new AttributePanel(
             <button onclick="aPanel.update()"> .update() </button>
         </div>
     </div>
-  
+
+    <a href="#sec-0" class="back"> Back to Menu </a>
     
     <div class="section-container"> 
         <div class="demo-block"> 
+            <a id="sec-2"> </a>
+            <div class="section-title"> Attribute Bars</div>
             <div class="demo-code"> 
                 <pre>
                     <code>
@@ -90,6 +107,7 @@ const aBar = new AttributeBars(
                     </code>
                 </pre>
             </div>
+            <div class="eg"> Example </div>
             <div id="attribute-bar"> </div>
         </div>
         <div class="buttons">  
@@ -150,6 +168,8 @@ const aBar = new AttributeBars(
         </div>
     </div>
     
+
+    <a href="#sec-0" class="back"> Back to Menu </a>
     
 
     
