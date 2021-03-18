@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="TRPG.css">
+    <link rel="stylesheet" href="demo.css">
+    <script src="TRPG.js"> </script>
+    <title> Demo for TRPG.JS </title>
+</head>
+<body>
+    <div class="section-container"> 
+        <div class="demo-block" id="attribute-panel"> </div>
+        <div class="buttons">  
+            .set() 
+            <button onclick="aPanel.set('life', 50)"> ('life', 50) </button>
+            <button onclick="aPanel.set('life', 3)"> ('life', 3) </button>
+            <button onclick="aPanel.set('hp', 1500)"> ('hp', 1500) </button>
+            <br> .delete()
+            <button onclick="aPanel.delete('life')"> ('life') </button> 
+            <button onclick="aPanel.delete('hp')"> ('hp') </button> 
+            <br>
+            <br> .colorChange =
+            <button onclick="aPanel.colorChange = true">  true </button>
+            <button onclick="aPanel.colorChange = false"> false </button> 
+            <br> .colorChangeTime =
+            <button onclick="aPanel.colorChangeTime = 'inf'">  'inf' </button>
+            <button onclick="aPanel.colorChangeTime = 1">  1 </button>
+            <button onclick="aPanel.colorChangeTime = 3">  3 </button> 
+            <button onclick="aPanel.colorChangeTime = 5">  5 </button> 
+            <br> .colorChangeColor =
+            <button onclick="aPanel.colorChangeColor = 'red'">  'red' </button>
+            <button onclick="aPanel.colorChangeColor = 'blue'">  'blue' </button> 
+            <br> .nameColor = 
+            <button onclick="aPanel.nameColor = 'black'"> 'black' </button>
+            <button onclick="aPanel.nameColor = 'red'"> 'red' </button>
+            <br> .valueColor =
+            <button onclick="aPanel.valueColor = 'black'">  'black' </button>
+            <button onclick="aPanel.valueColor = 'red'">  'red' </button> 
+            <br>
+            <button onclick="aPanel.update()"> .update() </button>
+        </div>
+    </div>
+  
+    
+    <div class="section-container"> 
+        <div class="demo-block" id="attribute-bar"> </div>
+        <div class="buttons">  
+            .set()
+            <button onclick="aBar.set('life', 3, 3, 'yellow')"> ('life', 3, 3, 'yellow') </button>
+            <button onclick="aBar.set('life', 1, 3, 'green')"> ('life', 1, 3, 'green') </button>
+            <button onclick="aBar.set('hp', 1500, 5000, 'pink')"> ('hp', 1500, 5000, 'pink') </button>
+            <br> .delete()
+            <button onclick="aBar.delete('life')"> ('life') </button> 
+            <button onclick="aBar.delete('hp')"> ('hp') </button> 
+            <br>.setValue()
+            <button onclick="aBar.setValue('life', 0)"> ('life', 0) </button>
+            <button onclick="aBar.setValue('life', 2)"> ('life', 2) </button>
+            <button onclick="aBar.setValue('hp', 1)"> ('hp', 1) </button>
+            <br>.setMaxValue()
+            <button onclick="aBar.setMaxValue('life', 100)"> ('life', 100) </button>
+            <button onclick="aBar.setMaxValue('life', 5)"> ('life', 5) </button>
+            <button onclick="aBar.setMaxValue('hp', 13000)"> ('hp', 13000) </button>
+            <br>.setBarColor()
+            <button onclick="aBar.setBarColor('hp', 'red')"> ('hp', 'red') </button>
+            <button onclick="aBar.setBarColor('hp', 'green')"> ('hp', 'green') </button>
+            <br>.setLabelColor()
+            <button onclick="aBar.setLabelColor('hp', 'black')"> ('hp', 'black') </button>
+            <button onclick="aBar.setLabelColor('hp', 'white')"> ('hp', 'white') </button>
+            <br>
+            <br> .colorChange =
+            <button onclick="aBar.colorChange = true">  true </button>
+            <button onclick="aBar.colorChange = false"> false </button> 
+            <br> .colorChangeTime =
+            <button onclick="aBar.colorChangeTime = 'inf'">  'inf' </button>
+            <button onclick="aBar.colorChangeTime = 1">  1 </button>
+            <button onclick="aBar.colorChangeTime = 3">  3 </button> 
+            <button onclick="aBar.colorChangeTime = 5">  5 </button> 
+            <br> .colorChangeColor =
+            <button onclick="aBar.colorChangeColor = 'red'">  'red' </button>
+            <button onclick="aBar.colorChangeColor = 'blue'">  'blue' </button> 
+            <br> .containerColor =
+            <button onclick="aBar.containerColor = 'rgb(216, 216, 216)'"> 'rgb(216, 216, 216)' </button>
+            <button onclick="aBar.containerColor = 'black'"> 'black' </button>
+            <br> .showLabel =
+            <button onclick="aBar.showLabel = true"> true </button>
+            <button onclick="aBar.showLabel = false"> false </button>
+            <br> .labelPosition =
+            <button onclick="aBar.labelPosition = 'left'"> 'left' </button>
+            <button onclick="aBar.labelPosition = 'center'"> 'center' </button>
+            <button onclick="aBar.labelPosition = 'right'"> 'right' </button>
+            <br> .labelStyle =
+            <button onclick="aBar.labelStyle = 'value/max'"> 'value/max' </button>
+            <button onclick="aBar.labelStyle = 'value'"> 'value' </button>
+            <button onclick="aBar.labelStyle = '%'"> '%' </button>
+            <br>
+            <button onclick="aBar.update()"> .update() </button>
+        </div>
+    </div>
+    
+    
+
+    
+    <script src="demo.js"> </script>
+</body>
+</html>
