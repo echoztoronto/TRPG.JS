@@ -45,7 +45,7 @@ const myBag = new Inventory('inventory', {
     },
     numRow: 4,
     numColumn: 6,
-    menuOption: ['use','destroy','gift'],
+    menuOption: ['use','destroy'],
     menuOptionOnclick: {
       'use': use_item,
       'destroy':  destroy_item,

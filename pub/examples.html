@@ -12,25 +12,48 @@
 <body>
     <a id="sec-0"> </a>
     <div class="title"> TRPG.JS PlayGround </div>
-    <div class="menu"> 
-        Menu 
-        <br><br>
-        <br>
-        <a href="#sec-3"> Inventory </a>
-        <br>
-        <a href="#sec-1">Attribute Panel</a>
-        <br>
-        <a href="#sec-2">Attribute Bars</a>
+    <div class="section-container">
+        <div class="menu"> 
+            Menu 
+            <br>
+            <a href="#sec-3"> Inventory </a>
+            <br>
+            <a href="#sec-1">Attribute Panel</a>
+            <br>
+            <a href="#sec-2">Attribute Bars</a>
+            <br><br>
+            Coming Soon:
+            <br>
+            <a href="#sec-0"> Skill Bar </a>
+            <br>
+            <a href="#sec-0"> Talent Tree </a>
+            <br>
+            <a href="#sec-0"> Event Panel </a>
+            <br>
+            <a href="#sec-0"> Chat Window </a>
+
+        </div>
+        <div id="introduction"> 
+            TRPG.JS is a library that can be used to build web-based TRPGs.
+            <br><br>
+            <b>What is TRPG? </b><br>
+            <b>T</b>abletop <b>R</b>ole-<b>P</b>laying Game, where multiple players need to follow a set of rules, role-play their characters, and go through a story together. 
+            <br><br>
+            You can use TRPG.JS library to display the information panel for each player, such as <b>attributes</b>, <b>skills</b>, <b>talent tree</b> and <b>inventory</b>, as well as to <b>display events</b> (and possible options/reactions to events) and <b>build chat windows</b>. 
+            <br><br>
+            This library is mainly focusing on DOM manipulation, please be advised that you can modify the style of everything to make the UI prettier :) 
+        </div>
     </div>
     
 
-      <div class="section-container"> 
+    <div class="section-container"> 
         <div class="demo-block"> 
             <a id="sec-3"> </a>
             <div class="section-title"> Inventory </div>
             <div class="demo-code"> 
                 <pre>
                     <code>
+// constructor
 const myBag = new Inventory('inventory', {
   quantity : { apple: 20,banana: 5,
                orange: 0,strawberry: 100},
@@ -39,9 +62,9 @@ const myBag = new Inventory('inventory', {
     image: {//path to image here},
     numRow: 4,
     numColumn: 6,
-    menuOption: ['use','destroy','gift'],
+    menuOption: ['use','destroy'],
     menuOptionOnclick: { 'use': use_item,
-     'destroy':  destroy_item,}  //no event for 'gift'
+     'destroy':  destroy_item,}  
 });
                     </code>
                 </pre>
@@ -49,6 +72,30 @@ const myBag = new Inventory('inventory', {
             <div class="eg"> Example </div>
             <div id="inventory-message"> </div>
             <div id="inventory"> </div>
+            <div class="demo-code"> 
+                <pre>
+                    <code>
+// left click menu option onclick functions
+function use_item(item) {
+  myBag.removeItem(item, 1);
+}
+
+function destroy_item(item) {
+  myBag.clearItem(item);
+}
+
+function gift_item(item) {
+  myBag.removeItem(item, 1);
+  // print "thank you above"
+}
+                    </code>
+                </pre>
+            </div>
+
+
+
+    
+
         </div>
         <div class="buttons">  
         <br> .set()
@@ -78,7 +125,7 @@ const myBag = new Inventory('inventory', {
             <button onclick="myBag.clearItem('apple')"> ('apple') </button> 
             <button onclick="myBag.clearItem('strawberry')">('strawberry')  </button> 
             <button onclick="myBag.clearItem('banana')"> ('banana')</button>
-            <br> .setOption()
+            <br><br> .setOption()
             <button onclick="myBag.setOption([])"> ([]) </button> 
             <button onclick="myBag.setOption(['eat','drink'])">(['eat','drink'])  </button> 
             <button onclick="myBag.setOption(['use','destroy','gift'])"> (['use','destroy','gift'])</button>
@@ -86,25 +133,6 @@ const myBag = new Inventory('inventory', {
             <button onclick="myBag.addOption('gift')"> ('gift') </button> 
             <button onclick="myBag.addOption('view')">('view')  </button> 
             <button onclick="myBag.addOption('wash')"> ('wash')</button>
-            <pre>
-                <code>
-function use_item(item) {
-  myBag.removeItem(item, 1);
-}
-
-function destroy_item(item) {
-  myBag.clearItem(item);
-}
-
-function gift_item(item) {
-  myBag.removeItem(item, 1);
-  document.getElementById("inventory-message").innerHTML="thank you!";
-  setTimeout(() => {
-    document.getElementById("inventory-message").innerHTML= '';
-  }, 2000);
-}
-                </code>
-            </pre>
             <br> .addOptionClick()
             <button onclick="myBag.addOptionClick('use', use_item)"> ('use', use_item)</button>
             <button onclick="myBag.addOptionClick('destroy', destroy_item)">('destroy', destroy_item)  </button> 
@@ -113,14 +141,44 @@ function gift_item(item) {
             <button onclick="myBag.removeOptionClick('use')"> ('use') </button> 
             <button onclick="myBag.removeOptionClick('destroy')">('destroy')  </button> 
             <button onclick="myBag.removeOptionClick('gift')"> ('gift')</button>
+            <br><br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b>
+            <br> .itemSize = 
+            <button onclick="myBag.itemSize=30; myBag.update();"> 30 </button> 
+            <button onclick="myBag.itemSize=50; myBag.update();"> 50 </button> 
+            <button onclick="myBag.itemSize=80; myBag.update();"> 80 </button>
+            <br>  .numColumn= 
+            <button onclick="myBag.numColumn=1; myBag.update();"> 2</button> 
+            <button onclick="myBag.numColumn=3; myBag.update();"> 3 </button> 
+            <button onclick="myBag.numColumn=5; myBag.update();"> 5 </button>
+            <br>  .numRow= 
+            <button onclick="myBag.numRow=3; myBag.update();"> 3</button> 
+            <button onclick="myBag.numRow=5; myBag.update();"> 5 </button> 
+            <button onclick="myBag.numRow=8; myBag.update();"> 8 </button>
+            <br><br> .showName = 
+            <button onclick="myBag.showName=true; myBag.update();"> true </button> 
+            <button onclick="myBag.showName=false; myBag.update();"> false </button> 
+            <br> .showDescription = 
+            <button onclick="myBag.showDescription=true; myBag.update();"> true </button> 
+            <button onclick="myBag.showDescription=false; myBag.update();"> false </button> 
+            <br> .showQuantity = 
+            <button onclick="myBag.showQuantity=true; myBag.update();"> true </button> 
+            <button onclick="myBag.showQuantity=false; myBag.update();"> false </button> 
+            <br> .showOnclickMenu = 
+            <button onclick="myBag.showOnclickMenu=true; myBag.update();"> true </button> 
+            <button onclick="myBag.showOnclickMenu=false; myBag.update();"> false </button> 
+            <br><br> .quantityXPosition = 
+            <button onclick="myBag.quantityXPosition='left'; myBag.update();"> 'left' </button> 
+            <button onclick="myBag.quantityXPosition='center'; myBag.update();"> 'center' </button> 
+            <button onclick="myBag.quantityXPosition='right'; myBag.update();"> 'right' </button>
+            <br> .quantityYPosition = 
+            <button onclick="myBag.quantityYPosition='top'; myBag.update();"> 'top' </button> 
+            <button onclick="myBag.quantityYPosition='center'; myBag.update();"> 'center' </button> 
+            <button onclick="myBag.quantityYPosition='bottom'; myBag.update();"> 'bottom' </button>
+
         </div>
     </div>
 
     <a href="#sec-0" class="back"> Back to Menu </a>
-
-
-
-
 
     <div class="section-container"> 
         <div class="demo-block"> 
@@ -129,6 +187,7 @@ function gift_item(item) {
             <div class="demo-code"> 
                 <pre>
                     <code>
+// constructor
 const aPanel = new AttributePanel(
 'attribute-panel', {
     attributes : {
@@ -168,7 +227,7 @@ const aPanel = new AttributePanel(
             <button onclick="aPanel.colorChangeColor = 'red';aPanel.update()">  'red' </button>
             <button onclick="aPanel.colorChangeColor = 'blue';aPanel.update()">  'blue' </button>
             <br><br>
-            <br><b>.update() is required for the following options to be effective, but here I'm just running it for you </b> 
+            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b> 
             <br> .nameColor = 
             <button onclick="aPanel.nameColor = 'black';aPanel.update()"> 'black' </button>
             <button onclick="aPanel.nameColor = 'red';aPanel.update()"> 'red' </button>
@@ -188,6 +247,7 @@ const aPanel = new AttributePanel(
             <div class="demo-code"> 
                 <pre>
                     <code>
+// constructor
 const aBar = new AttributeBars(
 'attribute-bar', {
     attributes : {  
@@ -246,7 +306,7 @@ const aBar = new AttributeBars(
             <button onclick="aBar.colorChangeColor = 'red';aBar.update()">  'red' </button>
             <button onclick="aBar.colorChangeColor = 'blue';aBar.update()">  'blue' </button> 
             <br><br>
-            <br><b>.update() is required for the following options to be effective, but here I'm just running it for you </b>
+            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b>
             <br> .containerColor =
             <button onclick="aBar.containerColor = 'rgb(216, 216, 216)';aBar.update()"> 'rgb(216, 216, 216)' </button>
             <button onclick="aBar.containerColor = 'black';aBar.update()"> 'black' </button>
@@ -272,10 +332,7 @@ const aBar = new AttributeBars(
         </div>
     </div>
     
-
     <a href="#sec-0" class="back"> Back to Menu </a>
-    
-
     
     <script src="examples.js"> </script>
 </body>

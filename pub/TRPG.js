@@ -463,7 +463,6 @@ class Inventory {
                     menu.setAttribute("data-option-clicked", op_text);
                     // add option onclick function
                     if(onclick_f != undefined) {
-                        console.log(onclick_f);
                         onclick_f(menu.getAttribute('data-item'));
                     }
                 });
@@ -576,6 +575,8 @@ class Inventory {
         // quantity style
         change_class_css('TRPG-inventory-quantity', 'font-size', this.quantityFontSize + 'px');
         this.set_quantity_position();
+        if(this.showQuantity) change_class_css('TRPG-inventory-quantity', 'visibility', 'visible');
+        else change_class_css('TRPG-inventory-quantity', 'visibility', 'hidden');
 
         // option style
         change_class_css('TRPG-inventory-option', 'font-size', this.optionFontSize + 'px');
@@ -584,19 +585,19 @@ class Inventory {
 
     set_quantity_position() {
         change_class_css('TRPG-inventory-quantity', 'text-align', this.quantityXPosition);
-        let offset = this.quantityFontSize + 2;
+        let offset = this.quantityFontSize;
         switch(this.quantityYPosition) {
             case "top":
                 change_class_css('TRPG-inventory-quantity', 'padding-top', '0px');
                 break;
             case "center":
-                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(50% - ' + offset + 'px)');
+                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(50% - ' + offset/2 + 'px)');
                 break;
             case "bottom":
-                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(100% - ' + offset + 'px)');
+                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(85% - ' + offset + 'px)');
                 break;
             default:
-                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(100% - ' + offset + 'px)');
+                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(80% - ' + offset + 'px)');
         }
     }
 
