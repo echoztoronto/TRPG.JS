@@ -37,6 +37,7 @@
 
 #introduction {
     min-width: 750px;
+    max-width: 900px;
     border: 2px solid black;
     margin-left: 30px;
     padding: 30px 30px 30px 50px;
@@ -117,7 +118,9 @@ code {
 
 @media only screen and (max-width: 768px) {
     .demo-block {min-width:  700px;}
+    .menu {min-width:  700px;}
     code {  font-size: 13px; }
+
 }
 
 
