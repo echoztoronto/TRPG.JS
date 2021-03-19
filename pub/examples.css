@@ -3,6 +3,7 @@
     font-size: 40px;
     text-shadow: 2px 2px #b4b4b4;
     padding-bottom: 30px;
+    min-width: 400px;
 }
 
 .author{
@@ -10,6 +11,7 @@
     font-size: 30px;
     text-shadow: 1px 1px #b4b4b4;
     padding-bottom: 50px;
+    min-width: 400px;
 }
 
 .menu {
