@@ -601,12 +601,12 @@ function lock_to_max(allowExceedMax, value, max) {
 function move_element_to_mouse_postion(event, div) {
     const x = event.clientX;    
     const y = event.clientY; 
-    div.style.left = x + 'px';
-    div.style.top  = y + 'px';
+    div.style.left = window.scrollX + x + 'px';
+    div.style.top  = window.scrollY + y + 'px';
 }
 
 function set_element_to_bottom_right_of_another_element(front, back) {
     const rect = back.getBoundingClientRect();
-    front.style.left = rect.right - 5  + 'px';
-    front.style.top =  rect.bottom - 5 + 'px';
+    front.style.left = window.scrollX + rect.right - 5  + 'px';
+    front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
 }
