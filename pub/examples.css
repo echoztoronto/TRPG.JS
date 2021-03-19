@@ -7,7 +7,7 @@
 
 .menu {
     font-size: 30px;
-    width: 450px;
+    min-width: 500px;
     text-align: center;
     border: solid 2px black;
     padding-bottom: 50px;
@@ -27,7 +27,7 @@
 }
 
 #introduction {
-    width: 750px;
+    min-width: 750px;
     border: 2px solid black;
     margin-left: 30px;
     padding: 30px 30px 30px 50px;
@@ -37,6 +37,7 @@
 }
 
 .back{
+    min-width: 800px;
     text-decoration: none;
     color: black;
     display: block;
@@ -62,7 +63,7 @@
 }
 
 .demo-block {
-    min-width: 450px;
+    min-width: 500px;
 }
 
 .buttons {
