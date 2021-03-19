@@ -309,6 +309,7 @@ class Inventory {
     quantityYPosition = 'bottom';  // top, center, bottm
 
     index = {};   // {name: cell number}   for develop only
+    validItemCount = 0;
 
     constructor (ID, modules) {  // modules = {name: {description: x, image: x, ...} }
         // setting up the modules
@@ -354,18 +355,22 @@ class Inventory {
     }
 
     addItem(item, quantity) {
-        this.update();
+        let need_update = false;
         if(this.quantity[item] == undefined) this.quantity[item] = 0;
+        if(this.quantity[item] == 0)  need_update = true;
         this.quantity[item] += quantity;
+        if(need_update) {
+            this.validItemCount ++;
+            this.index[item] = this.validItemCount;
+            this.update();
+        }
         // DOM 
         const quantity_id = this.ID + '-quantity-' + this.index[item];
         const quantity_element = document.getElementById(quantity_id);
         quantity_element.innerHTML = this.quantity[item];
-        this.update();
     }
 
     removeItem(item, quantity) {
-        this.update();
         if(this.quantity[item] == undefined) {
             console.log("undefined quantity");
             return;
@@ -375,6 +380,13 @@ class Inventory {
         if(this.quantity[item] < 0) this.quantity[item] = 0;
         // DOM 
         if(this.quantity[item] == 0) {
+            const i = this.index[item];
+            for(const item_name in this.index) {
+                if(this.index[item_name] > i) {
+                    this.index[item] -= 1;
+                }
+            }
+            this.index[item] = 0;
             this.update();
             return;
         }
@@ -385,6 +397,13 @@ class Inventory {
 
     clearItem(item) {
         delete this.quantity[item];
+        const i = this.index[item];
+        for(const item_name in this.index) {
+            if(this.index[item_name] > i) {
+                this.index[item] -= 1;
+            }
+        }
+        this.index[item] = 0;
         this.update();
     }
 
@@ -426,6 +445,7 @@ class Inventory {
         
         // add tr based on numRow 
         let item_count = 1;
+        this.validItemCount = 0;
         for(let row_count = 1; row_count < this.numRow+1; row_count++) {
             const row = document.createElement("tr");
             row.classList.add("TRPG-inventory-row");
@@ -496,6 +516,7 @@ class Inventory {
         for (const item in this.quantity) {
             if(this.quantity[item] > 0) {
                 this.index[item] = item_count;
+                this.validItemCount++;
                 //cell content
                 let image_path = this.image[item];
                 const description = this.description[item];
