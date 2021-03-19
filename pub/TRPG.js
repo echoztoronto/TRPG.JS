@@ -1,4 +1,7 @@
 
+const default_img_path = "img/default.jpg";
+
+
 
 //  ------------------------------- Attribute Panel  ------------------------------
 class AttributePanel {
@@ -287,25 +290,32 @@ class AttributeBars {
 //  ------------------------------- Inventory  ------------------------------
 
 class Inventory {
-    quantity = {};    // {name: quantity}      *required
+    quantity = {};     // {name: quantity}      *required
     description = {};  // {name: description}
     image = {};        // {name: path}
     
     numRow = 5;
     numColumn = 5;
+    showName = true;
     showDescription = true;
     showQuantity = true;
     showOnclickMenu = true;
     onclickMenuOption = []; 
+    optionFontSize = 20;
+    itemSize = 50;
+    quantityFontSize = 18;
+    quantityXPosition = 'right';  // left, center, right
+    quantityYPosition = 'bottom';  // top, center, bottm
 
+    index = {};   // {name: cell number}   for develop only
 
     constructor (ID, modules) {  // modules = {name: {description: x, image: x, ...} }
         // setting up the modules
         this.ID = ID;
         for (const module in modules) {
-            if (module in ["quantity","description","image"]) {
-                for (const attr in attrs) {
-                    this[module][attr] = modules[module][attr];
+            if (module=="quantity"||module=="description"||module=="image") {
+                for (const item in modules[module]) {
+                    this[module][item] = modules[module][item];
                 }
             }
             else {
@@ -316,6 +326,239 @@ class Inventory {
         this.container.classList.add("TRPG-inventory-container");
         // DOM
         this.update();
+    }
+
+    set(item, quantity, description, img){
+        this.quantity[item] = quantity;
+        this.description[item] = description;
+        this.image[item] = img;
+        this.update();
+    }
+
+    setQuantity(item, quantity) {
+        this.quantity[item] = quantity;
+        this.update();
+    }
+
+    setDescription(item, description){
+        if(this.quantity[item] == undefined) this.quantity[item] = 0;
+        this.description[item] = description;
+        this.update();
+    }
+
+    setImage(item, img){
+        if(this.quantity[item] == undefined) this.quantity[item] = 0;
+        this.image[item] = img;
+        this.update();
+    }
+
+    addItem(item, quantity) {
+        if(this.quantity[item] == undefined) this.quantity[item] = 0;
+        this.quantity[item] += quantity;
+        // DOM 
+        const quantity_id = this.ID + '-quantity-' + this.index[item];
+        const quantity_element = document.getElementById(quantity_id);
+        quantity_element.innerHTML = this.quantity[item];
+    }
+
+    removeItem(item, quantity) {
+        if(this.quantity[item] == undefined) {
+            console.log("undefined quantity");
+            return;
+        }
+        this.quantity[item] -= quantity;
+        // we don't support negative quantity
+        if(this.quantity[item] < 0) this.quantity[item] = 0;
+        // DOM 
+        if(this.quantity[item] == 0) {
+            this.update();
+            return;
+        }
+        const quantity_id = this.ID + '-quantity-' + this.index[item];
+        const quantity_element = document.getElementById(quantity_id);
+        quantity_element.innerHTML = this.quantity[item];
+    }
+
+    update() {
+        // delete exist table object
+        if(document.getElementById(this.ID + "-table") != null) {
+            document.getElementById(this.ID + "-table").remove();
+        }
+
+        // create table object 
+        const table = document.createElement("table");
+        table.classList.add("TRPG-inventory-table");
+        table.id = this.ID + "-table";
+        this.container.appendChild(table);
+        
+        // add tr based on numRow 
+        let item_count = 1;
+        for(let row_count = 1; row_count < this.numRow+1; row_count++) {
+            const row = document.createElement("tr");
+            row.classList.add("TRPG-inventory-row");
+            table.appendChild(row);
+            // add th based on numColumn
+            for(let col_count = 1; col_count < this.numColumn+1; col_count++) {
+                const cell = document.createElement("th");
+                cell.classList.add("TRPG-inventory-cell");
+                cell.id = this.ID + '-' + item_count;
+                row.appendChild(cell);
+                item_count++;
+            }
+        }
+
+        // add left click menu
+        const menu = document.createElement("div");
+        menu.classList.add("TRPG-inventory-option-menu");
+        menu.id = this.ID + "-option-menu";
+        menu.style.visibility = 'hidden';
+        this.container.appendChild(menu);
+        if(this.onclickMenuOption.length == 0) {
+            console.log("onclickMenuOption is empty!");
+        } else {
+            let option_count = 1;
+            for(let i = 0; i < this.onclickMenuOption.length; i++){
+                const op_text = this.onclickMenuOption[i];
+                const op = document.createElement("div");
+                op.classList.add("TRPG-inventory-option");
+                op.id = this.ID + "-option-" + option_count;
+                op.setAttribute("data-option", op_text);
+                op.innerHTML = op_text;
+                menu.appendChild(op);
+                op.addEventListener("click",function(){
+                    menu.setAttribute("data-option-clicked", op_text);
+                });
+            }
+        }
+
+        // add hover window for name and description
+        const info = document.createElement("div");
+        info.classList.add("TRPG-inventory-info");
+        info.id = this.ID + "-info";
+        info.style.visibility = 'hidden';
+        this.container.appendChild(info);
+        // item name
+        const name_element = document.createElement("div");
+        if(this.showName) {
+            name_element.classList.add("TRPG-inventory-item-name");
+            info.appendChild(name_element);
+            name_element.style.visibility = 'hidden';
+        } 
+        // item descrition
+        const description_element = document.createElement("div");
+        if(this.showDescription) {
+            description_element.classList.add("TRPG-inventory-item-description");
+            info.appendChild(description_element);
+            description_element.style.visibility = 'hidden';
+        }
+        
+        // add items and update index
+        item_count = 1;
+        let valid_cell_id = [];
+        for (const item in this.quantity) {
+            if(this.quantity[item] > 0) {
+                this.index[item] = item_count;
+                //cell content
+                const image_path = this.image[item];
+                const description = this.description[item];
+                const display_name = this.showName;
+                const display_description = this.showDescription;
+                if(image_path == undefined) image_path = default_img_path;
+                const cell_element = document.getElementById(this.ID + '-' + item_count);
+                cell_element.innerHTML = 
+                    `<div class='TRPG-inventory-cell-container'> 
+                        <img src='${image_path}' id='${this.ID}-img-${item_count}'>
+                        <div class='TRPG-inventory-quantity' id='${this.ID}-quantity-${item_count}'> ${this.quantity[item]} </div>
+                    </div>`;
+                valid_cell_id.push(cell_element);
+                // left click event - show options
+                if(this.showOnclickMenu){
+                    cell_element.addEventListener("click",function(event){
+                        menu.style.visibility = "hidden";
+                        move_element_to_mouse_postion(event, menu);
+                        menu.style.visibility = "visible";
+                        menu.setAttribute("data-item", item);
+                    });
+                }
+                // hover event - show name/description 
+                cell_element.addEventListener("mouseover",function(){
+                    if(menu.style.visibility == 'visible') {
+                        info.style.visibility = "hidden";
+                        name_element.style.visibility = 'hidden';
+                        description_element.style.visibility = 'hidden';
+                        return;
+                    }
+                    set_element_to_bottom_right_of_another_element(info, cell_element);
+                    info.setAttribute("data-item", item);
+                    if(display_name) {
+                        name_element.innerHTML = item;
+                        name_element.style.visibility = 'visible';
+                    } 
+                    if(display_description) {
+                        description_element.style.visibility = 'visible';
+                        if(description == undefined) {
+                            description_element.innerHTML = `no description for this item`;
+                        } else description_element.innerHTML = description;
+                    } 
+                    if(!display_name && !display_description) {
+                        info.style.visibility = "hidden";
+                    } else info.style.visibility = "visible";
+                });
+
+                item_count ++;
+            }
+        }
+
+        // remove click event
+        document.addEventListener('click', function(event){
+            if(info.style.visibility == 'visible') {
+                info.style.visibility = "hidden";
+                name_element.style.visibility = 'hidden';
+                description_element.style.visibility = 'hidden';
+            }
+            let should_hide = true;
+            for(let i =0; i < valid_cell_id.length; i++) {
+                if(valid_cell_id[i].contains(event.target)) should_hide = false;
+            }
+            if(should_hide) menu.style.visibility = 'hidden';
+        });
+        document.addEventListener('mousemove', function(){
+            if(menu.style.visibility == 'visible') {
+                info.style.visibility = "hidden";
+                name_element.style.visibility = 'hidden';
+                description_element.style.visibility = 'hidden';
+            }
+        });
+
+        // cell width and height 
+        change_class_css("TRPG-inventory-cell", "width", this.itemSize + 'px');
+        change_class_css("TRPG-inventory-cell", "height", this.itemSize + 'px');
+
+        // quantity style
+        change_class_css('TRPG-inventory-quantity', 'font-size', this.quantityFontSize + 'px');
+        this.set_quantity_position();
+
+        // option style
+        change_class_css('TRPG-inventory-option', 'font-size', this.optionFontSize + 'px');
+
+    }
+
+    set_quantity_position() {
+        change_class_css('TRPG-inventory-quantity', 'text-align', this.quantityXPosition);
+        let offset = this.quantityFontSize + 2;
+        switch(this.quantityYPosition) {
+            case "top":
+                change_class_css('TRPG-inventory-quantity', 'padding-top', '0px');
+                break;
+            case "center":
+                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(50% - ' + offset + 'px)');
+                break;
+            case "bottom":
+                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(100% - ' + offset + 'px)');
+                break;
+            default:
+                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(100% - ' + offset + 'px)');
+        }
     }
 
 }
@@ -353,4 +596,17 @@ function lock_to_max(allowExceedMax, value, max) {
         return max;
     }
     return value;
+}
+
+function move_element_to_mouse_postion(event, div) {
+    const x = event.clientX;    
+    const y = event.clientY; 
+    div.style.left = x + 'px';
+    div.style.top  = y + 'px';
+}
+
+function set_element_to_bottom_right_of_another_element(front, back) {
+    const rect = back.getBoundingClientRect();
+    front.style.left = rect.right - 5  + 'px';
+    front.style.top =  rect.bottom - 5 + 'px';
 }

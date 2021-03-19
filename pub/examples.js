@@ -25,3 +25,27 @@ const aBar = new AttributeBars('attribute-bar', {
                                 },
                               });
 
+
+const myBag = new Inventory('inventory', {
+  quantity : {  
+      apple: 20,
+      banana: 5,
+      orange: 0,
+      strawberry: 100
+    },
+  description: {
+      apple: 'rotted',
+      banana: 'it tastes like a banana'
+    }, 
+    image: {
+      banana: 'img/banana.jpg',
+      apple: 'img/apple.jpg',
+      strawberry: 'img/strawberry.jpg',
+      orange: 'img/orange.jpg'
+    },
+    numRow: 4,
+    numColumn: 6,
+    showName: true,
+    showDescription: true,
+    onclickMenuOption: ['use','destroy', 'gift'] 
+});

@@ -55,3 +55,132 @@
     font-size: 18px;
     margin-left: -100%;
 }
+
+/* --------- Inventory -----------------------------*/
+
+
+.TRPG-inventory-table {
+    margin: 20px 20px 20px 20px;
+    background-color: rgb(246, 148, 91);
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+    box-shadow: rgba(179, 70, 51, 0.322) 0px 0px 0px 3px;
+}
+
+
+
+.TRPG-inventory-cell {
+    background-color: rgba(255, 255, 255, 0.863);
+    border-radius: 10px;
+    border: 1px solid rgb(165, 88, 88);
+    padding: 0; 
+    margin: 0;
+}
+
+.TRPG-inventory-cell-container {
+    display: flex; 
+    flex-flow: row nowrap; 
+    width: 100%; 
+    height: 100%;
+    padding: 0; 
+    margin: 0;
+}
+
+.TRPG-inventory-cell img {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    flex: none; 
+    position: relative;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 0 0 0 0;
+}
+
+.TRPG-inventory-quantity {
+    box-sizing: border-box;
+    flex: none; 
+    position: relative;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    margin-left: -100%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.TRPG-inventory-option-menu {
+    position: absolute;
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    -webkit-transition: opacity 2s ease-in;
+    -moz-transition: opacity 2s ease-in;
+    -o-transition: opacity 2s ease-in;
+    -ms-transition: opacity 2s ease-in;
+    transition: opacity 2s ease-in;
+    border-top : 1px solid rgb(78, 78, 78);
+    border-left: 1px solid rgb(78, 78, 78);
+    border-right: 1px solid rgb(78, 78, 78);
+}
+
+.TRPG-inventory-option {
+    min-width: 60px;
+    min-height: 20px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    border-bottom: 1px solid rgb(78, 78, 78);
+    padding: 3px 5px 3px 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.TRPG-inventory-option:hover {
+    background-color: rgb(163, 207, 248);
+}
+
+.TRPG-inventory-info {
+    position: absolute;
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    border: solid 1px black;
+}
+
+.TRPG-inventory-item-name {
+    min-width: 60px;
+    min-height: 20px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 3px 5px 3px 5px;
+    font-size: 20px;
+    font-family:cursive;
+}
+
+.TRPG-inventory-item-description {
+    min-width: 60px;
+    min-height: 20px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 3px 5px 3px 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
