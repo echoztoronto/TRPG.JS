@@ -15,6 +15,9 @@
     <div class="menu"> 
         Menu 
         <br><br>
+        <br>
+        <a href="#sec-3"> Inventory </a>
+        <br>
         <a href="#sec-1">Attribute Panel</a>
         <br>
         <a href="#sec-2">Attribute Bars</a>
@@ -28,14 +31,88 @@
             <div class="demo-code"> 
                 <pre>
                     <code>
+const myBag = new Inventory('inventory', {
+  quantity : { apple: 20,banana: 5,
+               orange: 0,strawberry: 100},
+  description: { apple: 'rotted',
+           banana: 'it tastes like a banana' }, 
+    image: {//path to image here},
+    numRow: 4,
+    numColumn: 6,
+    menuOption: ['use','destroy','gift'],
+    menuOptionOnclick: { 'use': use_item,
+     'destroy':  destroy_item,}  //no event for 'gift'
+});
                     </code>
                 </pre>
             </div>
             <div class="eg"> Example </div>
+            <div id="inventory-message"> </div>
             <div id="inventory"> </div>
         </div>
         <div class="buttons">  
+        <br> .set()
+            <button onclick="myBag.set('grape',233, 'Raw grapes are 81% water, 18% carbohydrates, 1% protein, and have negligible fat','img/grape.jpg')"> ('grape',233, DESCRIPTION,IMG_PATH) </button> 
+            <br> .setQuantity()
+            <button onclick="myBag.setQuantity('apple',50)"> ('apple',50) </button> 
+            <button onclick="myBag.setQuantity('apple',100)"> ('apple',100) </button> 
+            <button onclick="myBag.setQuantity('orange',35)"> ('orange',35) </button>
+            <button onclick="myBag.setQuantity('carrot',1)"> ('carrot',1) </button>
+            <br> .setDescription()
+            <button onclick="myBag.setDescription('apple', 'a red thing')"> ('apple', 'a red thing') </button>  
+            <button onclick="myBag.setDescription('banana',undefined)"> ('banana',undefined) </button>
+            <button onclick="myBag.setDescription('strawberry','I like it')"> ('strawberry','I like it') </button>
+            <br> .setImage()
+            <button onclick="myBag.setImage('apple', 'img/default.jpg')"> apple -> question mark </button> 
+            <button onclick="myBag.setImage('apple', 'img/watermelon.jpg')"> apple -> watermelon  </button> 
+            <button onclick="myBag.setImage('banana', 'img/grape.jpg')"> banana -> grape </button>
+            <br> .addItem()
+            <button onclick="myBag.addItem('apple', 1)"> ('apple', 1) </button> 
+            <button onclick="myBag.addItem('apple', 30)">('apple', 30)  </button> 
+            <button onclick="myBag.addItem('banana', 5)"> ('banana', 5)</button>
+            <br> .removeItem()
+            <button onclick="myBag.removeItem('apple', 1)"> ('apple', 1) </button> 
+            <button onclick="myBag.removeItem('apple', 30)">('apple', 30)  </button> 
+            <button onclick="myBag.removeItem('banana', 5)"> ('banana', 5)</button>
+            <br> .clearItem()
+            <button onclick="myBag.clearItem('apple')"> ('apple') </button> 
+            <button onclick="myBag.clearItem('strawberry')">('strawberry')  </button> 
+            <button onclick="myBag.clearItem('banana')"> ('banana')</button>
+            <br> .setOption()
+            <button onclick="myBag.setOption([])"> ([]) </button> 
+            <button onclick="myBag.setOption(['eat','drink'])">(['eat','drink'])  </button> 
+            <button onclick="myBag.setOption(['use','destroy','gift'])"> (['use','destroy','gift'])</button>
+            <br> .addOption()
+            <button onclick="myBag.addOption('gift')"> ('gift') </button> 
+            <button onclick="myBag.addOption('view')">('view')  </button> 
+            <button onclick="myBag.addOption('wash')"> ('wash')</button>
+            <pre>
+                <code>
+function use_item(item) {
+  myBag.removeItem(item, 1);
+}
 
+function destroy_item(item) {
+  myBag.clearItem(item);
+}
+
+function gift_item(item) {
+  myBag.removeItem(item, 1);
+  document.getElementById("inventory-message").innerHTML="thank you!";
+  setTimeout(() => {
+    document.getElementById("inventory-message").innerHTML= '';
+  }, 2000);
+}
+                </code>
+            </pre>
+            <br> .addOptionClick()
+            <button onclick="myBag.addOptionClick('use', use_item)"> ('use', use_item)</button>
+            <button onclick="myBag.addOptionClick('destroy', destroy_item)">('destroy', destroy_item)  </button> 
+            <button onclick="myBag.addOptionClick('gift', gift_item)"> ('gift', gift_item) </button> 
+            <br> .removeOptionClick()
+            <button onclick="myBag.removeOptionClick('use')"> ('use') </button> 
+            <button onclick="myBag.removeOptionClick('destroy')">('destroy')  </button> 
+            <button onclick="myBag.removeOptionClick('gift')"> ('gift')</button>
         </div>
     </div>
 

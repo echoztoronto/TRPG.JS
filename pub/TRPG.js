@@ -300,7 +300,8 @@ class Inventory {
     showDescription = true;
     showQuantity = true;
     showOnclickMenu = true;
-    onclickMenuOption = []; 
+    menuOption = []; 
+    menuOptionOnclick = {};
     optionFontSize = 20;
     itemSize = 50;
     quantityFontSize = 18;
@@ -313,7 +314,7 @@ class Inventory {
         // setting up the modules
         this.ID = ID;
         for (const module in modules) {
-            if (module=="quantity"||module=="description"||module=="image") {
+            if (module=="quantity"||module=="description"||module=="image"||module=="menuOptionOnclick") {
                 for (const item in modules[module]) {
                     this[module][item] = modules[module][item];
                 }
@@ -353,15 +354,18 @@ class Inventory {
     }
 
     addItem(item, quantity) {
+        this.update();
         if(this.quantity[item] == undefined) this.quantity[item] = 0;
         this.quantity[item] += quantity;
         // DOM 
         const quantity_id = this.ID + '-quantity-' + this.index[item];
         const quantity_element = document.getElementById(quantity_id);
         quantity_element.innerHTML = this.quantity[item];
+        this.update();
     }
 
     removeItem(item, quantity) {
+        this.update();
         if(this.quantity[item] == undefined) {
             console.log("undefined quantity");
             return;
@@ -377,6 +381,35 @@ class Inventory {
         const quantity_id = this.ID + '-quantity-' + this.index[item];
         const quantity_element = document.getElementById(quantity_id);
         quantity_element.innerHTML = this.quantity[item];
+    }
+
+    clearItem(item) {
+        delete this.quantity[item];
+        this.update();
+    }
+
+    setOption(op) {
+        this.menuOption = op;
+        this.update();
+    }
+
+    addOption(op){
+        let repeated = false;
+        for(let i = 0; i < this.menuOption.length; i++) {
+            if(this.menuOption[i] == op) repeated = true;
+        }
+        if(!repeated) this.menuOption.push(op);
+        this.update();
+    }
+
+    addOptionClick(op, func) {
+        this.menuOptionOnclick[op] = func;
+        this.update();
+    }
+
+    removeOptionClick(op) {
+        this.menuOptionOnclick[op] = undefined;
+        this.update();
     }
 
     update() {
@@ -413,13 +446,14 @@ class Inventory {
         menu.id = this.ID + "-option-menu";
         menu.style.visibility = 'hidden';
         this.container.appendChild(menu);
-        if(this.onclickMenuOption.length == 0) {
-            console.log("onclickMenuOption is empty!");
+        if(this.menuOption.length == 0) {
+            console.log("menuOption is empty!");
         } else {
             let option_count = 1;
-            for(let i = 0; i < this.onclickMenuOption.length; i++){
-                const op_text = this.onclickMenuOption[i];
+            for(let i = 0; i < this.menuOption.length; i++){
+                const op_text = this.menuOption[i];
                 const op = document.createElement("div");
+                const onclick_f = this.menuOptionOnclick[op_text];
                 op.classList.add("TRPG-inventory-option");
                 op.id = this.ID + "-option-" + option_count;
                 op.setAttribute("data-option", op_text);
@@ -427,6 +461,11 @@ class Inventory {
                 menu.appendChild(op);
                 op.addEventListener("click",function(){
                     menu.setAttribute("data-option-clicked", op_text);
+                    // add option onclick function
+                    if(onclick_f != undefined) {
+                        console.log(onclick_f);
+                        onclick_f(menu.getAttribute('data-item'));
+                    }
                 });
             }
         }
@@ -459,7 +498,7 @@ class Inventory {
             if(this.quantity[item] > 0) {
                 this.index[item] = item_count;
                 //cell content
-                const image_path = this.image[item];
+                let image_path = this.image[item];
                 const description = this.description[item];
                 const display_name = this.showName;
                 const display_description = this.showDescription;

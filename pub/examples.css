@@ -8,8 +8,10 @@
 .menu {
     font-size: 30px;
     width: 700px;
-    min-height: 200px;
+    min-height: 400px;
     text-align: center;
+    border: solid 2px black;
+    margin-bottom: 50px;
 }
 
 .menu a {
@@ -77,10 +79,15 @@ button:hover {
 }
 
 .demo-code {
-    padding-left: 10px;
     font-size: 20px;
     border: solid 2px black;
     margin-bottom: 10px;
+}
+
+pre {
+    margin:0;
+    padding-left: 10px;
+    background-color: #e7e6e6;
 }
 
 code {
@@ -119,4 +126,17 @@ code {
 #inventory {
     min-height: 300px;
     border: ridge rgb(104, 159, 228) 5px;
+}
+
+#inventory-message {
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-family:cursive;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    color: red;
 }

@@ -45,7 +45,26 @@ const myBag = new Inventory('inventory', {
     },
     numRow: 4,
     numColumn: 6,
-    showName: true,
-    showDescription: true,
-    onclickMenuOption: ['use','destroy', 'gift'] 
+    menuOption: ['use','destroy','gift'],
+    menuOptionOnclick: {
+      'use': use_item,
+      'destroy':  destroy_item,
+    }
 });
+
+
+function use_item(item) {
+  myBag.removeItem(item, 1);
+}
+
+function destroy_item(item) {
+  myBag.clearItem(item);
+}
+
+function gift_item(item) {
+  myBag.removeItem(item, 1);
+  document.getElementById("inventory-message").innerHTML="thank you!";
+  setTimeout(() => {
+    document.getElementById("inventory-message").innerHTML= '';
+  }, 2000);
+}
