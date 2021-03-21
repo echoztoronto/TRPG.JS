@@ -53,7 +53,7 @@ class AttributePanel {
     }
 
     set(attr, value) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         this.attributes[attr] = value;
         // DOM
         if(document.getElementById(dest_ID) != null) {
@@ -61,10 +61,10 @@ class AttributePanel {
         } else this.addDOM(attr);
         // color
         if(this.colorChange) {
-            stop_timeout(this.timers[attr]);
+            _stop_timeout(this.timers[attr]);
             let original_color = this.valueColor;
             if(this.valueColorList[attr] != undefined) original_color = this.valueColorList[attr];
-            this.timers[attr] = this.timers[attr] = timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
+            this.timers[attr] = this.timers[attr] = _timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
         }       
     }
 
@@ -90,7 +90,7 @@ class AttributePanel {
         if(this.attributes[attr] == undefined) return;
         else {
             // DOM
-            const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+            const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
             if(document.getElementById(dest_ID) != null) {
                 document.getElementById(dest_ID).remove();
             }
@@ -100,45 +100,45 @@ class AttributePanel {
 
     update() {
         for (const attr in this.attributes) {
-            const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+            const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
             if(document.getElementById(dest_ID) != null) {
                 document.getElementById(dest_ID).remove();
             }
             this.addDOM(attr);
         }
-        change_class_css("TRPG-aPanel-attr-name","color", this.nameColor);
-        change_class_css("TRPG-aPanel-attr-value","color", this.valueColor);
-        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-name");
-        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-value");
-        change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
-        change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
+        _change_class_css("TRPG-aPanel-attr-name","color", this.nameColor);
+        _change_class_css("TRPG-aPanel-attr-value","color", this.valueColor);
+        this.nameMaxWidth = _make_all_same_width("TRPG-aPanel-attr-name");
+        this.nameMaxWidth = _make_all_same_width("TRPG-aPanel-attr-value");
+        _change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
+        _change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
         // name color and value color
         for (const attr in this.nameColorList) {
             if(attr == 0) return;
-            const dest_ID = this.ID + "-" + replace_space_with_dash(attr) + "-name";
+            const dest_ID = this.ID + "-" + _replace_space_with_dash(attr) + "-name";
             if(document.getElementById(dest_ID) == undefined) return;
             document.getElementById(dest_ID).style.color = this.nameColorList[attr];
         }
         for (const attr in this.valueColorList) {
             if(attr == 0) return;
-            const dest_ID = this.ID + "-" + replace_space_with_dash(attr) + "-value";
+            const dest_ID = this.ID + "-" + _replace_space_with_dash(attr) + "-value";
             if(document.getElementById(dest_ID) == undefined) return;
             document.getElementById(dest_ID).style.color = this.valueColorList[attr];
         }
     }
 
     addDOM(attr) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         let attr_div = document.createElement("div");
         this.container.appendChild(attr_div);
         attr_div.className = "TRPG-aPanel-attr";
         attr_div.id = dest_ID;
         attr_div.innerHTML = `  <div class='TRPG-aPanel-attr-name' id='${dest_ID}-name'> ${attr} </div> 
                                 <div class='TRPG-aPanel-attr-value' id='${dest_ID}-value'> ${this.attributes[attr]} </div>`;
-        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-name");
-        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-value");
-        change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
-        change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
+        this.nameMaxWidth = _make_all_same_width("TRPG-aPanel-attr-name");
+        this.nameMaxWidth = _make_all_same_width("TRPG-aPanel-attr-value");
+        _change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
+        _change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
         if(this.showDescription) {
             let showDescriptionOnWhich = '';
             switch(this.showDescriptionWhenHoverOn) {
@@ -160,7 +160,7 @@ class AttributePanel {
             name_element.addEventListener("mouseover", function(){
                 if(desction_list[attr] == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
                 else description_element.innerHTML = `${desction_list[attr]}`;
-                set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
+                __set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
                 description_element.style.visibility = "visible";
             });
             name_element.addEventListener("mouseout", function(){
@@ -226,7 +226,7 @@ class AttributeBars {
     }
 
     set(attr, value, maxValue, barColor) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         this.attributes[attr] = value;
         this.attributesMax[attr] = maxValue;
         this.barColor[attr] = barColor;
@@ -236,20 +236,20 @@ class AttributeBars {
             const bar_element = document.getElementById(dest_ID+"-bar");
             const a_value = this.attributes[attr];
             const a_max = this.attributesMax[attr];
-            bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
+            bar_element.style.width = (_lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
             bar_element.style.backgroundColor = this.barColor[attr];
         } else this.addDOM(attr);
         // color
         if(this.colorChange) {
-            stop_timeout(this.timers[attr]);
+            _stop_timeout(this.timers[attr]);
             let original_color = this.labelColor;
             if(this.labelColors[attr] != undefined) original_color = this.labelColors[attr];
-            this.timers[attr] = timed_color_change(dest_ID + "-value",original_color, this.colorChangeColor, this.colorChangeTime);
+            this.timers[attr] = _timed_color_change(dest_ID + "-value",original_color, this.colorChangeColor, this.colorChangeTime);
         }
     }
 
     setValue(attr, value) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         this.attributes[attr] = value;
         // DOM
         if(document.getElementById(dest_ID) != null) {
@@ -257,19 +257,19 @@ class AttributeBars {
             const bar_element = document.getElementById(dest_ID+"-bar");
             const a_value = this.attributes[attr];
             const a_max = this.attributesMax[attr];
-            bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
+            bar_element.style.width = (_lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
             // color
             if(this.colorChange) {
-                stop_timeout(this.timers[attr]);
+                _stop_timeout(this.timers[attr]);
                 let original_color = this.labelColor;
                 if(this.labelColors[attr] != undefined) original_color = this.labelColors[attr];
-                this.timers[attr] = timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
+                this.timers[attr] = _timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
             }  
         }  
     }
     
     setMaxValue(attr, maxValue) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         this.attributesMax[attr] = maxValue;
         // DOM
         if(document.getElementById(dest_ID) != null) {
@@ -277,19 +277,19 @@ class AttributeBars {
             const bar_element = document.getElementById(dest_ID+"-bar");
             const a_value = this.attributes[attr];
             const a_max = this.attributesMax[attr];
-            bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
+            bar_element.style.width = (_lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
             // color
             if(this.colorChange) {
-                stop_timeout(this.timers[attr]);
+                _stop_timeout(this.timers[attr]);
                 let original_color = this.labelColor;
                 if(this.labelColors[attr] != undefined) original_color = this.labelColors[attr];
-                this.timers[attr] = timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
+                this.timers[attr] = _timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
             }  
         }  
     }
 
     setBarColor(attr, color) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         this.barColor[attr] = color;
         // DOM
         if(document.getElementById(dest_ID) != null) {
@@ -298,7 +298,7 @@ class AttributeBars {
     }
 
     setLabelColor(attr, color) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         if(document.getElementById(dest_ID) != null) {
             this.labelColors[attr] = color;
             const value_element = document.getElementById(dest_ID + "-value");
@@ -316,7 +316,7 @@ class AttributeBars {
         if(this.attributes[attr] == undefined) return;
         else {
             // DOM
-            const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+            const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
             if(document.getElementById(dest_ID) != null) {
                 document.getElementById(dest_ID).remove();
             }
@@ -331,7 +331,7 @@ class AttributeBars {
     }
 
     addDOM(attr) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         const a_value = this.attributes[attr];
         const a_max = this.attributesMax[attr];
         if(document.getElementById(dest_ID) != null) {
@@ -349,7 +349,7 @@ class AttributeBars {
                                     <div class='TRPG-aBar-attr-value' id='${dest_ID}-value'>   </div> 
                                 </div>`;
         const bar_element = document.getElementById(dest_ID + "-bar");
-        bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
+        bar_element.style.width = (_lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
         bar_element.style.backgroundColor = this.barColor[attr];
         const value_element = document.getElementById(dest_ID + "-value");
         // label
@@ -370,16 +370,16 @@ class AttributeBars {
                 else description_element.innerHTML = `${description_list[attr]}`;
                 switch(description_position) {
                     case "left":
-                        set_element_to_bottom_left_of_another_element(description_element, name_element);
+                        _set_element_to_bottom_left_of_another_element(description_element, name_element);
                         break;
                     case "center":
-                        set_element_to_bottom_center_of_another_element(description_element, name_element);
+                        _set_element_to_bottom_center_of_another_element(description_element, name_element);
                         break;
                     case "right":
-                        set_element_to_bottom_right_of_another_element(description_element, name_element);
+                        _set_element_to_bottom_right_of_another_element(description_element, name_element);
                         break;
                     default:
-                        set_element_to_bottom_center_of_another_element(description_element, name_element);
+                        _set_element_to_bottom_center_of_another_element(description_element, name_element);
                 }
                 description_element.style.visibility = "visible";
             });
@@ -390,11 +390,11 @@ class AttributeBars {
     }
 
     setLabelByStyle(attr) {
-        const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
+        const dest_ID = this.ID + "-" + _replace_space_with_dash(attr);
         let element = document.getElementById(dest_ID + "-value");
         let a_value = this.attributes[attr]; 
         let a_max = this.attributesMax[attr]; 
-        let actual_value = lock_to_max(this.allowExceedMax,a_value, a_max);
+        let actual_value = _lock_to_max(this.allowExceedMax,a_value, a_max);
 
         if(this.labelColors[attr] != undefined) {
             element.style.color = this.labelColors[attr];
@@ -660,7 +660,7 @@ class Inventory {
                 if(this.showOnclickMenu){
                     cell_element.addEventListener("click",function(event){
                         menu.style.visibility = "hidden";
-                        move_element_to_mouse_postion(event, menu);
+                        _move_element_to_mouse_postion(event, menu);
                         menu.style.visibility = "visible";
                         menu.setAttribute("data-item", item);
                     });
@@ -674,7 +674,7 @@ class Inventory {
                         description_element.style.visibility = 'hidden';
                         return;
                     }
-                    set_element_to_bottom_right_of_another_element(info, cell_element);
+                    _set_element_to_bottom_right_of_another_element(info, cell_element);
                     info.setAttribute("data-item", item);
                     if(display_name) {
                         name_element.innerHTML = item;
@@ -717,35 +717,35 @@ class Inventory {
         });
 
         // cell width and height 
-        change_class_css("TRPG-inventory-cell", "width", this.itemSize + 'px');
-        change_class_css("TRPG-inventory-cell", "height", this.itemSize + 'px');
+        _change_class_css("TRPG-inventory-cell", "width", this.itemSize + 'px');
+        _change_class_css("TRPG-inventory-cell", "height", this.itemSize + 'px');
 
         // quantity style
-        change_class_css('TRPG-inventory-quantity', 'font-size', this.quantityFontSize + 'px');
+        _change_class_css('TRPG-inventory-quantity', 'font-size', this.quantityFontSize + 'px');
         this.set_quantity_position();
-        if(this.showQuantity) change_class_css('TRPG-inventory-quantity', 'visibility', 'visible');
-        else change_class_css('TRPG-inventory-quantity', 'visibility', 'hidden');
+        if(this.showQuantity) _change_class_css('TRPG-inventory-quantity', 'visibility', 'visible');
+        else _change_class_css('TRPG-inventory-quantity', 'visibility', 'hidden');
 
         // option style
-        change_class_css('TRPG-inventory-option', 'font-size', this.optionFontSize + 'px');
+        _change_class_css('TRPG-inventory-option', 'font-size', this.optionFontSize + 'px');
 
     }
 
     set_quantity_position() {
-        change_class_css('TRPG-inventory-quantity', 'text-align', this.quantityXPosition);
+        _change_class_css('TRPG-inventory-quantity', 'text-align', this.quantityXPosition);
         let offset = this.quantityFontSize;
         switch(this.quantityYPosition) {
             case "top":
-                change_class_css('TRPG-inventory-quantity', 'padding-top', '0px');
+                _change_class_css('TRPG-inventory-quantity', 'padding-top', '0px');
                 break;
             case "center":
-                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(50% - ' + offset/2 + 'px)');
+                _change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(50% - ' + offset/2 + 'px)');
                 break;
             case "bottom":
-                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(85% - ' + offset + 'px)');
+                _change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(85% - ' + offset + 'px)');
                 break;
             default:
-                change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(80% - ' + offset + 'px)');
+                _change_class_css('TRPG-inventory-quantity', 'padding-top', 'calc(80% - ' + offset + 'px)');
         }
     }
 
@@ -756,7 +756,7 @@ class Inventory {
 
 
 //  ------------------------------- Helper Functions  ------------------------------
-function timed_color_change(ID, original, dest, sec) {
+function _timed_color_change(ID, original, dest, sec) {
     const element = document.getElementById(ID);
     let timer = 0;
     element.style.color = dest;
@@ -768,21 +768,21 @@ function timed_color_change(ID, original, dest, sec) {
     return timer;
 }
 
-function stop_timeout(timer) {
+function _stop_timeout(timer) {
     if (timer) {
         clearTimeout(timer);
         timer = 0;
     }
 }
 
-function change_class_css(className, cssName, value) {
+function _change_class_css(className, cssName, value) {
     const all = document.getElementsByClassName(className);
     for (let i = 0; i < all.length; i++) {
         all[i].style[cssName] = value;
     }
 }
 
-function make_all_same_width(className) {
+function _make_all_same_width(className) {
     let max_width = 0;
     const all = document.getElementsByClassName(className);
     for (let i = 0; i < all.length; i++) {
@@ -796,37 +796,37 @@ function make_all_same_width(className) {
     return max_width;
 }
 
-function replace_space_with_dash(str) {
+function _replace_space_with_dash(str) {
     return str.replace(/\s+/g, '-').toLowerCase();
 }
 
-function lock_to_max(allowExceedMax, value, max) {
+function _lock_to_max(allowExceedMax, value, max) {
     if(!allowExceedMax && value > max) {
         return max;
     }
     return value;
 }
 
-function move_element_to_mouse_postion(event, div) {
+function _move_element_to_mouse_postion(event, div) {
     const x = event.clientX;    
     const y = event.clientY; 
     div.style.left = window.scrollX + x + 'px';
     div.style.top  = window.scrollY + y + 'px';
 }
 
-function set_element_to_bottom_right_of_another_element(front, back) {
+function _set_element_to_bottom_right_of_another_element(front, back) {
     const rect = back.getBoundingClientRect();
     front.style.left = window.scrollX + rect.right - 5  + 'px';
     front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
 }
 
-function set_element_to_bottom_center_of_another_element(front, back) {
+function _set_element_to_bottom_center_of_another_element(front, back) {
     const rect = back.getBoundingClientRect();
     front.style.left = window.scrollX + (rect.left + rect.right)/2  + 'px';
     front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
 }
 
-function set_element_to_bottom_left_of_another_element(front, back) {
+function _set_element_to_bottom_left_of_another_element(front, back) {
     const rect = back.getBoundingClientRect();
     front.style.left = window.scrollX + rect.left - 5  + 'px';
     front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
