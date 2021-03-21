@@ -1,5 +1,3 @@
-
-
 const aPanel = new AttributePanel('attribute-panel', {
     attributes : {
         hp: 1000,

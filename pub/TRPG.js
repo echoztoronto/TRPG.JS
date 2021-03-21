@@ -1,7 +1,10 @@
+// TRPG.JS
+// Created by Echo Yuwen Zheng  2021
+// GitHub: echoztoronto
+// Email: ywzhengtoronto@gmail.com
+
 
 const default_img_path = "img/default.jpg";
-
-
 
 //  ------------------------------- Attribute Panel  ------------------------------
 class AttributePanel {
