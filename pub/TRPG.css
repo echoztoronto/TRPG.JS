@@ -17,11 +17,14 @@
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    margin-bottom: 10px;
 }
 
 .TRPG-aPanel-attr-name .TRPG-aPanel-attr-value {
     display: inline-block;
     min-height: 30px;
+    min-width: 200px;
+    white-space: pre;
 }
 
 .TRPG-aPanel-attr-name {

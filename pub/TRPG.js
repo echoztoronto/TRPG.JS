@@ -69,16 +69,19 @@ class AttributePanel {
     }
 
     setNameColor(attr, color) {
+        if(this.attributes[attr] == undefined) return;
         this.nameColorList[attr] = color;
         this.update();
     }
 
     setValueColor(attr, color) {
+        if(this.attributes[attr] == undefined) return;
         this.valueColorList[attr] = color;
         this.update();
     }
 
     setDescription(attr, description){
+        if(this.attributes[attr] == undefined) return;
         this.description[attr] = description;
         this.update();
     }
@@ -155,7 +158,7 @@ class AttributePanel {
             const description_element = this.description_div;
             const desction_list = this.description;
             name_element.addEventListener("mouseover", function(){
-                if(desction_list[attr] == undefined) description_element.innerHTML = `<i>no description</i>`;
+                if(desction_list[attr] == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
                 else description_element.innerHTML = `${desction_list[attr]}`;
                 set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
                 description_element.style.visibility = "visible";
@@ -304,6 +307,7 @@ class AttributeBars {
     }
 
     setDescription(attr, description){
+        if(this.attributes[attr] == undefined) return;
         this.description[attr] = description;
         this.update();
     }
@@ -362,7 +366,7 @@ class AttributeBars {
             const description_list = this.description;
             const description_position = this.descriptionPosition;
             name_element.addEventListener("mouseover", function(){
-                if(description_list[attr] == undefined) description_element.innerHTML = `<i>no description</i>`;
+                if(description_list[attr] == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
                 else description_element.innerHTML = `${description_list[attr]}`;
                 switch(description_position) {
                     case "left":
@@ -679,7 +683,7 @@ class Inventory {
                     if(display_description) {
                         description_element.style.visibility = 'visible';
                         if(description == undefined) {
-                            description_element.innerHTML = `no description for this item`;
+                            description_element.innerHTML = `&#60;no description>`;
                         } else description_element.innerHTML = description;
                     } 
                     if(!display_name && !display_description) {

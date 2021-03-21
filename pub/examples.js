@@ -2,7 +2,8 @@ const aPanel = new AttributePanel('attribute-panel', {
     attributes : {
         hp: 1000,
         mp: 500,
-        sanity: 'healthy'
+        sanity: 'healthy',
+        career: 'web-developer'
       },
     description : {
         hp: 'heath point, you will lose health when you eat a rotten apple :)'

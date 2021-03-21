@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="TRPG.css">
     <link rel="stylesheet" href="examples.css">
     <script src="TRPG.js"> </script>
-    <title> Demo for TRPG.JS </title>
+    <title> TRPG.JS PlayGround </title>
 </head>
 <body>
     <a id="sec-0"> </a>
@@ -18,11 +18,11 @@
         <div class="menu"> 
             Menu 
             <br>
-            <a href="#sec-3"> Inventory </a>
-            <br>
             <a href="#sec-1">Attribute Panel</a>
             <br>
             <a href="#sec-2">Attribute Bars</a>
+            <br>
+            <a href="#sec-3"> Inventory </a>
             <br><br>
             Coming Soon:
             <br>
@@ -47,8 +47,220 @@
         </div>
     </div>
     
-
+    <!-- Attribute Panel  -->
     <div class="section-container"> 
+        <div class="demo-block"> 
+            <a id="sec-1"> </a>
+            <div class="section-title"> Attribute Panel</div>
+            <div class="demo-code"> 
+                <pre>
+                    <code>
+&#60;div id="attribute-panel"> &#60;/div>
+
+// javascript constructor
+const aPanel = new AttributePanel('attribute-panel', {
+    attributes : {
+        hp: 1000,
+        mp: 500,
+        sanity: 'healthy',
+        career: 'web developer'
+      },
+    description : {
+        hp: 'heath point, you will lose health when 
+            you eat a rotten apple :)'
+    },
+    showDescription : true,
+    showDescriptionWhenHoverOn : "both",
+    colorChange : true,
+    colorChangeTime: 2, 
+  });
+                    </code>
+                </pre>
+            </div>
+            <div class="eg"> Example </div>
+            <div id="attribute-panel"> </div>
+        </div>
+        <div class="buttons">  
+            .set() 
+            <button onclick="aPanel.set('life', 50)"> ('life', 50) </button>
+            <button onclick="aPanel.set('life', 3)"> ('life', 3) </button>
+            <button onclick="aPanel.set('hp', 1500)"> ('hp', 1500) </button>
+            <br><b>Note: you can only modify existing attributes </b>
+            <br> .delete()
+            <button onclick="aPanel.delete('life')"> ('life') </button> 
+            <button onclick="aPanel.delete('hp')"> ('hp') </button> 
+            <br> .setNameColor()
+            <button onclick="aPanel.setNameColor('hp','LawnGreen')"> ('hp','LawnGreen') </button> 
+            <button onclick="aPanel.setNameColor('mp', 'Crimson')"> ('mp', 'Crimson') </button>
+            <br> .setValueColor()
+            <button onclick="aPanel.setValueColor('hp','Violet')"> ('hp','Violet') </button> 
+            <button onclick="aPanel.setValueColor('mp', 'Turquoise')"> ('mp', 'Turquoise') </button>
+            <br>.setDescription()
+            <button onclick="aPanel.setDescription('hp', 'your life')"> ('hp', 'your life') </button>
+            <button onclick="aPanel.setDescription('hp', 'health point')"> ('hp', 'health point') </button>
+            <br>
+            <br><br>
+            <br> <b>When you make a change to an existing attribute, you can change value's color for a while (or forever) </b>
+            <br> (you need to call any set function to see these changes)
+            <br> .colorChange =
+            <button onclick="aPanel.colorChange = true;aPanel.update()">  true </button>
+            <button onclick="aPanel.colorChange = false;aPanel.update()"> false </button> 
+            <br> .colorChangeTime =
+            <button onclick="aPanel.colorChangeTime = 'inf';aPanel.update()">  'inf' </button>
+            <button onclick="aPanel.colorChangeTime = 1;aPanel.update()">  1 </button>
+            <button onclick="aPanel.colorChangeTime = 3;aPanel.update()">  3 </button> 
+            <button onclick="aPanel.colorChangeTime = 5;aPanel.update()">  5 </button> 
+            <br> .colorChangeColor =
+            <button onclick="aPanel.colorChangeColor = 'red';aPanel.update()">  'red' </button>
+            <button onclick="aPanel.colorChangeColor = 'blue';aPanel.update()">  'blue' </button>
+            <br><br>
+            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b> 
+            <br> .nameColor = 
+            <button onclick="aPanel.nameColor = 'green';aPanel.update()"> 'green' </button>
+            <button onclick="aPanel.nameColor = 'red';aPanel.update()"> 'red' </button>
+             <i> this will not overwrite .setNameColor() </i>
+            <br> .valueColor =
+            <button onclick="aPanel.valueColor = 'green';aPanel.update()">  'green' </button>
+            <button onclick="aPanel.valueColor = 'red';aPanel.update()">  'red' </button> 
+             <i> this will not overwrite .setValueColor() </i>
+            <br> .nameTextAlign = 
+            <button onclick="aPanel.nameTextAlign = 'left';aPanel.update()">  'left' </button>
+            <button onclick="aPanel.nameTextAlign = 'center';aPanel.update()">  'center' </button>
+            <button onclick="aPanel.nameTextAlign = 'right';aPanel.update()">  'right' </button> 
+            <br> .valueTextAlign = 
+            <button onclick="aPanel.valueTextAlign = 'left';aPanel.update()">  'left' </button>
+            <button onclick="aPanel.valueTextAlign = 'center';aPanel.update()">  'center' </button>
+            <button onclick="aPanel.valueTextAlign = 'right';aPanel.update()">  'right' </button>
+            <br> .showDescription = 
+            <button onclick="aPanel.showDescription = true;aPanel.update()">  true</button>
+            <button onclick="aPanel.showDescription = false;aPanel.update()">  false </button>  
+            <br> .showDescriptionWhenHoverOn = 
+            <button onclick="aPanel.showDescriptionWhenHoverOn = 'name';aPanel.update()">  'name' </button>
+            <button onclick="aPanel.showDescriptionWhenHoverOn = 'value';aPanel.update()">  'value' </button>
+            <button onclick="aPanel.showDescriptionWhenHoverOn = 'both';aPanel.update()">  'both' </button>
+        </div>
+    </div>
+
+    <a href="#sec-0" class="back"> Back to Menu </a>
+    
+
+    <!-- Attribute Bars  -->
+    <div class="section-container"> 
+        <div class="demo-block"> 
+            <a id="sec-2"> </a>
+            <div class="section-title"> Attribute Bars</div>
+            <div class="demo-code"> 
+                <pre>
+                    <code>
+&#60;div id="attribute-bar"> &#60;/div>
+
+// javascript constructor
+const aBar = new AttributeBars('attribute-bar', {
+    attributes : {  
+        hp: [1000,2000,'pink'],
+        mp: [500,800,'rgb(155, 198, 255)']
+      },
+    description : {
+        hp: 'heath point, you will lose health when 
+            you eat a rotten apple :)',
+        mp: 'the thing we all need to cast a spell'
+    },
+    showDescription : true,
+    descriptionPosition : "center",
+    colorChange : true,
+    colorChangeTime: 2,
+    colorChangeColor : "red",
+    labelColors: {
+        hp: "white"
+    },
+  });
+
+                    </code>
+                </pre>
+            </div>
+            <div class="eg"> Example </div>
+            <div id="attribute-bar"> </div>
+        </div>
+        <div class="buttons">  
+            .set()
+            <button onclick="aBar.set('life', 3, 3, 'yellow')"> ('life', 3, 3, 'yellow') </button>
+            <button onclick="aBar.set('life', 1, 3, 'green')"> ('life', 1, 3, 'green') </button>
+            <button onclick="aBar.set('hp', 1500, 5000, 'pink')"> ('hp', 1500, 5000, 'pink') </button>
+            <br><b>Note: you can only modify existing attributes </b>
+            <br> .delete()
+            <button onclick="aBar.delete('life')"> ('life') </button> 
+            <button onclick="aBar.delete('hp')"> ('hp') </button> 
+            <br>.setValue()
+            <button onclick="aBar.setValue('hp', 1)"> ('hp', 1) </button>
+            <button onclick="aBar.setValue('hp', 100)"> ('hp', 100) </button>
+            <button onclick="aBar.setValue('life', 0)"> ('life', 0) </button>
+            <button onclick="aBar.setValue('life', 2)"> ('life', 2) </button>
+            <br>.setMaxValue()
+            <button onclick="aBar.setMaxValue('hp', 100)"> ('hp', 100) </button>
+            <button onclick="aBar.setMaxValue('hp', 13000)"> ('hp', 13000) </button>
+            <button onclick="aBar.setMaxValue('life', 100)"> ('life', 100) </button>
+            <button onclick="aBar.setMaxValue('life', 5)"> ('life', 5) </button>
+            <br>.setBarColor()
+            <button onclick="aBar.setBarColor('hp', 'red')"> ('hp', 'red') </button>
+            <button onclick="aBar.setBarColor('hp', 'green')"> ('hp', 'green') </button>
+            <br>.setLabelColor()
+            <button onclick="aBar.setLabelColor('hp', 'black')"> ('hp', 'black') </button>
+            <button onclick="aBar.setLabelColor('hp', 'white')"> ('hp', 'white') </button>
+            <br>.setDescription()
+            <button onclick="aBar.setDescription('hp', 'your life')"> ('hp', 'your life') </button>
+            <button onclick="aBar.setDescription('hp', 'health point')"> ('hp', 'health point') </button>
+            <br><br>
+            <br> <b>When you make a change to an existing attribute, you can change value's color for a while (or forever) </b>
+            <br> (you need to call any set function to see these changes) 
+            <br> .colorChange =
+            <button onclick="aBar.colorChange = true;aBar.update()">  true </button>
+            <button onclick="aBar.colorChange = false;aBar.update()"> false </button> 
+            <br> .colorChangeTime =
+            <button onclick="aBar.colorChangeTime = 'inf';aBar.update()">  'inf' </button>
+            <button onclick="aBar.colorChangeTime = 1;aBar.update()">  1 </button>
+            <button onclick="aBar.colorChangeTime = 3;aBar.update()">  3 </button> 
+            <button onclick="aBar.colorChangeTime = 5;aBar.update()">  5 </button> 
+            <br> .colorChangeColor =
+            <button onclick="aBar.colorChangeColor = 'red';aBar.update()">  'red' </button>
+            <button onclick="aBar.colorChangeColor = 'blue';aBar.update()">  'blue' </button> 
+            <br><br>
+            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b>
+            <br> .showDescription = 
+            <button onclick="aBar.showDescription = true;aBar.update()">  true</button>
+            <button onclick="aBar.showDescription = false;aBar.update()">  false </button>  
+            <br> .descriptionPosition = 
+            <button onclick="aBar.descriptionPosition = 'left';aBar.update()">  'left' </button>
+            <button onclick="aBar.descriptionPosition = 'center';aBar.update()">  'center' </button>
+            <button onclick="aBar.descriptionPosition = 'right';aBar.update()">  'right' </button>
+
+            <br> .containerColor =
+            <button onclick="aBar.containerColor = 'rgb(216, 216, 216)';aBar.update()"> 'rgb(216, 216, 216)' </button>
+            <button onclick="aBar.containerColor = 'black';aBar.update()"> 'black' </button>
+            <br> .showLabel =
+            <button onclick="aBar.showLabel = true;aBar.update()"> true </button>
+            <button onclick="aBar.showLabel = false;aBar.update()"> false </button>
+            <br> .labelPosition =
+            <button onclick="aBar.labelPosition = 'left';aBar.update()"> 'left' </button>
+            <button onclick="aBar.labelPosition = 'center';aBar.update()"> 'center' </button>
+            <button onclick="aBar.labelPosition = 'right';aBar.update()"> 'right' </button>
+            <br> .labelStyle =
+            <button onclick="aBar.labelStyle = 'value/max';aBar.update()"> 'value/max' </button>
+            <button onclick="aBar.labelStyle = 'value';aBar.update()"> 'value' </button>
+            <button onclick="aBar.labelStyle = '%';aBar.update()"> '%' </button>
+            <br> .allowExceedMax =
+            <button onclick="aBar.allowExceedMax = true;aBar.update()"> true </button>
+            <button onclick="aBar.allowExceedMax = false;aBar.update()"> false </button>
+            examples:
+            <button onclick="aBar.setValue('mp', 300)"> set 'mp' to 300 </button>
+            <button onclick="aBar.setValue('mp', 3000)"> set 'mp' to 3000 </button>
+        </div>
+    </div>
+    
+    <a href="#sec-0" class="back"> Back to Menu </a>
+
+
+    <!-- Inventory  -->
+        <div class="section-container"> 
         <div class="demo-block"> 
             <a id="sec-3"> </a>
             <div class="section-title"> Inventory </div>
@@ -176,183 +388,6 @@ function gift_item(item) {
         </div>
     </div>
 
-    <a href="#sec-0" class="back"> Back to Menu </a>
-
-    <div class="section-container"> 
-        <div class="demo-block"> 
-            <a id="sec-1"> </a>
-            <div class="section-title"> Attribute Panel</div>
-            <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="attribute-panel"> &#60;/div>
-
-// javascript constructor
-const aPanel = new AttributePanel(
-'attribute-panel', {
-    attributes : {
-        hp: 1000,
-        mp: 500,
-        sanity: 'healthy'
-        },
-    colorChange : true,
-    colorChangeTime: 2, 
-});
-                    </code>
-                </pre>
-            </div>
-            <div class="eg"> Example </div>
-            <div id="attribute-panel"> </div>
-        </div>
-        <div class="buttons">  
-            .set() 
-            <button onclick="aPanel.set('life', 50)"> ('life', 50) </button>
-            <button onclick="aPanel.set('life', 3)"> ('life', 3) </button>
-            <button onclick="aPanel.set('hp', 1500)"> ('hp', 1500) </button>
-            <br><b>Note: you can only modify existing attributes </b>
-            <br> .delete()
-            <button onclick="aPanel.delete('life')"> ('life') </button> 
-            <button onclick="aPanel.delete('hp')"> ('hp') </button> 
-            <br> .setNameColor()
-            <button onclick="aPanel.setNameColor('hp','LawnGreen')"> ('hp','LawnGreen') </button> 
-            <button onclick="aPanel.setNameColor('mp', 'Crimson')"> ('mp', 'Crimson') </button>
-            <br> .setValueColor()
-            <button onclick="aPanel.setValueColor('hp','Violet')"> ('hp','Violet') </button> 
-            <button onclick="aPanel.setValueColor('mp', 'Turquoise')"> ('mp', 'Turquoise') </button>
-            <br>
-            <br><br>
-            <br> <b>When you make a change to an existing attribute, you can change the numberic text color for a while (or forever) </b>
-            <br> (you need to call any set function to see these changes)
-            <br> .colorChange =
-            <button onclick="aPanel.colorChange = true;aPanel.update()">  true </button>
-            <button onclick="aPanel.colorChange = false;aPanel.update()"> false </button> 
-            <br> .colorChangeTime =
-            <button onclick="aPanel.colorChangeTime = 'inf';aPanel.update()">  'inf' </button>
-            <button onclick="aPanel.colorChangeTime = 1;aPanel.update()">  1 </button>
-            <button onclick="aPanel.colorChangeTime = 3;aPanel.update()">  3 </button> 
-            <button onclick="aPanel.colorChangeTime = 5;aPanel.update()">  5 </button> 
-            <br> .colorChangeColor =
-            <button onclick="aPanel.colorChangeColor = 'red';aPanel.update()">  'red' </button>
-            <button onclick="aPanel.colorChangeColor = 'blue';aPanel.update()">  'blue' </button>
-            <br><br>
-            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b> 
-            <br> .nameColor = 
-            <button onclick="aPanel.nameColor = 'green';aPanel.update()"> 'green' </button>
-            <button onclick="aPanel.nameColor = 'red';aPanel.update()"> 'red' </button>
-             <i> this will not overwrite .setNameColor() </i>
-            <br> .valueColor =
-            <button onclick="aPanel.valueColor = 'green';aPanel.update()">  'green' </button>
-            <button onclick="aPanel.valueColor = 'red';aPanel.update()">  'red' </button> 
-             <i> this will not overwrite .setValueColor() </i>
-            <br> .nameTextAlign = 
-            <button onclick="aPanel.nameTextAlign = 'left';aPanel.update()">  'left' </button>
-            <button onclick="aPanel.nameTextAlign = 'center';aPanel.update()">  'center' </button>
-            <button onclick="aPanel.nameTextAlign = 'right';aPanel.update()">  'right' </button> 
-            <br> .valueTextAlign = 
-            <button onclick="aPanel.valueTextAlign = 'left';aPanel.update()">  'left' </button>
-            <button onclick="aPanel.valueTextAlign = 'center';aPanel.update()">  'center' </button>
-            <button onclick="aPanel.valueTextAlign = 'right';aPanel.update()">  'right' </button> 
-        </div>
-    </div>
-
-    <a href="#sec-0" class="back"> Back to Menu </a>
-    
-    <div class="section-container"> 
-        <div class="demo-block"> 
-            <a id="sec-2"> </a>
-            <div class="section-title"> Attribute Bars</div>
-            <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="attribute-bar"> &#60;/div>
-
-// javascript constructor
-const aBar = new AttributeBars(
-'attribute-bar', {
-    attributes : {  
-        hp: [1000,2000,'pink'],
-        mp: [500,800,'rgb(155, 198, 255)']
-        },
-    colorChange : true,
-    colorChangeTime: 2,
-    colorChangeColor : "red",
-    labelColor: {
-        hp: "white"
-    },
-});
-
-                    </code>
-                </pre>
-            </div>
-            <div class="eg"> Example </div>
-            <div id="attribute-bar"> </div>
-        </div>
-        <div class="buttons">  
-            .set()
-            <button onclick="aBar.set('life', 3, 3, 'yellow')"> ('life', 3, 3, 'yellow') </button>
-            <button onclick="aBar.set('life', 1, 3, 'green')"> ('life', 1, 3, 'green') </button>
-            <button onclick="aBar.set('hp', 1500, 5000, 'pink')"> ('hp', 1500, 5000, 'pink') </button>
-            <br><b>Note: you can only modify existing attributes </b>
-            <br> .delete()
-            <button onclick="aBar.delete('life')"> ('life') </button> 
-            <button onclick="aBar.delete('hp')"> ('hp') </button> 
-            <br>.setValue()
-            <button onclick="aBar.setValue('hp', 1)"> ('hp', 1) </button>
-            <button onclick="aBar.setValue('hp', 100)"> ('hp', 100) </button>
-            <button onclick="aBar.setValue('life', 0)"> ('life', 0) </button>
-            <button onclick="aBar.setValue('life', 2)"> ('life', 2) </button>
-            <br>.setMaxValue()
-            <button onclick="aBar.setMaxValue('hp', 100)"> ('hp', 100) </button>
-            <button onclick="aBar.setMaxValue('hp', 13000)"> ('hp', 13000) </button>
-            <button onclick="aBar.setMaxValue('life', 100)"> ('life', 100) </button>
-            <button onclick="aBar.setMaxValue('life', 5)"> ('life', 5) </button>
-            <br>.setBarColor()
-            <button onclick="aBar.setBarColor('hp', 'red')"> ('hp', 'red') </button>
-            <button onclick="aBar.setBarColor('hp', 'green')"> ('hp', 'green') </button>
-            <br>.setLabelColor()
-            <button onclick="aBar.setLabelColor('hp', 'black')"> ('hp', 'black') </button>
-            <button onclick="aBar.setLabelColor('hp', 'white')"> ('hp', 'white') </button>
-            <br><br>
-            <br> <b>When you make a change to an existing attribute, you can change the numberic text color for a while (or forever) </b>
-            <br> (you need to call any set function to see these changes) 
-            <br> .colorChange =
-            <button onclick="aBar.colorChange = true;aBar.update()">  true </button>
-            <button onclick="aBar.colorChange = false;aBar.update()"> false </button> 
-            <br> .colorChangeTime =
-            <button onclick="aBar.colorChangeTime = 'inf';aBar.update()">  'inf' </button>
-            <button onclick="aBar.colorChangeTime = 1;aBar.update()">  1 </button>
-            <button onclick="aBar.colorChangeTime = 3;aBar.update()">  3 </button> 
-            <button onclick="aBar.colorChangeTime = 5;aBar.update()">  5 </button> 
-            <br> .colorChangeColor =
-            <button onclick="aBar.colorChangeColor = 'red';aBar.update()">  'red' </button>
-            <button onclick="aBar.colorChangeColor = 'blue';aBar.update()">  'blue' </button> 
-            <br><br>
-            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b>
-            <br> .containerColor =
-            <button onclick="aBar.containerColor = 'rgb(216, 216, 216)';aBar.update()"> 'rgb(216, 216, 216)' </button>
-            <button onclick="aBar.containerColor = 'black';aBar.update()"> 'black' </button>
-            <br> .showLabel =
-            <button onclick="aBar.showLabel = true;aBar.update()"> true </button>
-            <button onclick="aBar.showLabel = false;aBar.update()"> false </button>
-            <br> .labelPosition =
-            <button onclick="aBar.labelPosition = 'left';aBar.update()"> 'left' </button>
-            <button onclick="aBar.labelPosition = 'center';aBar.update()"> 'center' </button>
-            <button onclick="aBar.labelPosition = 'right';aBar.update()"> 'right' </button>
-            <br> .labelStyle =
-            <button onclick="aBar.labelStyle = 'value/max';aBar.update()"> 'value/max' </button>
-            <button onclick="aBar.labelStyle = 'value';aBar.update()"> 'value' </button>
-            <button onclick="aBar.labelStyle = '%';aBar.update()"> '%' </button>
-            <br> .allowExceedMax =
-            <button onclick="aBar.allowExceedMax = true;aBar.update()"> true </button>
-            <button onclick="aBar.allowExceedMax = false;aBar.update()"> false </button>
-            examples:
-            <button onclick="aBar.setValue('mp', 300)"> set 'mp' to 300 </button>
-            <button onclick="aBar.setValue('mp', 3000)"> set 'mp' to 3000 </button>
-            <br>
-
-        </div>
-    </div>
-    
     <a href="#sec-0" class="back"> Back to Menu </a>
     
     <script src="examples.js"> </script>

@@ -146,6 +146,7 @@ code {
 #attribute-panel {
     min-height: 100px;
     border: ridge rgb(104, 159, 228) 5px;
+    width: 400px;
 }
 
 #attribute-bar {
