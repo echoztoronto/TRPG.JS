@@ -9,6 +9,9 @@ const default_img_path = "img/default.jpg";
 //  ------------------------------- Attribute Panel  ------------------------------
 class AttributePanel {
     attributes = {};       //  {name: value}      *required
+    description = {};      //  {name: description}
+    showDescription = true;
+    showDescriptionWhenHoverOn = "name";  //"name", "value", "both"
     colorChange = false;
     colorChangeTime = 3;      
     colorChangeColor = "red";
@@ -38,6 +41,13 @@ class AttributePanel {
         }
         this.container = document.getElementById(this.ID);
         this.container.classList.add("TRPG-aPanel-container");
+        // description div
+        this.description_div = document.createElement("div");
+        this.description_div.className = "TRPG-description-container";
+        this.description_div.id = this.ID + "-description-container";
+        this.description_div.style.visibility = "hidden";
+        this.description_div.innerHTML = ' ';
+        this.container.appendChild(this.description_div);
         // DOM
         this.update();
     }
@@ -65,6 +75,11 @@ class AttributePanel {
 
     setValueColor(attr, color) {
         this.valueColorList[attr] = color;
+        this.update();
+    }
+
+    setDescription(attr, description){
+        this.description[attr] = description;
         this.update();
     }
 
@@ -121,6 +136,34 @@ class AttributePanel {
         this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-value");
         change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
         change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
+        if(this.showDescription) {
+            let showDescriptionOnWhich = '';
+            switch(this.showDescriptionWhenHoverOn) {
+                case 'name':
+                    showDescriptionOnWhich = dest_ID + '-name';
+                    break;
+                case 'value':
+                    showDescriptionOnWhich = dest_ID + '-value';
+                    break;
+                case 'both':
+                    showDescriptionOnWhich = dest_ID;
+                    break;
+                default:
+                    showDescriptionOnWhich = dest_ID + '-name';
+            }
+            const name_element = document.getElementById(showDescriptionOnWhich);
+            const description_element = this.description_div;
+            const desction_list = this.description;
+            name_element.addEventListener("mouseover", function(){
+                if(desction_list[attr] == undefined) description_element.innerHTML = `<i>no description</i>`;
+                else description_element.innerHTML = `${desction_list[attr]}`;
+                set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
+                description_element.style.visibility = "visible";
+            });
+            name_element.addEventListener("mouseout", function(){
+                description_element.style.visibility = "hidden";
+            });
+        }
     }
 }
 
@@ -130,8 +173,10 @@ class AttributeBars {
     attributes = {};      //  {name: value}      *required
     attributesMax = {};   //  {name: maxValue}   *required
     barColor = {};        //  {name: barColor}   *required
-    labelColors = {};      //  {name: labelColor}
-    
+    labelColors = {};     //  {name: labelColor}
+    description = {};     //  {name: description}
+    showDescription = true;
+    descriptionPosition = "center";  // "left", "center", "right"
     colorChange = false;
     colorChangeTime = 3;      
     colorChangeColor = "red";
@@ -166,6 +211,13 @@ class AttributeBars {
         }
         this.container = document.getElementById(this.ID);
         this.container.classList.add("TRPG-aBar-container");
+        // description div
+        this.description_div = document.createElement("div");
+        this.description_div.className = "TRPG-description-container";
+        this.description_div.id = this.ID + "-description-container";
+        this.description_div.style.visibility = "hidden";
+        this.description_div.innerHTML = ' ';
+        this.container.appendChild(this.description_div);
         // DOM
         this.update();
     }
@@ -251,6 +303,11 @@ class AttributeBars {
         }
     }
 
+    setDescription(attr, description){
+        this.description[attr] = description;
+        this.update();
+    }
+
     delete(attr) {
         if(this.attributes[attr] == undefined) return;
         else {
@@ -280,7 +337,7 @@ class AttributeBars {
         this.container.appendChild(attr_div);
         attr_div.className = "TRPG-aBar-attr";
         attr_div.id = dest_ID;
-        attr_div.innerHTML = `  <div class='TRPG-aBar-attr-name'> ${attr} </div> 
+        attr_div.innerHTML = `  <div class='TRPG-aBar-attr-name' id='${dest_ID}-name'> ${attr} </div> 
                                 <div class='TRPG-aBar-attr-bar-container' style='background: ${this.containerColor}' > 
                                     <div class='TRPG-aBar-attr-bar'>  
                                         <div class='TRPG-aBar-attr-bar-content' id='${dest_ID}-bar'>  </div>
@@ -291,11 +348,40 @@ class AttributeBars {
         bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
         bar_element.style.backgroundColor = this.barColor[attr];
         const value_element = document.getElementById(dest_ID + "-value");
+        // label
         this.setLabelByStyle(attr); 
         if(this.showLabel) {
             value_element.style.visibility = "visible";
         } else {
             value_element.style.visibility = "hidden";
+        }
+        // description
+        if(this.showDescription) {
+            const name_element = document.getElementById(dest_ID)
+            const description_element = this.description_div;
+            const description_list = this.description;
+            const description_position = this.descriptionPosition;
+            name_element.addEventListener("mouseover", function(){
+                if(description_list[attr] == undefined) description_element.innerHTML = `<i>no description</i>`;
+                else description_element.innerHTML = `${description_list[attr]}`;
+                switch(description_position) {
+                    case "left":
+                        set_element_to_bottom_left_of_another_element(description_element, name_element);
+                        break;
+                    case "center":
+                        set_element_to_bottom_center_of_another_element(description_element, name_element);
+                        break;
+                    case "right":
+                        set_element_to_bottom_right_of_another_element(description_element, name_element);
+                        break;
+                    default:
+                        set_element_to_bottom_center_of_another_element(description_element, name_element);
+                }
+                description_element.style.visibility = "visible";
+            });
+            name_element.addEventListener("mouseout", function(){
+                description_element.style.visibility = "hidden";
+            });
         }
     }
 
@@ -727,5 +813,17 @@ function move_element_to_mouse_postion(event, div) {
 function set_element_to_bottom_right_of_another_element(front, back) {
     const rect = back.getBoundingClientRect();
     front.style.left = window.scrollX + rect.right - 5  + 'px';
+    front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
+}
+
+function set_element_to_bottom_center_of_another_element(front, back) {
+    const rect = back.getBoundingClientRect();
+    front.style.left = window.scrollX + (rect.left + rect.right)/2  + 'px';
+    front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
+}
+
+function set_element_to_bottom_left_of_another_element(front, back) {
+    const rect = back.getBoundingClientRect();
+    front.style.left = window.scrollX + rect.left - 5  + 'px';
     front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
 }

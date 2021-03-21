@@ -4,18 +4,29 @@ const aPanel = new AttributePanel('attribute-panel', {
         mp: 500,
         sanity: 'healthy'
       },
+    description : {
+        hp: 'heath point, you will lose health when you eat a rotten apple :)'
+    },
+    showDescription : true,
+    showDescriptionWhenHoverOn : "both",
     colorChange : true,
-    colorChangeTime: 2,  // "inf" for change it forever
+    colorChangeTime: 2, 
   });
 
 
 
 
 const aBar = new AttributeBars('attribute-bar', {
-    attributes : {  //{name: [value, maxValue, barColor]}
+    attributes : {  
         hp: [1000,2000,'pink'],
         mp: [500,800,'rgb(155, 198, 255)']
       },
+    description : {
+        hp: 'heath point, you will lose health when you eat a rotten apple :)',
+        mp: 'the thing we all need to cast a spell'
+    },
+    showDescription : true,
+    descriptionPosition : "center",
     colorChange : true,
     colorChangeTime: 2,
     colorChangeColor : "red",

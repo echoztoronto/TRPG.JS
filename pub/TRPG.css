@@ -12,10 +12,16 @@
 
 .TRPG-aPanel-attr {
     display: flex;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .TRPG-aPanel-attr-name .TRPG-aPanel-attr-value {
     display: inline-block;
+    min-height: 30px;
 }
 
 .TRPG-aPanel-attr-name {
@@ -30,10 +36,18 @@
 
 .TRPG-aBar-attr {
     margin-bottom: 20px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .TRPG-aBar-attr-name {
-    width: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 5px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .TRPG-aBar-attr-bar-container {
@@ -200,4 +214,28 @@
     -ms-user-select: none;
     padding: 3px 5px 3px 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+
+
+
+
+/*------------------- General -----------------------*/
+
+.TRPG-description-container {
+    z-index: 100;
+    min-width: 100px;
+    position: absolute;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+    font-size: 18px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 5px 5px 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
