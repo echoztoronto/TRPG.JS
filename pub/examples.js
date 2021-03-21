@@ -3,7 +3,8 @@
 const aPanel = new AttributePanel('attribute-panel', {
     attributes : {
         hp: 1000,
-        mp: 500
+        mp: 500,
+        sanity: 'healthy'
       },
     colorChange : true,
     colorChangeTime: 2,  // "inf" for change it forever
@@ -19,8 +20,8 @@ const aBar = new AttributeBars('attribute-bar', {
       },
     colorChange : true,
     colorChangeTime: 2,
-    colorChangeColor : "blue",
-    labelColor: {
+    colorChangeColor : "red",
+    labelColors: {
         hp: "white"
     },
   });

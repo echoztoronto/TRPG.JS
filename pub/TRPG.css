@@ -5,6 +5,18 @@
     font-size: 20px;
 }
 
+.TRPG-aPanel-attr {
+    display: flex;
+}
+
+.TRPG-aPanel-attr-name .TRPG-aPanel-attr-value {
+    display: inline-block;
+}
+
+.TRPG-aPanel-attr-name {
+    margin-right: 10px;
+}
+
 /* --------- Attribute Bar-------------------------*/
 .TRPG-aBar-container {
     padding: 20px 20px 20px 20px;

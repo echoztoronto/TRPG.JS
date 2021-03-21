@@ -11,6 +11,14 @@ class AttributePanel {
     colorChangeColor = "red";
     nameColor = "black";
     valueColor = "black";
+    nameTextAlign = "right";
+    valueTextAlign = "left";
+
+    timers = {};
+    nameColorList = {};        //  {name: nameColor}
+    valueColorList = {};       //  {name: valueColor}
+    nameMaxWidth = 0;
+    valueMaxWidth = 0;
 
     constructor(ID, modules) {
         // setting up the modules
@@ -40,14 +48,25 @@ class AttributePanel {
         } else this.addDOM(attr);
         // color
         if(this.colorChange) {
-            timed_color_change(dest_ID + "-value", this.colorChangeColor, this.colorChangeTime);
+            stop_timeout(this.timers[attr]);
+            let original_color = this.valueColor;
+            if(this.valueColorList[attr] != undefined) original_color = this.valueColorList[attr];
+            this.timers[attr] = this.timers[attr] = timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
         }       
     }
 
+    setNameColor(attr, color) {
+        this.nameColorList[attr] = color;
+        this.update();
+    }
+
+    setValueColor(attr, color) {
+        this.valueColorList[attr] = color;
+        this.update();
+    }
+
     delete(attr) {
-        if(this.attributes[attr] == undefined) {
-            console.log("Delete error: Cannot find attribute " + attr);
-        }
+        if(this.attributes[attr] == undefined) return;
         else {
             // DOM
             const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
@@ -68,6 +87,23 @@ class AttributePanel {
         }
         change_class_css("TRPG-aPanel-attr-name","color", this.nameColor);
         change_class_css("TRPG-aPanel-attr-value","color", this.valueColor);
+        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-name");
+        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-value");
+        change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
+        change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
+        // name color and value color
+        for (const attr in this.nameColorList) {
+            if(attr == 0) return;
+            const dest_ID = this.ID + "-" + replace_space_with_dash(attr) + "-name";
+            if(document.getElementById(dest_ID) == undefined) return;
+            document.getElementById(dest_ID).style.color = this.nameColorList[attr];
+        }
+        for (const attr in this.valueColorList) {
+            if(attr == 0) return;
+            const dest_ID = this.ID + "-" + replace_space_with_dash(attr) + "-value";
+            if(document.getElementById(dest_ID) == undefined) return;
+            document.getElementById(dest_ID).style.color = this.valueColorList[attr];
+        }
     }
 
     addDOM(attr) {
@@ -76,13 +112,12 @@ class AttributePanel {
         this.container.appendChild(attr_div);
         attr_div.className = "TRPG-aPanel-attr";
         attr_div.id = dest_ID;
-        attr_div.innerHTML = `  <span class='TRPG-aPanel-attr-name'> ${attr}: </span> 
-                                <span class='TRPG-aPanel-attr-value' id='${dest_ID}-value'> ${this.attributes[attr]} </span>`;
-    }
-
-    //for debug
-    print() {
-        console.log(this);
+        attr_div.innerHTML = `  <div class='TRPG-aPanel-attr-name' id='${dest_ID}-name'> ${attr} </div> 
+                                <div class='TRPG-aPanel-attr-value' id='${dest_ID}-value'> ${this.attributes[attr]} </div>`;
+        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-name");
+        this.nameMaxWidth = make_all_same_width("TRPG-aPanel-attr-value");
+        change_class_css("TRPG-aPanel-attr-name","text-align", this.nameTextAlign);
+        change_class_css("TRPG-aPanel-attr-value","text-align", this.valueTextAlign);
     }
 }
 
@@ -93,16 +128,19 @@ class AttributeBars {
     attributes = {};      //  {name: value}      *required
     attributesMax = {};   //  {name: maxValue}   *required
     barColor = {};        //  {name: barColor}   *required
-    labelColor = {};      //  {name: labelColor}
+    labelColors = {};      //  {name: labelColor}
     
     colorChange = false;
     colorChangeTime = 3;      
     colorChangeColor = "red";
     containerColor = 'rgb(216, 216, 216)';
+    labelColor = 'black';
     showLabel = true;
     labelPosition = "center";   //or "left", "right"
     labelStyle = "value/max";   //or "value", "%"
     allowExceedMax = false;
+
+    timers = {};
 
     constructor(ID, modules) {  // modules = {name: [value, maxValue, barColor]}
         // setting up the modules
@@ -115,7 +153,7 @@ class AttributeBars {
                     this.barColor[attr] = modules["attributes"][attr][2];
                 }
             } 
-            else if (module == "attributesMax"||module =="barColor"||module =="labelColor") {
+            else if (module == "attributesMax"||module =="barColor"||module =="labelColors") {
                 for (const attr in modules[module]) {
                     this[module][attr] = modules[module][attr];
                 }
@@ -146,7 +184,10 @@ class AttributeBars {
         } else this.addDOM(attr);
         // color
         if(this.colorChange) {
-            timed_color_change(dest_ID + "-value", this.colorChangeColor, this.colorChangeTime);
+            stop_timeout(this.timers[attr]);
+            let original_color = this.labelColor;
+            if(this.labelColors[attr] != undefined) original_color = this.labelColors[attr];
+            this.timers[attr] = timed_color_change(dest_ID + "-value",original_color, this.colorChangeColor, this.colorChangeTime);
         }
     }
 
@@ -162,9 +203,12 @@ class AttributeBars {
             bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
             // color
             if(this.colorChange) {
-                timed_color_change(dest_ID + "-value", this.colorChangeColor, this.colorChangeTime);
+                stop_timeout(this.timers[attr]);
+                let original_color = this.labelColor;
+                if(this.labelColors[attr] != undefined) original_color = this.labelColors[attr];
+                this.timers[attr] = timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
             }  
-        }  else console.log("SetValue error: Cannot find attribute " + attr);
+        }  
     }
     
     setMaxValue(attr, maxValue) {
@@ -179,9 +223,12 @@ class AttributeBars {
             bar_element.style.width = (lock_to_max(false,a_value, a_max)/a_max)*100  + "%";
             // color
             if(this.colorChange) {
-                timed_color_change(dest_ID + "-value", this.colorChangeColor, this.colorChangeTime);
+                stop_timeout(this.timers[attr]);
+                let original_color = this.labelColor;
+                if(this.labelColors[attr] != undefined) original_color = this.labelColors[attr];
+                this.timers[attr] = timed_color_change(dest_ID + "-value", original_color, this.colorChangeColor, this.colorChangeTime);
             }  
-        }  else console.log("SetMaxValue error: Cannot find attribute " + attr);  
+        }  
     }
 
     setBarColor(attr, color) {
@@ -190,22 +237,20 @@ class AttributeBars {
         // DOM
         if(document.getElementById(dest_ID) != null) {
             document.getElementById(dest_ID+"-bar").style.backgroundColor = this.barColor[attr];
-        }  else console.log("SetBarColor error: Cannot find attribute " + attr);
+        } 
     }
 
     setLabelColor(attr, color) {
         const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
         if(document.getElementById(dest_ID) != null) {
-            this.labelColor[attr] = color;
+            this.labelColors[attr] = color;
             const value_element = document.getElementById(dest_ID + "-value");
-            value_element.style.color = this.labelColor[attr];
-        } else console.log("SetLabelColor error: Cannot find attribute " + attr);
+            value_element.style.color = this.labelColors[attr];
+        }
     }
 
     delete(attr) {
-        if(this.attributes[attr] == undefined) {
-            console.log("Delete error: Cannot find attribute " + attr);
-        }
+        if(this.attributes[attr] == undefined) return;
         else {
             // DOM
             const dest_ID = this.ID + "-" + replace_space_with_dash(attr);
@@ -259,9 +304,9 @@ class AttributeBars {
         let a_max = this.attributesMax[attr]; 
         let actual_value = lock_to_max(this.allowExceedMax,a_value, a_max);
 
-        if(this.labelColor[attr] != undefined) {
-            element.style.color = this.labelColor[attr];
-        }   
+        if(this.labelColors[attr] != undefined) {
+            element.style.color = this.labelColors[attr];
+        }   else  element.style.color = this.labelColor;
         element.style.textAlign = this.labelPosition;
 
         switch(this.labelStyle) {
@@ -278,12 +323,6 @@ class AttributeBars {
                 element.innerHTML = `${actual_value} / ${a_max}`;
         }
     }
-
-    //for debug
-    print() {
-        console.log(this);
-    }
-
 }
 
 
@@ -371,10 +410,7 @@ class Inventory {
     }
 
     removeItem(item, quantity) {
-        if(this.quantity[item] == undefined) {
-            console.log("undefined quantity");
-            return;
-        }
+        if(this.quantity[item] == undefined) return;
         this.quantity[item] -= quantity;
         // we don't support negative quantity
         if(this.quantity[item] < 0) this.quantity[item] = 0;
@@ -466,9 +502,8 @@ class Inventory {
         menu.id = this.ID + "-option-menu";
         menu.style.visibility = 'hidden';
         this.container.appendChild(menu);
-        if(this.menuOption.length == 0) {
-            console.log("menuOption is empty!");
-        } else {
+        if(this.menuOption.length == 0) return;
+        else {
             let option_count = 1;
             for(let i = 0; i < this.menuOption.length; i++){
                 const op_text = this.menuOption[i];
@@ -629,23 +664,44 @@ class Inventory {
 
 
 //  ------------------------------- Helper Functions  ------------------------------
-function timed_color_change(ID, color, sec) {
+function timed_color_change(ID, original, dest, sec) {
     const element = document.getElementById(ID);
-    const original_color = element.style.color;
-    element.style.color = color;
+    let timer = 0;
+    element.style.color = dest;
     if (sec != "inf") {
-        setTimeout(function(){ 
-            element.style.color = original_color;
+        timer = setTimeout(function(){ 
+            element.style.color = original;
         }, 1000*sec);
     }
+    return timer;
 }
 
+function stop_timeout(timer) {
+    if (timer) {
+        clearTimeout(timer);
+        timer = 0;
+    }
+}
 
 function change_class_css(className, cssName, value) {
     const all = document.getElementsByClassName(className);
     for (let i = 0; i < all.length; i++) {
         all[i].style[cssName] = value;
     }
+}
+
+function make_all_same_width(className) {
+    let max_width = 0;
+    const all = document.getElementsByClassName(className);
+    for (let i = 0; i < all.length; i++) {
+        if(all[i].clientWidth > max_width) {
+            max_width = all[i].clientWidth;
+        }
+    }
+    for (let i = 0; i < all.length; i++) {
+        all[i].style.width = max_width + 'px';
+    }
+    return max_width;
 }
 
 function replace_space_with_dash(str) {

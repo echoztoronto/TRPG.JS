@@ -55,7 +55,9 @@
             <div class="demo-code"> 
                 <pre>
                     <code>
-// constructor
+&#60;div id="inventory"> &#60;/div>
+
+// javascript constructor
 const myBag = new Inventory('inventory', {
   quantity : { apple: 20,banana: 5,
                orange: 0,strawberry: 100},
@@ -93,11 +95,6 @@ function gift_item(item) {
                     </code>
                 </pre>
             </div>
-
-
-
-    
-
         </div>
         <div class="buttons">  
         <br> .set()
@@ -176,7 +173,6 @@ function gift_item(item) {
             <button onclick="myBag.quantityYPosition='top'; myBag.update();"> 'top' </button> 
             <button onclick="myBag.quantityYPosition='center'; myBag.update();"> 'center' </button> 
             <button onclick="myBag.quantityYPosition='bottom'; myBag.update();"> 'bottom' </button>
-
         </div>
     </div>
 
@@ -189,12 +185,15 @@ function gift_item(item) {
             <div class="demo-code"> 
                 <pre>
                     <code>
-// constructor
+&#60;div id="attribute-panel"> &#60;/div>
+
+// javascript constructor
 const aPanel = new AttributePanel(
 'attribute-panel', {
     attributes : {
         hp: 1000,
-        mp: 500
+        mp: 500,
+        sanity: 'healthy'
         },
     colorChange : true,
     colorChangeTime: 2, 
@@ -214,6 +213,13 @@ const aPanel = new AttributePanel(
             <br> .delete()
             <button onclick="aPanel.delete('life')"> ('life') </button> 
             <button onclick="aPanel.delete('hp')"> ('hp') </button> 
+            <br> .setNameColor()
+            <button onclick="aPanel.setNameColor('hp','LawnGreen')"> ('hp','LawnGreen') </button> 
+            <button onclick="aPanel.setNameColor('mp', 'Crimson')"> ('mp', 'Crimson') </button>
+            <br> .setValueColor()
+            <button onclick="aPanel.setValueColor('hp','Violet')"> ('hp','Violet') </button> 
+            <button onclick="aPanel.setValueColor('mp', 'Turquoise')"> ('mp', 'Turquoise') </button>
+            <br>
             <br><br>
             <br> <b>When you make a change to an existing attribute, you can change the numberic text color for a while (or forever) </b>
             <br> (you need to call any set function to see these changes)
@@ -231,12 +237,21 @@ const aPanel = new AttributePanel(
             <br><br>
             <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b> 
             <br> .nameColor = 
-            <button onclick="aPanel.nameColor = 'black';aPanel.update()"> 'black' </button>
+            <button onclick="aPanel.nameColor = 'green';aPanel.update()"> 'green' </button>
             <button onclick="aPanel.nameColor = 'red';aPanel.update()"> 'red' </button>
+             <i> this will not overwrite .setNameColor() </i>
             <br> .valueColor =
-            <button onclick="aPanel.valueColor = 'black';aPanel.update()">  'black' </button>
+            <button onclick="aPanel.valueColor = 'green';aPanel.update()">  'green' </button>
             <button onclick="aPanel.valueColor = 'red';aPanel.update()">  'red' </button> 
-            <br>
+             <i> this will not overwrite .setValueColor() </i>
+            <br> .nameTextAlign = 
+            <button onclick="aPanel.nameTextAlign = 'left';aPanel.update()">  'left' </button>
+            <button onclick="aPanel.nameTextAlign = 'center';aPanel.update()">  'center' </button>
+            <button onclick="aPanel.nameTextAlign = 'right';aPanel.update()">  'right' </button> 
+            <br> .valueTextAlign = 
+            <button onclick="aPanel.valueTextAlign = 'left';aPanel.update()">  'left' </button>
+            <button onclick="aPanel.valueTextAlign = 'center';aPanel.update()">  'center' </button>
+            <button onclick="aPanel.valueTextAlign = 'right';aPanel.update()">  'right' </button> 
         </div>
     </div>
 
@@ -249,7 +264,9 @@ const aPanel = new AttributePanel(
             <div class="demo-code"> 
                 <pre>
                     <code>
-// constructor
+&#60;div id="attribute-bar"> &#60;/div>
+
+// javascript constructor
 const aBar = new AttributeBars(
 'attribute-bar', {
     attributes : {  
@@ -258,7 +275,7 @@ const aBar = new AttributeBars(
         },
     colorChange : true,
     colorChangeTime: 2,
-    colorChangeColor : "blue",
+    colorChangeColor : "red",
     labelColor: {
         hp: "white"
     },
@@ -280,13 +297,15 @@ const aBar = new AttributeBars(
             <button onclick="aBar.delete('life')"> ('life') </button> 
             <button onclick="aBar.delete('hp')"> ('hp') </button> 
             <br>.setValue()
+            <button onclick="aBar.setValue('hp', 1)"> ('hp', 1) </button>
+            <button onclick="aBar.setValue('hp', 100)"> ('hp', 100) </button>
             <button onclick="aBar.setValue('life', 0)"> ('life', 0) </button>
             <button onclick="aBar.setValue('life', 2)"> ('life', 2) </button>
-            <button onclick="aBar.setValue('hp', 1)"> ('hp', 1) </button>
             <br>.setMaxValue()
+            <button onclick="aBar.setMaxValue('hp', 100)"> ('hp', 100) </button>
+            <button onclick="aBar.setMaxValue('hp', 13000)"> ('hp', 13000) </button>
             <button onclick="aBar.setMaxValue('life', 100)"> ('life', 100) </button>
             <button onclick="aBar.setMaxValue('life', 5)"> ('life', 5) </button>
-            <button onclick="aBar.setMaxValue('hp', 13000)"> ('hp', 13000) </button>
             <br>.setBarColor()
             <button onclick="aBar.setBarColor('hp', 'red')"> ('hp', 'red') </button>
             <button onclick="aBar.setBarColor('hp', 'green')"> ('hp', 'green') </button>
