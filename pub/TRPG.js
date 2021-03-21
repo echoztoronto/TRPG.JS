@@ -123,7 +123,6 @@ class AttributePanel {
 
 
 //  ------------------------------- Attribute Bar  ------------------------------
-
 class AttributeBars {
     attributes = {};      //  {name: value}      *required
     attributesMax = {};   //  {name: maxValue}   *required
@@ -327,7 +326,6 @@ class AttributeBars {
 
 
 //  ------------------------------- Inventory  ------------------------------
-
 class Inventory {
     quantity = {};     // {name: quantity}      *required
     description = {};  // {name: description}
@@ -576,6 +574,7 @@ class Inventory {
                 }
                 // hover event - show name/description 
                 cell_element.addEventListener("mouseover",function(){
+                    cell_element.style.cursor = "pointer";
                     if(menu.style.visibility == 'visible') {
                         info.style.visibility = "hidden";
                         name_element.style.visibility = 'hidden';
