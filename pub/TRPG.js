@@ -160,7 +160,7 @@ class AttributePanel {
             name_element.addEventListener("mouseover", function(){
                 if(desction_list[attr] == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
                 else description_element.innerHTML = `${desction_list[attr]}`;
-                __set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
+                _set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
                 description_element.style.visibility = "visible";
             });
             name_element.addEventListener("mouseout", function(){
