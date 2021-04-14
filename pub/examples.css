@@ -1,66 +1,58 @@
+body {
+    max-width: 1024px;
+    margin: 100px auto;
+    overflow: auto;
+    padding: 20px;
+    transition: margin-left .5s;
+}
+
 .title {
-    padding-left: 200px;
+    text-align: center;
     font-size: 40px;
     text-shadow: 2px 2px #b4b4b4;
     padding-bottom: 30px;
-    min-width: 400px;
 }
 
 .author{
-    padding-left: 250px;
+    text-align: center;
     font-size: 30px;
     text-shadow: 1px 1px #b4b4b4;
     padding-bottom: 50px;
-    min-width: 400px;
 }
 
-.menu {
-    font-size: 30px;
-    min-width: 500px;
-    text-align: center;
-    border: solid 2px black;
-    padding-bottom: 50px;
-    margin-bottom: 50px;
+.sidenav {
+    height: 100%; 
+    width: 180px; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    left: 0;
+    background-color: rgb(54, 54, 54); 
+    overflow-x: hidden; 
+    padding-top: 60px; 
+    transition: 0.5s; 
 }
 
-.menu a {
+.sidenav a {
+    padding: 8px 8px 8px 32px;
     text-decoration: none;
-    color: rgb(90, 91, 97);
     font-size: 20px;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    text-align: center;
-}
-
-.menu a:hover {
-    text-decoration: underline;
-}
-
-#introduction {
-    min-width: 680px;
-    max-width: 900px;
-    border: 2px solid black;
-    margin-left: 30px;
-    padding: 30px 30px 30px 50px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 22px;
-    margin-bottom: 50px;
-}
-
-.back{
-    min-width: 800px;
-    text-decoration: none;
-    color: black;
+    color: #bbbbbb;
     display: block;
-    font-size: 25px;
-    margin-bottom: 100px;
-    padding-left: 750px;
-    padding-bottom: 20px;
-    border-bottom: double 5px black;
+    transition: 0.3s;
+  }
+
+.sidenav a:hover {
+    color: #f1f1f1;
 }
 
-.back:hover {
-    text-decoration: underline;
-    cursor: pointer;
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+@media only screen and (max-width: 1450px) {
+    body {padding-left: 200px;}
 }
 
 .section-container {
@@ -116,13 +108,6 @@ code {
     font-size: 15px;
 }
 
-@media only screen and (max-width: 768px) {
-    .demo-block {min-width:  700px;}
-    .menu {min-width:  700px;}
-    code {  font-size: 13px; }
-
-}
-
 
 .section-title {
     font-size: 30px;
@@ -130,7 +115,7 @@ code {
     font-family:Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     color: black;
-    text-shadow: 2px 2px #b4b4b4;
+    text-shadow: 2px 2px #cccbcb;
 }
 
 .eg {
@@ -139,7 +124,7 @@ code {
     font-family:Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     color: rgb(51, 51, 182);
-    text-shadow: 2px 2px #b4b4b4;
+    text-shadow: 2px 2px #cfcece;
 }
 
 

@@ -19,38 +19,18 @@
     <div class="title"> TRPG.JS PlayGround </div>
     <div class="author"> By Echo (Yuwen) Zheng </div>
 
-    <div class="section-container">
-        <div class="menu"> 
-            Menu 
-            <br>
-            <a href="#sec-1">Attribute Panel</a>
-            <br>
-            <a href="#sec-2">Attribute Bars</a>
-            <br>
-            <a href="#sec-3"> Inventory </a>
-            <br><br>
-            Coming Soon:
-            <br>
-            <a href="#sec-0"> Skill Bar </a>
-            <br>
-            <a href="#sec-0"> Talent Tree </a>
-            <br>
-            <a href="#sec-0"> Event Panel </a>
-            <br>
-            <a href="#sec-0"> Chat Window </a>
 
-        </div>
-        <div id="introduction"> 
-            TRPG.JS is a library that can be used to build web-based TRPGs.
-            <br><br>
-            <b>What is TRPG? </b><br>
-            <b>T</b>abletop <b>R</b>ole-<b>P</b>laying <b>G</b>ame, where multiple players need to follow a set of rules, role-play their characters, and go through a story together. 
-            <br><br>
-            You can use TRPG.JS library to display the information panel for each player, such as <b>attributes</b>, <b>skills</b>, <b>talent tree</b> and <b>inventory</b>, as well as to <b>display events</b> (and possible options/reactions to events) and <b>build chat windows</b>. 
-            <br><br>
-            This library is mainly focusing on <b>DOM manipulation</b>, please be advised that you can modify the style of everything to make the UI prettier :) 
-        </div>
+    <div id="menu" class="sidenav"> 
+        <a href="docs.html"> Documentation </a> <br><br>
+        <a href="#sec-1">Attribute Panel</a>
+        <a href="#sec-2">Attribute Bars</a>
+        <a href="#sec-3"> Inventory </a>
+        <a href="#sec-0"> Skill Bar </a>
+        <a href="#sec-0"> Talent Tree </a>
+        <a href="#sec-0"> Event Panel </a>
+        <a href="#sec-0"> Chat Window </a>
     </div>
+
     
     <!-- Attribute Panel  -->
     <div class="section-container"> 
@@ -145,9 +125,6 @@ const aPanel = new AttributePanel('attribute-panel', {
             <button onclick="aPanel.showDescriptionWhenHoverOn = 'both';aPanel.update()">  'both' </button>
         </div>
     </div>
-
-    <a href="#sec-0" class="back"> Back to Menu </a>
-    
 
     <!-- Attribute Bars  -->
     <div class="section-container"> 
@@ -261,9 +238,6 @@ const aBar = new AttributeBars('attribute-bar', {
         </div>
     </div>
     
-    <a href="#sec-0" class="back"> Back to Menu </a>
-
-
     <!-- Inventory  -->
         <div class="section-container"> 
         <div class="demo-block"> 
@@ -393,8 +367,7 @@ function gift_item(item) {
         </div>
     </div>
 
-    <a href="#sec-0" class="back"> Back to Menu </a>
-    
+
     <script src="examples.js"> </script>
 </body>
 </html>
