@@ -148,6 +148,7 @@
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    text-shadow: 1px 1px #ffffff;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -218,10 +219,6 @@
     padding: 3px 5px 3px 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
-
-
-
 
 
 /*------------------- General -----------------------*/
