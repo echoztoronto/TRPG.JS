@@ -128,3 +128,17 @@ code {
     font-family:cursive;
     min-height: 100px;
 }
+
+#skill-panel-message {
+    margin-top: 30px;
+    font-size: 20px;
+    font-family:cursive;
+    min-height: 100px;
+}
+
+.message-log {
+    padding-left: 20px;
+    overflow-y: scroll;
+    max-height: 100px;
+    background-color: rgba(250, 221, 168, 0.774);
+}

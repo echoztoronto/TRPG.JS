@@ -257,6 +257,90 @@
     cursor: pointer;
 }
 
+/*------------------- Skill Panel -----------------------*/
+
+.TRPG-spanel-container {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    background-color: rgb(230, 237, 253);
+    padding: 20px;
+    border-radius: 5px;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.TRPG-spanel-skills {
+    display: flex;
+    margin: auto;
+}
+
+.TRPG-spanel-skill {
+    display: inline-block;
+    border: rgb(162, 177, 219) 2px solid;
+    border-radius: 13px;
+    margin-left: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.TRPG-spanel-skill:hover {
+    cursor: pointer;
+    border: 2px solid rgb(135, 143, 211);
+    box-shadow: 0 0 6px 1px rgb(168, 149, 255);
+}
+
+.TRPG-spanel-skill-icon  {
+    width: 100%;
+    height: 100%;
+    border-radius: 13px;
+    -webkit-user-drag: none;
+}
+
+.TRPG-spanel-description-container {
+    z-index: 100;
+    min-width: 100px;
+    position: absolute;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    background-color: rgb(232, 242, 250);
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 5px 5px 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.TRPG-spanel-description-name {
+    font-family:cursive;
+    font-size: 23px;
+}
+
+.TRPG-spanel-description-text {
+    margin-top: 15px;
+    color: rgb(2, 53, 121);
+}
+
+.TRPG-spanel-description-cd {
+    margin-top: 20px;
+    font-size: 18px;
+    float: right;
+    color: rgb(255, 110, 43);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.TRPG-spanel-skill-timer {
+    font-size: 60px;
+    height: 100%;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: -80px;
+    text-shadow: 3px 0px 3px rgb(0, 0, 0);
+    z-index: 99;
+    opacity: 100%;
+}
+
 /*------------------- General -----------------------*/
 
 .TRPG-description-container {

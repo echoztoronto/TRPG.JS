@@ -867,19 +867,20 @@
             this.show(random_event);
             this.current_event = random_event;
         }
-
-
-
-
     }
 
 
     //  ------------------------------- Skill Panel  ------------------------------
     class SkillPanel {
-        events = {};              // {name: [options]}       
-        eventDescription = {};    // {name: description}
-        options = {};             // {name: onclick_function}
-        optionDescription = {};   // {name: description}
+        skills = [];              // [skill names]      
+        icon = {};                // {name: image path}
+        description = {};         // {name: description}
+        onclick = {};             // {name: click function}
+        cooldown = {};            // {name: cooldown}
+
+        iconSize = 80;
+        showDescription = true;
+        timerColor = "black";
 
         constructor(ID, modules) {
             // setting up the modules
@@ -888,15 +889,110 @@
                     this[module] = modules[module];
             }
             this.container = document.getElementById(this.ID);
-            this.container.classList.add("TRPG-eventlist-container");
-            // descriptionid
-            const description_container = document.createElement("div");
-            description_container.id = this.ID + "-description";
-            description_container.classList.add("TRPG-eventlist-description");
-            this.container.appendChild(description_container);
-            // DOM
-            this.current_event = Object.keys(this.events)[0];
-            this.show(this.current_event);
+            this.container.classList.add("TRPG-spanel-container");
+
+            // description div
+            this.description_div = document.createElement("div");
+            this.description_div.className = "TRPG-spanel-description-container";
+            this.description_div.id = this.ID + "-description-container";
+            this.description_div.style.visibility = "hidden";
+            this.description_div.innerHTML = ' ';
+            this.container.appendChild(this.description_div);
+
+            this.update();
+        }
+
+        update() {
+            // remove old warpper
+            const previous = document.getElementById(this.ID + "-skills");
+            if(previous != null) previous.remove();
+            // don't add if there is no option
+            if(this.skills == undefined || this.skills == []) return;
+            // add new warpper
+            const skills_warpper = document.createElement("div");
+            skills_warpper.id = this.ID + "-skills";
+            skills_warpper.classList.add("TRPG-spanel-skills");
+            this.container.appendChild(skills_warpper);
+
+            // add each skill
+            for(let i=0; i<this.skills.length; i++) {
+                const name = this.skills[i];
+                const skill_element = document.createElement("div");
+                skill_element.id = this.ID + "-skill-" + i;
+                skill_element.classList.add("TRPG-spanel-skill");
+                skills_warpper.appendChild(skill_element);
+                // icon
+                let icon_path = this.icon[name];
+                if(icon_path == undefined) icon_path = default_img_path;
+                skill_element.innerHTML = 
+                    `<img class='TRPG-spanel-skill-icon' id='${this.ID}-skill-icon-${i}' src='${icon_path}'>
+                    <div class='TRPG-spanel-skill-timer' id='${this.ID}-skill-timer-${i}'> </div> 
+                    `;
+                const icon_element = document.getElementById(`${this.ID}-skill-icon-${i}`);
+                const timer_element = document.getElementById(`${this.ID}-skill-timer-${i}`);
+                timer_element.style.visibility = "hidden";
+                // onclick function
+                const onclick_f = this.onclick[name];
+                let cd = this.cooldown[name];
+                let actual_cd = this.cooldown[name];
+                if(cd == 0 || cd == undefined) cd = 0.1;
+                if(actual_cd == undefined) actual_cd = 0;
+                if(onclick_f != undefined) {
+                    skill_element.addEventListener("click",function(){
+                        onclick_f();
+                        icon_element.style.opacity =  '20%';
+                        skill_element.style.pointerEvents = 'none';
+                        // timer
+                        timer_element.style.visibility = "visible";
+                        timer_element.style.opacity =  '100%';
+                        let passed_time = 1;
+                        if(actual_cd != 0 && actual_cd != undefined) {
+                            timer_element.innerHTML = actual_cd;
+                            let timer = setInterval(function() {
+                                let remain_time = Number(actual_cd) - Number(passed_time);
+                                timer_element.innerHTML = remain_time;
+                                if (remain_time <= 0) {
+                                  clearInterval(timer);
+                                  timer_element.style.visibility = "hidden";
+                                }
+                                passed_time += 1;
+                              }, 1000);
+                        }
+                        window.setTimeout(function() {
+                            icon_element.style.opacity =  '100%';
+                            skill_element.style.pointerEvents = 'auto';
+                            timer_element.style.visibility = "hidden";
+                        } , Number(cd) * 1000);
+                    });
+                }
+
+                // description
+                if(this.showDescription) {
+                    const description_element = this.description_div;
+                    const description  = this.description[name];
+                    skill_element.addEventListener("mouseover", function(){
+                        if(description == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
+                        else description_element.innerHTML = 
+                            `
+                                <div class="TRPG-spanel-description-name">${name}  </div>
+                                <div class="TRPG-spanel-description-text"> ${description}</div>
+                                <div class="TRPG-spanel-description-cd">cooldown: ${actual_cd} sec</div>
+                            `;
+                        _set_element_to_bottom_center_of_another_element(description_element, skill_element);
+                        description_element.style.visibility = "visible";
+                    });
+                    skill_element.addEventListener("mouseout", function(){
+                        description_element.style.visibility = "hidden";
+                    });
+                }
+            }
+
+            // style
+            _change_class_css("TRPG-spanel-skill", "width", this.iconSize + 'px');
+            _change_class_css("TRPG-spanel-skill", "height", this.iconSize + 'px');
+            _change_class_css("TRPG-spanel-skill-timer", "font-size", (Number(this.iconSize)-20) + 'px');
+            _change_class_css("TRPG-spanel-skill-timer", "margin-top", (0-Number(this.iconSize)) + 'px');
+            _change_class_css("TRPG-spanel-skill-timer", "color", this.timerColor);
         }
 
     }
@@ -984,6 +1080,12 @@
         const rect = back.getBoundingClientRect();
         front.style.left = window.scrollX + rect.left - 5  + 'px';
         front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
+    }
+
+    function _set_element_to_center_center_of_another_element(front, back) {
+        const rect = back.getBoundingClientRect();
+        front.style.left = window.scrollX + (rect.left + rect.right)/2  + 'px';
+        front.style.top =  window.scrollY + (rect.top + rect.bottom)/2  + 'px';
     }
 
     function _random_inside_object(obj) {

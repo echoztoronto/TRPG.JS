@@ -106,36 +106,87 @@ const eList = new EventList('event-list', {
 });
 
 function cancel(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-    `event name: ${event_name} <br> function name: cancel`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: cancel <br>`;
+  message.scrollTop = message.scrollHeight;
 }
 
 function run(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-    `event name: ${event_name} <br> function name: run`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: run <br>`;
+  message.scrollTop = message.scrollHeight;
 }
 
 function fight(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-  `event name: ${event_name} <br> function name: fight`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: fight <br>`;
+  message.scrollTop = message.scrollHeight;
 }
 
 function pet(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-  `event name: ${event_name} <br> function name: pet`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: pet <br>`;
+  message.scrollTop = message.scrollHeight;
 }
 
 function revive(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-  `event name: ${event_name} <br> function name: revive`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: revive <br>`;
+  message.scrollTop = message.scrollHeight;
 }
 
 function play(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-  `event name: ${event_name} <br> function name: play`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: play <br>`;
+  message.scrollTop = message.scrollHeight;
 }
 
 function give_food(event_name) {
-  document.getElementById("event-list-message").innerHTML = 
-  `event name: ${event_name} <br> function name: give_food`;
+  const message = document.getElementById("event-list-message");
+  message.innerHTML += 
+  `event: ${event_name}, function: give_food <br>`;
+  message.scrollTop = message.scrollHeight;
+}
+
+
+///////////////  Skill Panel /////////////////
+const sPanel = new SkillPanel('skill-panel', {
+  skills: ['attack','retreat','test'],
+  icon: {
+    'attack': "img/stick.png",
+    'retreat': "img/escape.jpg",
+  },
+  description: {
+    attack:'normal attack <br><br> damage: 1 <br> <i> better than escape</i>',
+    retreat: "it's a situational retreat "
+  },
+  onclick: {
+    attack: attack,
+    retreat: retreat,
+    test: attack
+  },
+  cooldown: {
+    retreat: 5,
+    test:3
+  }
+});
+
+function attack() {
+  const message = document.getElementById("skill-panel-message");
+  message.innerHTML += 
+  `function: attack <br>`;
+  message.scrollTop = message.scrollHeight;
+}
+
+function retreat() {
+  const message = document.getElementById("skill-panel-message");
+  message.innerHTML += 
+  `function: retreat <br>`;
+  message.scrollTop = message.scrollHeight;
 }
