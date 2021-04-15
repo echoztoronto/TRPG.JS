@@ -63,7 +63,9 @@ const aPanel = new AttributePanel('attribute-panel', {
                 </pre>
             </div>
             <div class="eg"> Example </div>
-            <div id="attribute-panel"> </div>
+            <div class="example-container">
+                <div id="attribute-panel"> </div>
+            </div>
         </div>
         <div class="buttons">  
             .set() 
@@ -161,7 +163,10 @@ const aBar = new AttributeBars('attribute-bar', {
                 </pre>
             </div>
             <div class="eg"> Example </div>
-            <div id="attribute-bar"> </div>
+            <div class="example-container">
+                <div id="attribute-bar"> </div>
+            </div>
+            
         </div>
         <div class="buttons">  
             .set()
@@ -266,7 +271,10 @@ const myBag = new Inventory('inventory', {
             </div>
             <div class="eg"> Example </div>
             <div id="inventory-message"> </div>
-            <div id="inventory"> </div>
+            <div class="example-container">
+                <div id="inventory"> </div> 
+            </div>
+            
             <div class="demo-code"> 
                 <pre>
                     <code>
@@ -327,6 +335,7 @@ function gift_item(item) {
             <button onclick="myBag.addOptionClick('use', use_item)"> ('use', use_item)</button>
             <button onclick="myBag.addOptionClick('destroy', destroy_item)">('destroy', destroy_item)  </button> 
             <button onclick="myBag.addOptionClick('gift', gift_item)"> ('gift', gift_item) </button> 
+            (this will not add a new option on menu)
             <br> .removeOptionClick()
             <button onclick="myBag.removeOptionClick('use')"> ('use') </button> 
             <button onclick="myBag.removeOptionClick('destroy')">('destroy')  </button> 
@@ -335,7 +344,7 @@ function gift_item(item) {
             <br> .itemSize = 
             <button onclick="myBag.itemSize=30; myBag.update();"> 30 </button> 
             <button onclick="myBag.itemSize=50; myBag.update();"> 50 </button> 
-            <button onclick="myBag.itemSize=80; myBag.update();"> 80 </button>
+            <button onclick="myBag.itemSize=60; myBag.update();"> 60 </button>
             <br>  .numColumn= 
             <button onclick="myBag.numColumn=2; myBag.update();"> 2</button> 
             <button onclick="myBag.numColumn=3; myBag.update();"> 3 </button> 

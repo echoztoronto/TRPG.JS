@@ -6,7 +6,7 @@
 
 /* --------- Attribute Panel-------------------------*/
 .TRPG-aPanel-container {
-    padding: 20px 20px 20px 20px;
+    margin: auto;
     font-size: 20px;
 }
 
@@ -92,9 +92,8 @@
 
 /* --------- Inventory -----------------------------*/
 
-
 .TRPG-inventory-table {
-    margin: 20px 20px 20px 20px;
+    margin: auto;
     background-color: rgb(246, 148, 91);
     padding: 10px 20px 10px 20px;
     border-radius: 5px;
