@@ -5,7 +5,7 @@
 
 "use strict";
 
-(function(global, document, $) { 
+(function(window) { 
         
     const default_img_path = "img/default.jpg";
 
@@ -166,7 +166,6 @@
         }
     }
 
-    global.AttributePanel = global.AttributePanel || AttributePanel
 
     //  ------------------------------- Attribute Bar  ------------------------------
     class AttributeBars {
@@ -414,7 +413,6 @@
         }
     }
 
-    global.AttributeBars = global.AttributeBars || AttributeBars
 
     //  ------------------------------- Inventory  ------------------------------
     class Inventory {
@@ -741,7 +739,6 @@
 
     }
 
-    global.Inventory = global.Inventory || Inventory
 
     //  ------------------------------- EventList  ------------------------------
     class EventList {
@@ -876,7 +873,41 @@
 
     }
 
-    global.EventList = global.EventList || EventList
+
+    //  ------------------------------- Skill Panel  ------------------------------
+    class SkillPanel {
+        events = {};              // {name: [options]}       
+        eventDescription = {};    // {name: description}
+        options = {};             // {name: onclick_function}
+        optionDescription = {};   // {name: description}
+
+        constructor(ID, modules) {
+            // setting up the modules
+            this.ID = ID;
+            for (const module in modules) {
+                    this[module] = modules[module];
+            }
+            this.container = document.getElementById(this.ID);
+            this.container.classList.add("TRPG-eventlist-container");
+            // descriptionid
+            const description_container = document.createElement("div");
+            description_container.id = this.ID + "-description";
+            description_container.classList.add("TRPG-eventlist-description");
+            this.container.appendChild(description_container);
+            // DOM
+            this.current_event = Object.keys(this.events)[0];
+            this.show(this.current_event);
+        }
+
+    }
+
+
+    //  ------------------------------- Wrapping  -------------------------------
+    window.AttributePanel = window.AttributePanel || AttributePanel;
+    window.AttributeBars = window.AttributeBars || AttributeBars;
+    window.Inventory = window.Inventory || Inventory;
+    window.EventList = window.EventList || EventList;
+    window.SkillPanel = window.SkillPanel || SkillPanel;
 
     //  ------------------------------- Helper Functions  ------------------------------
     function _timed_color_change(ID, original, dest, sec) {
@@ -960,4 +991,4 @@
         return keys[keys.length * Math.random() << 0];
     };
 
-})(window, window.document, $);
+})(window);
