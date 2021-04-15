@@ -8,7 +8,7 @@ Web developers can use TRPG.JS library to display the information panel for each
 
 ## Examples
 
-Playground with examples: https://trpg-demo.herokuapp.com/examples.html
+Landing Page: https://trpg-demo.herokuapp.com
 
 API Documentation: https://trpg-demo.herokuapp.com/docs.html
 
