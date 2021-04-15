@@ -40,7 +40,9 @@ body {
     color: #bbbbbb;
     display: block;
     transition: 0.3s;
-  }
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: -15px;
+}
 
 .sidenav a:hover {
     color: #f1f1f1;
@@ -72,8 +74,11 @@ body {
     margin-left: 20px;
     border: solid 2px black;
     padding: 20px 20px 20px 20px;
+    margin-top: 60px;
     font-size: 20px;
     min-width: 700px;
+    max-height: 550px;
+    overflow-y: scroll;
 }
 
 button {
@@ -96,12 +101,15 @@ button:hover {
     font-size: 20px;
     border: solid 2px black;
     margin-bottom: 5px;
+    overflow-y: scroll;
+    max-height: 250px;
+    background-color: #f0f0f0;
 }
 
 pre {
     margin:0;
     padding-left: 10px;
-    background-color: #e7e6e6;
+    
 }
 
 code {
@@ -130,9 +138,7 @@ code {
 .example-container {
     padding: 20px;
     min-height: 250px;
-    border: ridge rgb(104, 159, 228) 5px;
 }
-
 
 #inventory-message {
     height: 30px;
@@ -145,4 +151,11 @@ code {
     -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
     color: red;
+}
+
+#event-list-message {
+    margin-top: 30px;
+    font-size: 20px;
+    font-family:cursive;
+    min-height: 100px;
 }

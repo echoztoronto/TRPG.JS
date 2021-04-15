@@ -25,11 +25,11 @@
         <a href="#sec-1">Attribute Panel</a>
         <a href="#sec-2">Attribute Bars</a>
         <a href="#sec-3"> Inventory </a>
-        <a href="#sec-0"> Skill Bar </a>
-        <a href="#sec-0"> Talent Tree </a>
-        <a href="#sec-0"> Event Panel </a>
-        <a href="#sec-0"> Chat Window </a>
+        <a href="#sec-4"> Event List </a>
+
     </div>
+
+
 
     
     <!-- Attribute Panel  -->
@@ -140,7 +140,7 @@ const aPanel = new AttributePanel('attribute-panel', {
 
 // javascript constructor
 const aBar = new AttributeBars('attribute-bar', {
-    attributes : {  
+    preset_attributes : {  
         hp: [1000,2000,'pink'],
         mp: [500,800,'rgb(155, 198, 255)']
       },
@@ -266,18 +266,7 @@ const myBag = new Inventory('inventory', {
     menuOptionOnclick: { 'use': use_item,
      'destroy':  destroy_item,}  
 });
-                    </code>
-                </pre>
-            </div>
-            <div class="eg"> Example </div>
-            <div id="inventory-message"> </div>
-            <div class="example-container">
-                <div id="inventory"> </div> 
-            </div>
-            
-            <div class="demo-code"> 
-                <pre>
-                    <code>
+
 // left click menu option onclick functions
 function use_item(item) {
   myBag.removeItem(item, 1);
@@ -294,6 +283,12 @@ function gift_item(item) {
                     </code>
                 </pre>
             </div>
+            <div class="eg"> Example </div>
+            <div id="inventory-message"> </div>
+            <div class="example-container">
+                <div id="inventory"> </div> 
+            </div>
+            
         </div>
         <div class="buttons">  
         <br> .set()
@@ -373,6 +368,86 @@ function gift_item(item) {
             <button onclick="myBag.quantityYPosition='top'; myBag.update();"> 'top' </button> 
             <button onclick="myBag.quantityYPosition='center'; myBag.update();"> 'center' </button> 
             <button onclick="myBag.quantityYPosition='bottom'; myBag.update();"> 'bottom' </button>
+        </div>
+    </div>
+
+    
+    <!-- Event List  -->
+    <div class="section-container"> 
+        <div class="demo-block"> 
+            <a id="sec-4"> </a>
+            <div class="section-title"> Event List</div>
+            <div class="demo-code"> 
+                <pre>
+                    <code>
+const eList = new EventList('event-list', {
+  events : {  
+    'golden apple': ['pick up','cancel'],
+    'pikachu': ['fight', 'run'],
+    'an event without description':
+          ['an option without description','cancel']
+  },
+  eventDescription: {
+    'golden apple': `There is a golden apple on the ground,
+           and no creatures is guarding it nearby. When you 
+           approach, you smell a scent that you can't resist.`,
+    'pikachu': "A wild Pikachu appears!"
+  },
+  options: {
+    'cancel': cancel,
+    'run': run,
+    'fight': fight
+  },
+  optionDescription: {
+    'run': "I'm not strong enough, it's time to escape!",
+    'fight': "Escape is for coward, I'd fight till death!",
+    'pick up': "It's mine now! [Pick Up]"
+  }
+});                    
+                    </code>
+                </pre>
+            </div>
+            <div class="eg"> Example </div>
+            <div class="example-container">
+                <div id="event-list"> </div>
+                <div id="event-list-message"> </div>
+            </div>
+        </div>
+        <div class="buttons">  
+            <b> Note: some options don't have onclick function set up. 
+            All available onclick functions will just print out the event name and function name below </b>
+            <br>
+            .show() 
+            <button onclick="eList.show('golden apple')"> ('golden apple') </button>
+            <button onclick="eList.show('pikachu')"> ('pikachu') </button>
+            <button onclick="eList.show('an event without description')"> ('an event without description') </button>
+            .showRandom() 
+            <button onclick="eList.showRandom()"> showRandom() </button>  (sometimes it repeats) <br>
+            .showRandomWithoutRepeat()
+            <button onclick="eList.showRandomWithoutRepeat()"> showRandomWithoutRepeat() </button> <br>
+            .setEvent()
+            <button onclick="eList.setEvent('cat',['fight','pet'],'you see a cat on your bed')"> ('cat',['fight','pet'],'you see a cat on your bed') </button>
+            <button onclick="eList.setEvent('death',['revive','quit game'], 'you died!')"> ('death',['revive','quit game'], 'you died!') </button> <br>
+            .setOption() 
+            <button onclick="eList.setOption('pet',pet,'touch it')"> ('pet',event_pet,'touch it') </button>
+            <button onclick="eList.setOption('revive',revive, 'use revive orb')"> ('revive',event_revive, 'use revive orb') </button> <br>
+            .deleteEvent() 
+            <button onclick="eList.deleteEvent('cat')"> ('cat') </button>
+            <button onclick="eList.deleteEvent('death')"> ('death') </button> <br>
+            .addEventOption() 
+            <button onclick="eList.addEventOption('cat','play')"> ('cat','play') </button>
+            <button onclick="eList.addEventOption('cat','give food')"> ('cat','give food') </button> <br>
+            .deleteEventOption() 
+            <button onclick="eList.deleteEventOption('cat','play')"> ('cat','play') </button>
+            <button onclick="eList.deleteEventOption('cat','give food')"> ('cat','give food') </button> <br>
+            .setOptionOnclick() 
+            <button onclick="eList.setOptionOnclick('play',play)"> ('play',play) </button>
+            <button onclick="eList.setOptionOnclick('give food', give_food)"> ('give food', give_food) </button> 
+            <button onclick="eList.setOptionOnclick('play', give_food)"> ('play', give_food) </button><br>
+            .setOptionDescription() 
+            <button onclick="eList.setOptionDescription('play', 'play with it')"> ('play', 'play with it') </button>
+            <button onclick="eList.setOptionDescription('play', 'actually, go to sleep')"> ('play', 'actually, go to sleep') </button> <br>
+
         </div>
     </div>
 

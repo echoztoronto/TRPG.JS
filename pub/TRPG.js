@@ -33,14 +33,7 @@
             // setting up the modules
             this.ID = ID;
             for (const module in modules) {
-                if(module == "attributes") {
-                    for (const attr in modules["attributes"]) {
-                        this.attributes[attr] = modules["attributes"][attr];
-                    }
-                }
-                else {
-                    this[module] = modules[module];
-                }
+                this[module] = modules[module];
             }
             this.container = document.getElementById(this.ID);
             this.container.classList.add("TRPG-aPanel-container");
@@ -200,11 +193,11 @@
             // setting up the modules
             this.ID = ID;
             for (const module in modules) {
-                if(module == "attributes") {
-                    for (const attr in modules["attributes"]) {
-                        this.attributes[attr] = modules["attributes"][attr][0];
-                        this.attributesMax[attr] = modules["attributes"][attr][1];
-                        this.barColor[attr] = modules["attributes"][attr][2];
+                if(module == "preset_attributes") {
+                    for (const attr in modules[module]) {
+                        this.attributes[attr] = modules[module][attr][0];
+                        this.attributesMax[attr] = modules[module][attr][1];
+                        this.barColor[attr] = modules[module][attr][2];
                     }
                 } 
                 else if (module == "attributesMax"||module =="barColor"||module =="labelColors") {
@@ -446,18 +439,11 @@
         index = {};   // {name: cell number}   for develop only
         validItemCount = 0;
 
-        constructor (ID, modules) {  // modules = {name: {description: x, image: x, ...} }
+        constructor (ID, modules) {  
             // setting up the modules
             this.ID = ID;
             for (const module in modules) {
-                if (module=="quantity"||module=="description"||module=="image"||module=="menuOptionOnclick") {
-                    for (const item in modules[module]) {
-                        this[module][item] = modules[module][item];
-                    }
-                }
-                else {
                     this[module] = modules[module];
-                }
             }
             this.container = document.getElementById(this.ID);
             this.container.classList.add("TRPG-inventory-container");
@@ -757,6 +743,141 @@
 
     global.Inventory = global.Inventory || Inventory
 
+    //  ------------------------------- EventList  ------------------------------
+    class EventList {
+        events = {};              // {name: [options]}       
+        eventDescription = {};    // {name: description}
+        options = {};             // {name: onclick_function}
+        optionDescription = {};   // {name: description}
+
+        constructor(ID, modules) {
+            // setting up the modules
+            this.ID = ID;
+            for (const module in modules) {
+                    this[module] = modules[module];
+            }
+            this.container = document.getElementById(this.ID);
+            this.container.classList.add("TRPG-eventlist-container");
+            // descriptionid
+            const description_container = document.createElement("div");
+            description_container.id = this.ID + "-description";
+            description_container.classList.add("TRPG-eventlist-description");
+            this.container.appendChild(description_container);
+            // DOM
+            this.current_event = Object.keys(this.events)[0];
+            this.show(this.current_event);
+        }
+
+        setEvent(name, options, description) {
+            this.events[name] = options;
+            if(description != '' && description != null) {
+                this.eventDescription[name] = description;
+            }
+            this.show(name);
+            this.current_event = name;
+        }
+
+        setOption(name, click, description) {
+            this.options[name] = click;
+            if(description != '' && description != null) {
+                this.optionDescription[name] = description;
+            }
+            this.show(this.current_event);
+        }
+
+        deleteEvent(name) {
+            if(this.events[name] != null) delete this.events[name];
+            if(this.current_event == name) this.show(Object.keys(this.events)[0]);
+            else this.show(this.current_event);
+        }
+
+        addEventOption(name, option) {
+            if(this.events[name].includes(option)) return;
+            this.events[name].push(option);
+            this.show(this.current_event);
+        }
+
+        deleteEventOption(name, option) {
+            const index = this.events[name].indexOf(option);
+            if (index > -1) {
+                this.events[name].splice(index, 1);
+            }
+            this.show(this.current_event);
+        }
+
+        setOptionOnclick(op, click) {
+            this.options[op] = click;
+            this.show(this.current_event);
+        }
+
+        setOptionDescription(op, description) {
+            this.optionDescription[op] = description;
+            this.show(this.current_event);
+        }
+
+        show(event_name) {
+            this.container.setAttribute("data-event-name", event_name);
+            this.current_event = event_name;
+            // description 
+            const description_container = document.getElementById(this.ID + "-description");
+            if(this.eventDescription[event_name] == undefined) {
+                description_container.innerHTML = event_name;
+            } else description_container.innerHTML = this.eventDescription[event_name];
+
+            // options
+            // remove old ones
+            const previous = document.getElementById(this.ID + "-options");
+            if(previous != null) previous.remove();
+            // don't add if there is no option
+            if(this.events[event_name] == undefined || this.events[event_name] == []) return;
+            // add new container
+            const options_container = document.createElement("div");
+            options_container.id = this.ID + "-options";
+            options_container.classList.add("TRPG-eventlist-options");
+            this.container.appendChild(options_container);
+            // add new options
+            for(let i=0; i<this.events[event_name].length; i++) {
+                const option_name = this.events[event_name][i];
+                const option_btn = document.createElement("div");
+                option_btn.id = this.ID + "-options-" + i;
+                option_btn.classList.add("TRPG-eventlist-option");
+                if(this.optionDescription[option_name] == undefined) {
+                    option_btn.innerHTML = option_name;
+                }  else option_btn.innerHTML = this.optionDescription[option_name];
+                options_container.appendChild(option_btn);
+                // onclick functions
+                const onclick_f = this.options[option_name];
+                const main_container = this.container;
+                if(onclick_f != undefined) {
+                    option_btn.addEventListener("click",function(){
+                        onclick_f(main_container.getAttribute('data-event-name'));
+                    });
+                }
+            }
+        }
+
+        showRandom() {
+            const random_event = _random_inside_object(this.events);
+            this.show(random_event);
+            this.current_event = random_event;
+        }
+
+        showRandomWithoutRepeat() {
+            let random_event = this.current_event;
+            while(random_event == this.current_event) {
+                random_event = _random_inside_object(this.events);
+            }
+            this.show(random_event);
+            this.current_event = random_event;
+        }
+
+
+
+
+    }
+
+    global.EventList = global.EventList || EventList
+
     //  ------------------------------- Helper Functions  ------------------------------
     function _timed_color_change(ID, original, dest, sec) {
         const element = document.getElementById(ID);
@@ -833,5 +954,10 @@
         front.style.left = window.scrollX + rect.left - 5  + 'px';
         front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
     }
+
+    function _random_inside_object(obj) {
+        let keys = Object.keys(obj);
+        return keys[keys.length * Math.random() << 0];
+    };
 
 })(window, window.document, $);
