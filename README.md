@@ -3,7 +3,7 @@
 
 TRPG.JS is a library that can be used to build web-based TRPG (Tabletop Role-Playing Game, where multiple players need to follow a set of rules, role-play their characters, and go through a story together). 
 
-Web developers can use TRPG.JS library to display the information panel for each player, such as attributes, skills, talent tree, inventory, as well as to display events (and possible options/reactions to events) and build a chat window. It can be used to build online gaming applications or present the replays of past games (including those that happened in real life). 
+Web developers can use TRPG.JS library to display the information panel for each player, such as attributes, skills and inventory, as well as to display events and the possible options to the events. It can be used to build online gaming applications or present the replays of past games, including those that happened in real life. 
 
 
 ## Examples
