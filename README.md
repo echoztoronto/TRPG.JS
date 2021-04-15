@@ -9,10 +9,12 @@ Web developers can use TRPG.JS library to display the information panel for each
 ## Examples
 
 Playground with examples: https://trpg-demo.herokuapp.com/examples.html
+
 API Documentation: https://trpg-demo.herokuapp.com/docs.html
 
 ## Getting Started
 This library is built by vanilla JavaScript, no external module is required.
+
 Simply include the following two lines in the HTML `<head>` tag.
 ```html
 <link rel="stylesheet" href="TRPG.css">
