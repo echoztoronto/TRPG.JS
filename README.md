@@ -27,8 +27,6 @@ A simple panel shows the attributes names and values.
 <img src="/readme/panel.jpg" width="100px">
 
 
-```
-
 ## Attribute Bars
 Displays the attributes in a graphical way.
 
