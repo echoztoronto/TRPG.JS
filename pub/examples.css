@@ -6,6 +6,10 @@ body {
     transition: margin-left .5s;
 }
 
+@media only screen and (max-width: 1450px) {
+    body {padding-left: 200px;}
+}
+
 .title {
     text-align: center;
     font-size: 40px;
@@ -18,12 +22,6 @@ body {
     font-size: 30px;
     text-shadow: 1px 1px #b4b4b4;
     padding-bottom: 50px;
-}
-
-
-
-@media only screen and (max-width: 1450px) {
-    body {padding-left: 200px;}
 }
 
 .section-container {

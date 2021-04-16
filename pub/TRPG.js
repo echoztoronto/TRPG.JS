@@ -877,10 +877,12 @@
         description = {};         // {name: description}
         onclick = {};             // {name: click function}
         cooldown = {};            // {name: cooldown}
-
+        disabled = {};            // {name: true/false}
         iconSize = 80;
         showDescription = true;
         timerColor = "black";
+
+        skill_index = {};
 
         constructor(ID, modules) {
             // setting up the modules
@@ -902,6 +904,50 @@
             this.update();
         }
 
+        setSkill(name, description, cd, img, click) {
+            if(!this.skills.includes(name)) this.skills.push(name);
+            this.description[name] = description;
+            this.cooldown[name] = cd;
+            this.icon[name] = img;
+            this.onclick[name] = click;   
+        }
+
+        addSkill(name) {
+            if(!this.skills.includes(name)) {
+                this.skills.push(name);
+                this.update();
+            }
+        }
+
+        deleteSkill(name) {
+            const index = this.skills.indexOf(name);
+            if (index > -1) {
+                this.skills.splice(index, 1);
+            }
+            this.update();
+        }
+
+        enableSkill(name) {
+            if(this.disabled[name] == false) return;
+            this.disabled[name] == false;
+            const i = this.skill_index[name];
+            if(i == undefined) return;
+            const icon_element = document.getElementById(`${this.ID}-skill-icon-${i}`);
+            icon_element.style.opacity =  '100%';
+            const skill_element = document.getElementById(`${this.ID}-skill-${i}`);
+            skill_element.style.pointerEvents = 'auto';
+        }
+
+        disableSkill(name) {
+            this.disabled[name] == true;
+            const i = this.skill_index[name];
+            if(i == undefined) return;
+            const icon_element = document.getElementById(`${this.ID}-skill-icon-${i}`);
+            icon_element.style.opacity =  '20%';
+            const skill_element = document.getElementById(`${this.ID}-skill-${i}`);
+            skill_element.style.pointerEvents = 'none';
+        }
+
         update() {
             // remove old warpper
             const previous = document.getElementById(this.ID + "-skills");
@@ -916,7 +962,9 @@
 
             // add each skill
             for(let i=0; i<this.skills.length; i++) {
+                this.skill_index = {};
                 const name = this.skills[i];
+                this.skill_index[name] = i;
                 const skill_element = document.createElement("div");
                 skill_element.id = this.ID + "-skill-" + i;
                 skill_element.classList.add("TRPG-spanel-skill");
@@ -937,7 +985,7 @@
                 let actual_cd = this.cooldown[name];
                 if(cd == 0 || cd == undefined) cd = 0.1;
                 if(actual_cd == undefined) actual_cd = 0;
-                if(onclick_f != undefined) {
+                if(onclick_f != undefined && this.disabled[name] != true) {
                     skill_element.addEventListener("click",function(){
                         onclick_f();
                         icon_element.style.opacity =  '20%';
@@ -965,14 +1013,19 @@
                         } , Number(cd) * 1000);
                     });
                 }
+                // disable
+                if(this.disabled[name] == true) {
+                    icon_element.style.opacity =  '20%';
+                    skill_element.style.pointerEvents = 'none';
+                }
 
                 // description
                 if(this.showDescription) {
                     const description_element = this.description_div;
-                    const description  = this.description[name];
+                    let description  = this.description[name];
                     skill_element.addEventListener("mouseover", function(){
-                        if(description == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
-                        else description_element.innerHTML = 
+                        if(description == undefined) description = ``;
+                        description_element.innerHTML = 
                             `
                                 <div class="TRPG-spanel-description-name">${name}  </div>
                                 <div class="TRPG-spanel-description-text"> ${description}</div>
@@ -994,7 +1047,6 @@
             _change_class_css("TRPG-spanel-skill-timer", "margin-top", (0-Number(this.iconSize)) + 'px');
             _change_class_css("TRPG-spanel-skill-timer", "color", this.timerColor);
         }
-
     }
 
 

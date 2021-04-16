@@ -157,7 +157,7 @@ function give_food(event_name) {
 
 ///////////////  Skill Panel /////////////////
 const sPanel = new SkillPanel('skill-panel', {
-  skills: ['attack','retreat','test'],
+  skills: ['attack','retreat'],
   icon: {
     'attack': "img/stick.png",
     'retreat': "img/escape.jpg",
@@ -169,11 +169,9 @@ const sPanel = new SkillPanel('skill-panel', {
   onclick: {
     attack: attack,
     retreat: retreat,
-    test: attack
   },
   cooldown: {
     retreat: 5,
-    test:3
   }
 });
 

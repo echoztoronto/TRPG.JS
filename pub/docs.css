@@ -2005,7 +2005,7 @@ body {
 }
 
 body {
-	font-size: 1rem;
+	font-size: 1.2rem;
 	font-weight: 400;
 	line-height: 2rem
 }
@@ -2038,7 +2038,7 @@ pre {
 }
 
 pre {
-	font-size: 1rem;
+	font-size: 1.2rem;
 	padding: .66001rem 9.5px 9.5px;
 	line-height: 2rem;
 	background: linear-gradient(to bottom, #fff 0, #fff .75rem, #f5f7fa .75rem, #f5f7fa 2.75rem, #fff 2.75rem, #fff 4rem);
@@ -2051,7 +2051,7 @@ blockquote {
 }
 
 blockquote p {
-	font-size: 1rem;
+	font-size: 1.2rem;
 	margin-bottom: .33999rem;
 	font-style: italic;
 	padding: .66001rem 1rem 1rem;
@@ -2113,20 +2113,20 @@ h5 {
 }
 
 h6 {
-	font-size: 1rem;
+	font-size: 1.2rem;
 	margin-bottom: -.65001rem;
 	padding-top: .65001rem
 }
 
 a {
 	cursor: pointer;
-	color: #35D7BB;
+	color: #4281e6;
 	text-decoration: none
 }
 
 a:hover,
 a:focus {
-	border-bottom-color: #35D7BB;
+	border-bottom-color: #4281e6;
 	color: #dff9f4
 }
 
@@ -2716,7 +2716,7 @@ dt {
 }
 
 .menu a:hover {
-	color: #35D7BB
+	color: #4281e6
 }
 
 .menu .menu-item {
@@ -2767,7 +2767,7 @@ dt {
 }
 
 .menu .menu-link.open g {
-	fill: #35D7BB
+	fill: #4281e6
 }
 
 .menu .menu-link-preview,
@@ -2951,7 +2951,7 @@ dt {
 .dropdown.documents li.active a,
 .documents.settings li.active a,
 .sidebar-list.documents li.active a {
-	color: #35D7BB
+	color: #4281e6
 }
 
 .settings {
@@ -3002,7 +3002,7 @@ dt {
 }
 
 .settings a:hover {
-	color: #35D7BB
+	color: #4281e6
 }
 
 .settings li {
@@ -3021,7 +3021,7 @@ dt {
 }
 
 .brand:hover g {
-	fill: #35D7BB
+	fill: #4281e6
 }
 
 .toggle {
@@ -3160,7 +3160,7 @@ dt {
 	font-size: 14px;
 	text-shadow: 0 1px 0 #1b8b77;
 	padding: 16px 24px;
-	background-color: #35D7BB;
+	background-color: #4281e6;
 	border-radius: 3px;
 	margin: 0 auto 16px;
 	line-height: 1;
@@ -3294,7 +3294,7 @@ dt {
 .switch.checked small {
 	padding-right: 0;
 	padding-left: 24px;
-	background-color: #35D7BB;
+	background-color: #4281e6;
 	box-shadow: none
 }
 
@@ -3412,8 +3412,8 @@ dt {
 
 .pagination--dillinger li>a:hover,
 .pagination--dillinger li>a:focus {
-	border-color: #35D7BB;
-	background-color: #35D7BB;
+	border-color: #4281e6;
+	background-color: #4281e6;
 	color: #fff
 }
 
@@ -3440,7 +3440,7 @@ dt {
 
 .diNotify-body {
 	-webkit-font-smoothing: antialiased;
-	background-color: #35D7BB;
+	background-color: #4281e6;
 	background: #666E7F;
 	border-radius: 3px;
 	color: #fff;
@@ -3705,7 +3705,7 @@ body {
 }
 
 #editor {
-	font-size: 1rem;
+	font-size: 1.2rem;
 	font-family: "Ubuntu Mono", Monaco;
 	font-weight: 400;
 	line-height: 2rem;
@@ -3787,7 +3787,7 @@ body {
 		font-size: .875em
 	}
 	body {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 	ul,
 	ol {
@@ -3803,7 +3803,7 @@ body {
 	}
 	pre,
 	blockquote p {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		padding-top: .66001rem
 	}
 	blockquote p {
@@ -3835,7 +3835,7 @@ body {
 		padding-top: .56251rem
 	}
 	h6 {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		margin-bottom: -.65001rem;
 		padding-top: .65001rem
 	}
@@ -4152,7 +4152,7 @@ body {
 		width: 400px
 	}
 	#editor {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 }
 
@@ -4161,7 +4161,7 @@ body {
 		font-size: .875em
 	}
 	body {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 	ul,
 	ol {
@@ -4177,7 +4177,7 @@ body {
 	}
 	pre,
 	blockquote p {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		padding-top: .66001rem
 	}
 	blockquote p {
@@ -4209,7 +4209,7 @@ body {
 		padding-top: .56251rem
 	}
 	h6 {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		margin-bottom: -.65001rem;
 		padding-top: .65001rem
 	}
@@ -4561,7 +4561,7 @@ body {
 		width: 50%
 	}
 	#editor {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 	.preview-mode-toggle-src,
 	.preview-mode-toggle-html {
@@ -4574,7 +4574,7 @@ body {
 		font-size: .875em
 	}
 	body {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 	ul,
 	ol {
@@ -4590,7 +4590,7 @@ body {
 	}
 	pre,
 	blockquote p {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		padding-top: .66001rem
 	}
 	blockquote p {
@@ -4622,7 +4622,7 @@ body {
 		padding-top: .56251rem
 	}
 	h6 {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		margin-bottom: -.65001rem;
 		padding-top: .65001rem
 	}
@@ -4948,7 +4948,7 @@ body {
 		width: 700px
 	}
 	#editor {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 }
 
@@ -4957,7 +4957,7 @@ body {
 		font-size: .875em
 	}
 	body {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 	ul,
 	ol {
@@ -4973,7 +4973,7 @@ body {
 	}
 	pre,
 	blockquote p {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		padding-top: .66001rem
 	}
 	blockquote p {
@@ -5005,7 +5005,7 @@ body {
 		padding-top: .56251rem
 	}
 	h6 {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		margin-bottom: -.65001rem;
 		padding-top: .65001rem
 	}
@@ -5041,7 +5041,7 @@ body {
 		font-size: 1.25rem
 	}
 	#editor {
-		font-size: 1rem
+		font-size: 1.2rem
 	}
 }
 
@@ -5257,3 +5257,14 @@ body {
 		width: 100%
 	}
 }
+
+
+body {
+    max-width: 1024px;
+    margin: 100px auto;
+    overflow: auto;
+    padding: 20px;
+    transition: margin-left .5s;
+	padding-left: 200px;
+}
+
