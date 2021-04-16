@@ -9,10 +9,10 @@
     color: rgb(255, 255, 255);
     background-color: rgba(41, 127, 224, 0.904);
     height: 100%;
-    padding-top: 4em;
     left:0;
     top:0;
     user-select: none;
+    padding-top: 15%;
 
     -webkit-animation: fadein 3s; 
     -moz-animation: fadein 3s; 
@@ -66,7 +66,7 @@
 }
 
 #landing a:hover {
-    color: black;
+    color: rgb(255, 198, 65);
     cursor: pointer;
 }
 
@@ -112,10 +112,11 @@
 .sidenav-sub a{
     padding:0;
     font-size: 20px;
+    color: #000000;
 }
 
 .sidenav-sub a:hover{
-    color: rgb(46, 118, 200);
+    color: rgb(255, 255, 255);
 }
 
 #sidenav-warpper{

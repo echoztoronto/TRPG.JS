@@ -86,6 +86,7 @@ function destroy_item(item) {
 function gift_item(item) {
   myBag.removeItem(item, 1);
   if(item == 'banana')  aPanel.set('strength',aPanel.get('strength') + 1);
+  draw_randomly();
 } 
 
 ///////////////  Event List /////////////////
@@ -126,7 +127,7 @@ function pick_up(event_name) {
     myBag.addItem("orange", 1);
     event_msg.innerHTML += 'orange + 1 <br><br>';
     event_msg.scrollTop = event_msg.scrollHeight;
-    eList.showRandomWithoutRepeat();
+    document.getElementById("event-list").style.visibility = 'hidden';
 }
 
 function cancel(event_name) {
@@ -138,35 +139,35 @@ function run(event_name) {
     aBar.setValue('mp',aBar.get('mp') - 5);
     event_msg.innerHTML += 'escaped, hp - 10, mp - 5 <br><br>';
     event_msg.scrollTop = event_msg.scrollHeight;
-    eList.showRandomWithoutRepeat();
+    document.getElementById("event-list").style.visibility = 'hidden';
 }
 
 function fight(event_name) {
     myBag.addItem("orange", 5);
     event_msg.innerHTML += 'obtained 5 oranges from the battle <br><br>';
     event_msg.scrollTop = event_msg.scrollHeight;
-    eList.showRandomWithoutRepeat();
+    document.getElementById("event-list").style.visibility = 'hidden';
 }
 
 function pet(event_name) {
     aBar.setValue('hp',aBar.get('hp') + 10);
     event_msg.innerHTML += 'hp + 10 <br><br>';
     event_msg.scrollTop = event_msg.scrollHeight;
-    eList.showRandomWithoutRepeat();
+    document.getElementById("event-list").style.visibility = 'hidden';
 }
 
 function revive(event_name) {
     aBar.setValue('hp',aBar.get('hp') + 100);
     event_msg.innerHTML += 'revived , hp + 100 <br><br>';
     event_msg.scrollTop = event_msg.scrollHeight;
-    eList.showRandomWithoutRepeat();
+    document.getElementById("event-list").style.visibility = 'hidden';
 }
 
 function give_food(event_name) {
     myBag.addItem("apple", -1);
     event_msg.innerHTML += 'apple - 1 <br><br>';
     event_msg.scrollTop = event_msg.scrollHeight;
-    eList.showRandomWithoutRepeat();
+    document.getElementById("event-list").style.visibility = 'hidden';
 }
 
 
@@ -203,10 +204,13 @@ function attack() {
 function retreat() {
     aBar.setValue('hp',aBar.get('hp') - 10);
     aBar.setValue('mp',aBar.get('mp') - 5);
+    const i = Math.random();
+    if(i > 0.8) eList.show("die");
 }
 
 function fire_ball() {
     aBar.setValue('mp',aBar.get('mp') - 20);
+    draw();
 }
 
 
@@ -228,4 +232,9 @@ const timer = setInterval(function(){
 function draw() {
     document.getElementById("event-list").style.visibility = 'visible';
     eList.showRandomWithoutRepeat();
+}
+
+function draw_randomly() {
+  const i = Math.random();
+  if(i < 0.5) draw();
 }

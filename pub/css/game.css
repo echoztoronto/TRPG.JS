@@ -26,6 +26,7 @@
     max-height: 400px;
     left: calc(50% - 300px);
     top: 350px;
+    visibility: hidden;
 }
 
 #skill-panel{
@@ -48,14 +49,18 @@
 
 #event-msg {
     position: fixed;
-    width: 600px;
-    left: calc(50% - 300px);
+    width: 300px;
+    left: calc(50% - 150px);
     top: 250px;
     height: 50px;
     background-color: rgb(255, 255, 255);
-    font-size: 20px;
+    font-size: 22px;
     padding: 10px;
     overflow-y: scroll;
     color: red;
     text-align: center;
+}
+
+#event-msg::-webkit-scrollbar {
+    visibility: hidden;
 }
