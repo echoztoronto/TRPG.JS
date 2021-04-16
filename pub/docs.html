@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <title>TRPJ.JS API</title>
         <style>@charset "UTF-8";@import 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css';</style>
-        <link rel="stylesheet" href="docs.css">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="css/docs.css">
+        <link rel="stylesheet" href="css/main.css">
         <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -77,6 +77,12 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td><code>get(attribute)</code></td>
+                    <td><code>attribute</code>: String </td>
+                    <td>Get the value of an attribute</td>
+                    <td><code>get(&quot;hp&quot;)</code></td>
+                </tr>
                 <tr>
                     <td><code>set(attribute,value)</code></td>
                     <td><code>attribute</code>: String , <code>value</code>: String/Number</td>
@@ -191,7 +197,7 @@ aPanel.update();
                 <tr>
                     <td><code>nameTextAlign</code></td>
                     <td><code>&quot;left&quot;</code>/<code>&quot;center&quot;</code>/<code>&quot;right&quot;</code></td>
-                    <td><code>&quot;right&quot;</code></td>
+                    <td><code>&quot;left&quot;</code></td>
                     <td>set the alignment of all attribute names</td>
                 </tr>
                 <tr>
@@ -252,6 +258,18 @@ aPanel.update();
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td><code>get(attribute)</code></td>
+                    <td><code>attribute</code>: String</td>
+                    <td>Get the current value of an attribute</td>
+                    <td><code>get(&quot;hp&quot;)</code></td>
+                </tr>
+                <tr>
+                    <td><code>getMax(attribute)</code></td>
+                    <td><code>attribute</code>: String</td>
+                    <td>Get the maximum value of an attribute</td>
+                    <td><code>getMax(&quot;hp&quot;)</code></td>
+                </tr>
                 <tr>
                     <td><code>set(attribute, value, maxValue, barColor)</code></td>
                     <td><code>attribute</code>: String,<code>value</code>: Number, <code>maxValue</code>: Number, <code>barColor</code>: String</td>
@@ -473,6 +491,12 @@ aBar.update();
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td><code>getQuantity(item)</code></td>
+                    <td><code>item</code>: String</td>
+                    <td>get the quantity of an item</td>
+                    <td><code>getQuantity(&quot;blueberry&quot;)</code></td>
+                </tr>
                 <tr>
                     <td><code>set(item, quantity, description, image_path)</code></td>
                     <td><code>item</code>: String, <code>quantity</code>: Number, <code>description</code>: String, <code>image_path</code>: String</td>
@@ -1000,6 +1024,12 @@ eList.show(<span class="hljs-string">"lecture"</span>);
                     <td><code>&quot;black&quot;</code></td>
                     <td>the text color of the counting down number</td>
                 </tr>
+                <tr>
+                    <td><code>descriptionPosition</code></td>
+                    <td><code>&quot;top&quot;</code> or <code>&quot;bottom&quot;</code></td>
+                    <td><code>&quot;bottom&quot;</code></td>
+                    <td>the description element position</td>
+                </tr>
             </tbody>
         </table>
         <br><br><br>
@@ -1007,7 +1037,8 @@ eList.show(<span class="hljs-string">"lecture"</span>);
 
         <div id="menu" class="sidenav"> 
           <a href="index.html" id="trpg-title"> TRPG.JS </a>
-          <a href="examples.html" id="trpg-title-sub"> &nbsp;&nbsp;PlayGround </a> <br>
+          <a href="examples.html" class="trpg-title-sub"> &nbsp;&nbsp;PlayGround </a>
+          <a href="game.html" class="trpg-title-sub"> &nbsp;&nbsp;Demo Game</a> <br><br>
           <div id="sidenav-warpper"> 
             <a href="#sec-1">Attribute Panel</a>
             <div class="sidenav-sub"> 

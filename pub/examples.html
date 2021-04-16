@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="TRPG.css">
-    <link rel="stylesheet" href="examples.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/examples.css">
+    <link rel="stylesheet" href="css/main.css">
     <script src="TRPG.js"> </script>
     <title> TRPG.JS PlayGround </title>
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -17,7 +17,8 @@
 <body>
     <div id="menu" class="sidenav"> 
         <a href="index.html" id="trpg-title"> TRPG.JS </a>
-        <a href="docs.html" id="trpg-title-sub"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;API </a> <br><br>
+        <a href="docs.html" class="trpg-title-sub"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;API </a> 
+        <a href="game.html" class="trpg-title-sub"> &nbsp;&nbsp;Demo Game</a> <br><br>
         <a href="#sec-1">Attribute Panel</a>
         <a href="#sec-2">Attribute Bars</a>
         <a href="#sec-3"> Inventory </a>
@@ -32,40 +33,32 @@
         Echo Zheng 
     </div>
 
-
-
-
-
-
     <!-- Attribute Panel  -->
     <div class="section-container"> 
         <div class="demo-block"> 
             <a id="sec-1"> </a>
             <div class="section-title"> Attribute Panel</div>
             <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="attribute-panel"> &#60;/div>
+<pre><code class="has-line-data" data-line-start="1" data-line-end="3" class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"attribute-panel"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 
-// javascript constructor
-const aPanel = new AttributePanel('attribute-panel', {
+</code></pre>
+<pre><code class="has-line-data" data-line-start="5" data-line-end="21" class="language-js"><span class="hljs-keyword">const</span> aPanel = <span class="hljs-keyword">new</span> AttributePanel(<span class="hljs-string">'attribute-panel'</span>, {
     attributes : {
-        hp: 1000,
-        mp: 500,
-        sanity: 'healthy',
-        career: 'web developer'
+        hp: <span class="hljs-number">1000</span>,
+        mp: <span class="hljs-number">500</span>,
+        sanity: <span class="hljs-string">'healthy'</span>,
+        career: <span class="hljs-string">'web developer'</span>
       },
     description : {
-        hp: 'heath point, you will lose health when 
-            you eat a rotten apple :)'
+        hp: <span class="hljs-string">'heath point, you will lose health 
+        when you eat a rotten apple :)'</span>
     },
-    showDescription : true,
-    showDescriptionWhenHoverOn : "both",
-    colorChange : true,
-    colorChangeTime: 2, 
+    showDescription : <span class="hljs-literal">true</span>,
+    showDescriptionWhenHoverOn : <span class="hljs-string">"both"</span>,
+    colorChange : <span class="hljs-literal">true</span>,
+    colorChangeTime: <span class="hljs-number">2</span>
   });
-                    </code>
-                </pre>
+</code></pre>
             </div>
             <div class="eg"> Example </div>
             <div class="example-container">
@@ -139,33 +132,31 @@ const aPanel = new AttributePanel('attribute-panel', {
             <a id="sec-2"> </a>
             <div class="section-title"> Attribute Bars</div>
             <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="attribute-bar"> &#60;/div>
 
-// javascript constructor
-const aBar = new AttributeBars('attribute-bar', {
+<pre><code class="has-line-data" data-line-start="1" data-line-end="3" class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"attribute-bar"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+</code></pre>
+<pre><code class="has-line-data" data-line-start="5" data-line-end="24" class="language-js"><span class="hljs-keyword">const</span> aBar = <span class="hljs-keyword">new</span> AttributeBars(<span class="hljs-string">'attribute-bar'</span>, {
     preset_attributes : {  
-        hp: [1000,2000,'pink'],
-        mp: [500,800,'rgb(155, 198, 255)']
+        hp: [<span class="hljs-number">1000</span>,<span class="hljs-number">2000</span>,<span class="hljs-string">'pink'</span>],
+        mp: [<span class="hljs-number">500</span>,<span class="hljs-number">800</span>,<span class="hljs-string">'rgb(155, 198, 255)'</span>]
       },
     description : {
-        hp: 'heath point, you will lose health when 
-            you eat a rotten apple :)',
-        mp: 'the thing we all need to cast a spell'
+        hp: <span class="hljs-string">'heath point, you will lose health 
+        when you eat a rotten apple :)'</span>,
+        mp: <span class="hljs-string">'the thing we all need to cast a spell'</span>
     },
-    showDescription : true,
-    descriptionPosition : "center",
-    colorChange : true,
-    colorChangeTime: 2,
-    colorChangeColor : "red",
+    showDescription : <span class="hljs-literal">true</span>,
+    descriptionPosition : <span class="hljs-string">"center"</span>,
+    colorChange : <span class="hljs-literal">true</span>,
+    colorChangeTime: <span class="hljs-number">2</span>,
+    colorChangeColor : <span class="hljs-string">"red"</span>,
     labelColors: {
-        hp: "white"
+        hp: <span class="hljs-string">"white"</span>
     },
   });
+</code></pre>
 
-                    </code>
-                </pre>
             </div>
             <div class="eg"> Example </div>
             <div class="example-container">
@@ -254,39 +245,41 @@ const aBar = new AttributeBars('attribute-bar', {
             <a id="sec-3"> </a>
             <div class="section-title"> Inventory </div>
             <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="inventory"> &#60;/div>
+<pre><code class="has-line-data" data-line-start="1" data-line-end="4" class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"inventory"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 
-// javascript constructor
-const myBag = new Inventory('inventory', {
-  quantity : { apple: 20,banana: 5,
-               orange: 0,strawberry: 100},
-  description: { apple: 'rotted',
-           banana: 'it tastes like a banana' }, 
-    image: {//path to image here},
-    numRow: 4,
-    numColumn: 6,
-    menuOption: ['use','destroy'],
-    menuOptionOnclick: { 'use': use_item,
-     'destroy':  destroy_item,}  
+</code></pre>
+<pre><code class="has-line-data" data-line-start="6" data-line-end="38" class="language-js"><span class="hljs-keyword">const</span> myBag = <span class="hljs-keyword">new</span> Inventory(<span class="hljs-string">'inventory'</span>, {
+  quantity : { apple: <span class="hljs-number">20</span>,banana: <span class="hljs-number">5</span>,
+               orange: <span class="hljs-number">0</span>,strawberry: <span class="hljs-number">100</span>},
+  description: { apple: <span class="hljs-string">'rotted'</span>,
+           banana: <span class="hljs-string">'it tastes like a banana'</span> }, 
+    image: {
+      banana: <span class="hljs-string">'img/banana.jpg'</span>,
+      apple: <span class="hljs-string">'img/apple.jpg'</span>,
+      strawberry: <span class="hljs-string">'img/strawberry.jpg'</span>,
+      orange: <span class="hljs-string">'img/orange.jpg'</span>
+    },
+    numRow: <span class="hljs-number">4</span>,
+    numColumn: <span class="hljs-number">6</span>,
+    menuOption: [<span class="hljs-string">'use'</span>,<span class="hljs-string">'destroy'</span>],
+    menuOptionOnclick: { <span class="hljs-string">'use'</span>: use_item,
+     <span class="hljs-string">'destroy'</span>:  destroy_item,}  
 });
 
-// left click menu option onclick functions
-function use_item(item) {
-  myBag.removeItem(item, 1);
+<span class="hljs-comment">// left click menu option onclick functions</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">use_item</span>(<span class="hljs-params">item</span>) </span>{
+  myBag.removeItem(item, <span class="hljs-number">1</span>);
 }
 
-function destroy_item(item) {
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">destroy_item</span>(<span class="hljs-params">item</span>) </span>{
   myBag.clearItem(item);
 }
 
-function gift_item(item) {
-  myBag.removeItem(item, 1);
-  // print "thank you" above
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">gift_item</span>(<span class="hljs-params">item</span>) </span>{
+  myBag.removeItem(item, <span class="hljs-number">1</span>);
+  <span class="hljs-comment">// print "thank you" above</span>
 }
-                    </code>
-                </pre>
+</code></pre>
             </div>
             <div class="eg"> Example </div>
             <div id="inventory-message"> </div>
@@ -383,36 +376,40 @@ function gift_item(item) {
             <a id="sec-4"> </a>
             <div class="section-title"> Event List</div>
             <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="event-list"> &#60;/div>
 
-const eList = new EventList('event-list', {
+<pre><code class="has-line-data" data-line-start="1" data-line-end="3" class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"event-list"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+</code></pre>
+<pre><code class="has-line-data" data-line-start="4" data-line-end="31" class="language-js"><span class="hljs-keyword">const</span> eList = <span class="hljs-keyword">new</span> EventList(<span class="hljs-string">'event-list'</span>, {
   events : {  
-    'golden apple': ['pick up','cancel'],
-    'pikachu': ['fight', 'run'],
-    'an event without description':
-          ['an option without description','cancel']
+    <span class="hljs-string">'golden apple'</span>: [<span class="hljs-string">'pick up'</span>,<span class="hljs-string">'cancel'</span>],
+    <span class="hljs-string">'pikachu'</span>: [<span class="hljs-string">'fight'</span>, <span class="hljs-string">'run'</span>],
+    <span class="hljs-string">'an event without description'</span>:
+          [<span class="hljs-string">'an option without description'</span>,<span class="hljs-string">'cancel'</span>]
   },
   eventDescription: {
-    'golden apple': `There is a golden apple on the ground,
-           and no creatures is guarding it nearby. When you 
-           approach, you smell a scent that you can't resist.`,
-    'pikachu': "A wild Pikachu appears!"
+    <span class="hljs-string">'golden apple'</span>: <span class="hljs-string">`There is a golden apple on 
+            the ground, and no creatures is 
+            guarding it nearby. When you approach, 
+            you smell a scent that you can't resist.`</span>,
+    <span class="hljs-string">'pikachu'</span>: <span class="hljs-string">"A wild Pikachu appears!"</span>
   },
   options: {
-    'cancel': cancel,
-    'run': run,
-    'fight': fight
+    <span class="hljs-string">'pick up'</span>: pick_up,
+    <span class="hljs-string">'cancel'</span>: cancel,
+    <span class="hljs-string">'run'</span>: run,
+    <span class="hljs-string">'fight'</span>: fight
   },
   optionDescription: {
-    'run': "I'm not strong enough, it's time to escape!",
-    'fight': "Escape is for coward, I'd fight till death!",
-    'pick up': "It's mine now! [Pick Up]"
+    <span class="hljs-string">'run'</span>: <span class="hljs-string">"I'm not strong enough,
+                it's time to escape!"</span>,
+    <span class="hljs-string">'fight'</span>: <span class="hljs-string">"Escape is for coward,
+                I'd fight till death!"</span>,
+    <span class="hljs-string">'pick up'</span>: <span class="hljs-string">"It's mine now! [Pick Up]"</span>
   }
-});                    
-                    </code>
-                </pre>
+});                
+</code></pre>         
+            
             </div>
             <div class="eg"> Example </div>
             <div class="example-container">
@@ -464,31 +461,29 @@ const eList = new EventList('event-list', {
             <a id="sec-5"> </a>
             <div class="section-title"> Skill Panel</div>
             <div class="demo-code"> 
-                <pre>
-                    <code>
-&#60;div id="skill-panel"> &#60;/div>
+<pre><code class="has-line-data" data-line-start="1" data-line-end="3" class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"skill-panel"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 
-// JavaScript constructor
-const sPanel = new SkillPanel('skill-panel', {
-  skills: ['attack','retreat'],
+</code></pre>
+<pre><code class="has-line-data" data-line-start="5" data-line-end="24" class="language-js"><span class="hljs-keyword">const</span> sPanel = <span class="hljs-keyword">new</span> SkillPanel(<span class="hljs-string">'skill-panel'</span>, {
+  skills: [<span class="hljs-string">'attack'</span>,<span class="hljs-string">'retreat'</span>],
   icon: {
-    'attack': "img/stick.png",
-    'retreat': "img/escape.jpg",
+    <span class="hljs-string">'attack'</span>: <span class="hljs-string">"img/stick.png"</span>,
+    <span class="hljs-string">'retreat'</span>: <span class="hljs-string">"img/escape.jpg"</span>,
   },
   description: {
-    attack:'normal attack <br><br> damage: 1 <br> <i> better than escape</i>',
-    retreat: "it's a situational retreat "
+    attack:<span class="hljs-string">'normal attack &lt;br&gt;&lt;br&gt; damage: 1 
+        &lt;br&gt; &lt;i&gt; better than escape&lt;/i&gt;'</span>,
+    retreat: <span class="hljs-string">"it's a situational retreat "</span>
   },
   onclick: {
     attack: attack,
     retreat: retreat,
   },
   cooldown: {
-    retreat: 5,
+    retreat: <span class="hljs-number">5</span>,
   }
 });
-                    </code>
-                </pre>
+</code></pre>
             </div>
             <div class="eg"> Example </div>
             <div class="example-container">
@@ -537,6 +532,6 @@ const sPanel = new SkillPanel('skill-panel', {
     </div>
 
 
-    <script src="examples.js"> </script>
+    <script src="js/examples.js"> </script>
 </body>
 </html>

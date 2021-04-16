@@ -1,0 +1,61 @@
+#attribute-panel{
+    position: fixed;
+    left: 220px;
+    bottom: 20px;
+    width: 200px;
+    height: 100px;
+    border: solid 1px rgb(188, 188, 248);
+}
+
+#attribute-bar{
+    position: fixed;
+    left: 250px;
+    top: 10px;
+    width: 600px;
+}
+
+#inventory {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+#event-list {
+    position: fixed;
+    width: 600px;
+    max-height: 400px;
+    left: calc(50% - 300px);
+    top: 350px;
+}
+
+#skill-panel{
+    position: fixed;
+    left: 480px;
+    bottom: 20px;
+    width: 400px;
+    height: 100px;
+}
+
+#draw{
+    position: fixed;
+    left: 240px;
+    width: 150px;
+    top: calc(50% - 200px);
+    height: 100px;
+    background-color: rgb(171, 215, 253);
+    font-size: 23px;
+}
+
+#event-msg {
+    position: fixed;
+    width: 600px;
+    left: calc(50% - 300px);
+    top: 250px;
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 10px;
+    overflow-y: scroll;
+    color: red;
+    text-align: center;
+}

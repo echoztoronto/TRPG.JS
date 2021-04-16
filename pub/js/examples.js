@@ -94,6 +94,7 @@ const eList = new EventList('event-list', {
     'pikachu': "A wild Pikachu appears!"
   },
   options: {
+    'pick up': pick_up,
     'cancel': cancel,
     'run': run,
     'fight': fight
@@ -105,53 +106,54 @@ const eList = new EventList('event-list', {
   }
 });
 
+const event_msg = document.getElementById("event-list-message");
+
+function pick_up(event_name) {
+  event_msg.innerHTML += 
+  `event: ${event_name}, function: pick_up <br>`;
+  event_msg.scrollTop = event_msg.scrollHeight;
+}
+
 function cancel(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: cancel <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 function run(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: run <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 function fight(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: fight <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 function pet(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: pet <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 function revive(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: revive <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 function play(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: play <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 function give_food(event_name) {
-  const message = document.getElementById("event-list-message");
-  message.innerHTML += 
+  event_msg.innerHTML += 
   `event: ${event_name}, function: give_food <br>`;
-  message.scrollTop = message.scrollHeight;
+  event_msg.scrollTop = event_msg.scrollHeight;
 }
 
 

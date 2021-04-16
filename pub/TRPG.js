@@ -20,7 +20,7 @@
         colorChangeColor = "red";
         nameColor = "black";
         valueColor = "black";
-        nameTextAlign = "right";
+        nameTextAlign = "left";
         valueTextAlign = "left";
 
         timers = {};
@@ -46,6 +46,10 @@
             this.container.appendChild(this.description_div);
             // DOM
             this.update();
+        }
+
+        get(attr) {
+            return this.attributes[attr];
         }
 
         set(attr, value) {
@@ -129,7 +133,7 @@
             this.container.appendChild(attr_div);
             attr_div.className = "TRPG-aPanel-attr";
             attr_div.id = dest_ID;
-            attr_div.innerHTML = `  <div class='TRPG-aPanel-attr-name' id='${dest_ID}-name'> ${attr} </div> 
+            attr_div.innerHTML = `  <div class='TRPG-aPanel-attr-name' id='${dest_ID}-name'> <b>${attr}</b> </div> 
                                     <div class='TRPG-aPanel-attr-value' id='${dest_ID}-value'> ${this.attributes[attr]} </div>`;
             this.nameMaxWidth = _make_all_same_width("TRPG-aPanel-attr-name");
             this.nameMaxWidth = _make_all_same_width("TRPG-aPanel-attr-value");
@@ -153,10 +157,11 @@
                 const name_element = document.getElementById(showDescriptionOnWhich);
                 const description_element = this.description_div;
                 const desction_list = this.description;
+                const overall_position = getComputedStyle(this.container).position;
                 name_element.addEventListener("mouseover", function(){
                     if(desction_list[attr] == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
                     else description_element.innerHTML = `${desction_list[attr]}`;
-                    _set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'));
+                    _set_element_to_bottom_right_of_another_element(description_element, document.getElementById(dest_ID + '-value'), overall_position);
                     description_element.style.visibility = "visible";
                 });
                 name_element.addEventListener("mouseout", function(){
@@ -219,6 +224,14 @@
             this.container.appendChild(this.description_div);
             // DOM
             this.update();
+        }
+
+        get(attr) {
+            return this.attributes[attr];
+        }
+
+        getMax(attr) {
+            return this.attributesMax[attr];
         }
 
         set(attr, value, maxValue, barColor) {
@@ -361,21 +374,22 @@
                 const description_element = this.description_div;
                 const description_list = this.description;
                 const description_position = this.descriptionPosition;
+                const overall_position = getComputedStyle(this.container).position;
                 name_element.addEventListener("mouseover", function(){
                     if(description_list[attr] == undefined) description_element.innerHTML = `<i>&#60;no description></i>`;
                     else description_element.innerHTML = `${description_list[attr]}`;
                     switch(description_position) {
                         case "left":
-                            _set_element_to_bottom_left_of_another_element(description_element, name_element);
+                            _set_element_to_bottom_left_of_another_element(description_element, name_element, overall_position);
                             break;
                         case "center":
-                            _set_element_to_bottom_center_of_another_element(description_element, name_element);
+                            _set_element_to_bottom_center_of_another_element(description_element, name_element, overall_position);
                             break;
                         case "right":
-                            _set_element_to_bottom_right_of_another_element(description_element, name_element);
+                            _set_element_to_bottom_right_of_another_element(description_element, name_element, overall_position);
                             break;
                         default:
-                            _set_element_to_bottom_center_of_another_element(description_element, name_element);
+                            _set_element_to_bottom_center_of_another_element(description_element, name_element, overall_position);
                     }
                     description_element.style.visibility = "visible";
                 });
@@ -447,6 +461,10 @@
             this.container.classList.add("TRPG-inventory-container");
             // DOM
             this.update();
+        }
+
+        getQuantity(item) {
+            return this.quantity[item];
         }
 
         set(item, quantity, description, img){
@@ -644,11 +662,12 @@
                             <div class='TRPG-inventory-quantity' id='${this.ID}-quantity-${item_count}'> ${this.quantity[item]} </div>
                         </div>`;
                     valid_cell_id.push(cell_element);
+                    const overall_position = getComputedStyle(this.container).position;
                     // left click event - show options
                     if(this.showOnclickMenu){
                         cell_element.addEventListener("click",function(event){
                             menu.style.visibility = "hidden";
-                            _move_element_to_mouse_postion(event, menu);
+                            _move_element_to_mouse_postion(event, menu, overall_position);
                             menu.style.visibility = "visible";
                             menu.setAttribute("data-item", item);
                         });
@@ -662,7 +681,7 @@
                             description_element.style.visibility = 'hidden';
                             return;
                         }
-                        _set_element_to_bottom_right_of_another_element(info, cell_element);
+                        _set_element_to_bottom_right_of_another_element(info, cell_element, overall_position);
                         info.setAttribute("data-item", item);
                         if(display_name) {
                             name_element.innerHTML = item;
@@ -818,8 +837,8 @@
             // description 
             const description_container = document.getElementById(this.ID + "-description");
             if(this.eventDescription[event_name] == undefined) {
-                description_container.innerHTML = event_name;
-            } else description_container.innerHTML = this.eventDescription[event_name];
+                description_container.innerHTML = `<b>${event_name}</b>`;
+            } else description_container.innerHTML = `<b>${this.eventDescription[event_name]}</b>`;
 
             // options
             // remove old ones
@@ -881,6 +900,7 @@
         iconSize = 80;
         showDescription = true;
         timerColor = "black";
+        descriptionPosition = "bottom";
 
         skill_index = {};
 
@@ -1023,6 +1043,8 @@
                 // description
                 if(this.showDescription) {
                     const description_element = this.description_div;
+                    const overall_position = getComputedStyle(this.container).position;
+                    const d_position = this.descriptionPosition;
                     let description  = this.description[name];
                     skill_element.addEventListener("mouseover", function(){
                         if(description == undefined) description = ``;
@@ -1032,7 +1054,8 @@
                                 <div class="TRPG-spanel-description-text"> ${description}</div>
                                 <div class="TRPG-spanel-description-cd">cooldown: ${actual_cd} sec</div>
                             `;
-                        _set_element_to_bottom_center_of_another_element(description_element, skill_element);
+                            if(d_position == 'top') _set_element_to_top_of_another_element(description_element, skill_element, overall_position);
+                            else _set_element_to_bottom_center_of_another_element(description_element, skill_element, overall_position);
                         description_element.style.visibility = "visible";
                     });
                     skill_element.addEventListener("mouseout", function(){
@@ -1110,35 +1133,41 @@
         return value;
     }
 
-    function _move_element_to_mouse_postion(event, div) {
+    function _move_element_to_mouse_postion(event, div, position) {
         const x = event.clientX;    
         const y = event.clientY; 
         div.style.left = window.scrollX + x + 'px';
         div.style.top  = window.scrollY + y + 'px';
+        if(position == 'fixed' || position == 'absolute') div.style.position = 'fixed';
     }
 
-    function _set_element_to_bottom_right_of_another_element(front, back) {
+    function _set_element_to_bottom_right_of_another_element(front, back, position) {
         const rect = back.getBoundingClientRect();
         front.style.left = window.scrollX + rect.right - 5  + 'px';
         front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
+        if(position == 'fixed' || position == 'absolute') front.style.position = 'fixed';
     }
 
-    function _set_element_to_bottom_center_of_another_element(front, back) {
+    function _set_element_to_bottom_center_of_another_element(front, back, position) {
         const rect = back.getBoundingClientRect();
         front.style.left = window.scrollX + (rect.left + rect.right)/2  + 'px';
         front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
+        if(position == 'fixed' || position == 'absolute') front.style.position = 'fixed';
     }
 
-    function _set_element_to_bottom_left_of_another_element(front, back) {
+    function _set_element_to_bottom_left_of_another_element(front, back, position) {
         const rect = back.getBoundingClientRect();
         front.style.left = window.scrollX + rect.left - 5  + 'px';
         front.style.top =  window.scrollY + rect.bottom - 5 + 'px';
+        if(position == 'fixed' || position == 'absolute') front.style.position = 'fixed';
     }
 
-    function _set_element_to_center_center_of_another_element(front, back) {
+    function _set_element_to_top_of_another_element(front, back, position) {
         const rect = back.getBoundingClientRect();
-        front.style.left = window.scrollX + (rect.left + rect.right)/2  + 'px';
-        front.style.top =  window.scrollY + (rect.top + rect.bottom)/2  + 'px';
+        const rect2 = front.getBoundingClientRect();
+        front.style.left = window.scrollX + (rect.left+rect.right)/2 - 5  + 'px';
+        front.style.top =  window.scrollY + rect.top - rect2.height - 5 + 'px';
+        if(position == 'fixed' || position == 'absolute') front.style.position = 'fixed';
     }
 
     function _random_inside_object(obj) {
