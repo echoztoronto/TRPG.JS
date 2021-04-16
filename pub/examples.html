@@ -33,27 +33,7 @@
     </div>
 
 
- <div class="section-container"> 
-        <div class="demo-block"> 
-            <a id="sec-5"> </a>
-            <div class="section-title"> Skill Panel</div>
-            <div class="demo-code"> 
-                <pre>
-                    <code>
 
-                    </code>
-                </pre>
-            </div>
-            <div class="eg"> Example </div>
-            <div class="example-container">
-                <div id="skill-panel"> </div>
-                <div id="skill-panel-message" class="message-log"> </div>
-            </div>
-        </div>
-        <div class="buttons">  
- 
-        </div>
-    </div>
 
 
 
@@ -405,6 +385,8 @@ function gift_item(item) {
             <div class="demo-code"> 
                 <pre>
                     <code>
+&#60;div id="event-list"> &#60;/div>
+
 const eList = new EventList('event-list', {
   events : {  
     'golden apple': ['pick up','cancel'],
@@ -472,7 +454,85 @@ const eList = new EventList('event-list', {
             .setOptionDescription() 
             <button onclick="eList.setOptionDescription('play', 'play with it')"> ('play', 'play with it') </button>
             <button onclick="eList.setOptionDescription('play', 'actually, go to sleep')"> ('play', 'actually, go to sleep') </button> <br>
+        </div>
+    </div>
 
+
+    <!-- Skill Panel  -->
+     <div class="section-container"> 
+        <div class="demo-block"> 
+            <a id="sec-5"> </a>
+            <div class="section-title"> Skill Panel</div>
+            <div class="demo-code"> 
+                <pre>
+                    <code>
+&#60;div id="skill-panel"> &#60;/div>
+
+// JavaScript constructor
+const sPanel = new SkillPanel('skill-panel', {
+  skills: ['attack','retreat'],
+  icon: {
+    'attack': "img/stick.png",
+    'retreat': "img/escape.jpg",
+  },
+  description: {
+    attack:'normal attack <br><br> damage: 1 <br> <i> better than escape</i>',
+    retreat: "it's a situational retreat "
+  },
+  onclick: {
+    attack: attack,
+    retreat: retreat,
+  },
+  cooldown: {
+    retreat: 5,
+  }
+});
+                    </code>
+                </pre>
+            </div>
+            <div class="eg"> Example </div>
+            <div class="example-container">
+                <div id="skill-panel"> </div>
+                <div id="skill-panel-message" class="message-log"> </div>
+            </div>
+        </div>
+        <div class="buttons">  
+            .set() 
+            <button onclick="sPanel.setSkill('fire ball','A strong magical fire ball',10,'img/fire.jpg',fire_ball)"> ('fire ball','A strong magical fire ball',10,'img/fire.jpg',fire_ball) </button>
+            <button onclick="sPanel.setSkill('eat banana', 'restore some hp', 2, 'img/banana.jpg', eat_banana)"> ('eat banana', 'restore some hp', 2, 'img/banana.jpg', eat_banana) </button> <br>
+            .addSkill() 
+            <button onclick="sPanel.addSkill('attack')"> ('attack') </button>
+            <button onclick="sPanel.addSkill('retreat')"> ('retreat') </button>
+            <button onclick="sPanel.addSkill('fire ball')">('fire ball')  </button>
+            <button onclick="sPanel.addSkill('eat banana')"> ('eat banana') </button> <br>
+            .deleteSkill() 
+            <button onclick="sPanel.deleteSkill('attack')"> ('attack') </button>
+            <button onclick="sPanel.deleteSkill('retreat')"> ('retreat') </button>
+            <button onclick="sPanel.deleteSkill('fire ball')">('fire ball')  </button>
+            <button onclick="sPanel.deleteSkill('eat banana')"> ('eat banana') </button> <br>
+            .enableSkill() 
+            <button onclick="sPanel.enableSkill('attack')"> ('attack') </button>
+            <button onclick="sPanel.enableSkill('retreat')"> ('retreat') </button>
+            <button onclick="sPanel.enableSkill('fire ball')">('fire ball')  </button>
+            <button onclick="sPanel.enableSkill('eat banana')"> ('eat banana') </button> <br>
+            .disableSkill() 
+            <button onclick="sPanel.disableSkill('attack')"> ('attack') </button>
+            <button onclick="sPanel.disableSkill('retreat')"> ('retreat') </button>
+            <button onclick="sPanel.disableSkill('fire ball')">('fire ball')  </button>
+            <button onclick="sPanel.disableSkill('eat banana')"> ('eat banana') </button> <br>
+            <br><br>
+            <br><b>.update() is required for the following options to be effective, but here I'll just run it for you </b> 
+            <br> .iconSize = 
+            <button onclick="sPanel.iconSize = 60;sPanel.update()"> 60 </button>
+            <button onclick="sPanel.iconSize = 80;sPanel.update()"> 80 </button> 
+            <button onclick="sPanel.iconSize = 100;sPanel.update()"> 100</button> <br>
+            .showDescription = 
+            <button onclick="sPanel.showDescription = true;sPanel.update()"> true </button>
+            <button onclick="sPanel.showDescription = false;sPanel.update()"> false </button>  <br>
+            .timerColor = 
+            <button onclick="sPanel.timerColor = 'black';sPanel.update()"> 'black' </button>
+            <button onclick="sPanel.timerColor = 'red';sPanel.update()"> 'red' </button>
+            <button onclick="sPanel.timerColor = 'green';sPanel.update()"> 'green' </button>
         </div>
     </div>
 

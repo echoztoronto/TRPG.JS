@@ -175,16 +175,28 @@ const sPanel = new SkillPanel('skill-panel', {
   }
 });
 
+const skill_msg = document.getElementById("skill-panel-message");
+
 function attack() {
-  const message = document.getElementById("skill-panel-message");
-  message.innerHTML += 
+  skill_msg.innerHTML += 
   `function: attack <br>`;
-  message.scrollTop = message.scrollHeight;
+  skill_msg.scrollTop = skill_msg.scrollHeight;
 }
 
 function retreat() {
-  const message = document.getElementById("skill-panel-message");
-  message.innerHTML += 
+  skill_msg.innerHTML += 
   `function: retreat <br>`;
-  message.scrollTop = message.scrollHeight;
+  skill_msg.scrollTop = skill_msg.scrollHeight;
+}
+
+function fire_ball() {
+  skill_msg.innerHTML += 
+  `function: fire_ball <br>`;
+  skill_msg.scrollTop = skill_msg.scrollHeight;
+}
+
+function eat_banana() {
+  skill_msg.innerHTML += 
+  `function: eat_banana <br>`;
+  skill_msg.scrollTop = skill_msg.scrollHeight;
 }

@@ -910,6 +910,7 @@
             this.cooldown[name] = cd;
             this.icon[name] = img;
             this.onclick[name] = click;   
+            this.update();
         }
 
         addSkill(name) {
@@ -960,9 +961,9 @@
             skills_warpper.classList.add("TRPG-spanel-skills");
             this.container.appendChild(skills_warpper);
 
+            this.skill_index = {};
             // add each skill
             for(let i=0; i<this.skills.length; i++) {
-                this.skill_index = {};
                 const name = this.skills[i];
                 this.skill_index[name] = i;
                 const skill_element = document.createElement("div");
@@ -1044,7 +1045,7 @@
             _change_class_css("TRPG-spanel-skill", "width", this.iconSize + 'px');
             _change_class_css("TRPG-spanel-skill", "height", this.iconSize + 'px');
             _change_class_css("TRPG-spanel-skill-timer", "font-size", (Number(this.iconSize)-20) + 'px');
-            _change_class_css("TRPG-spanel-skill-timer", "margin-top", (0-Number(this.iconSize)) + 'px');
+            _change_class_css("TRPG-spanel-skill-timer", "margin-top", (5-Number(this.iconSize)) + 'px');
             _change_class_css("TRPG-spanel-skill-timer", "color", this.timerColor);
         }
     }
