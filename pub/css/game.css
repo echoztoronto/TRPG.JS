@@ -1,5 +1,10 @@
+body {
+    min-width: 1580px;
+    min-height: 1100px;
+}
+
 #attribute-panel{
-    position: fixed;
+    position: absolute;
     left: 220px;
     bottom: 20px;
     width: 200px;
@@ -8,20 +13,20 @@
 }
 
 #attribute-bar{
-    position: fixed;
+    position: absolute;
     left: 250px;
     top: 10px;
     width: 600px;
 }
 
 #inventory {
-    position: fixed;
+    position: absolute;
     right: 20px;
     bottom: 20px;
 }
 
 #event-list {
-    position: fixed;
+    position: absolute;
     width: 600px;
     max-height: 400px;
     left: calc(50% - 300px);
@@ -30,7 +35,7 @@
 }
 
 #skill-panel{
-    position: fixed;
+    position: absolute;
     left: 480px;
     bottom: 20px;
     width: 400px;
@@ -38,7 +43,7 @@
 }
 
 #draw{
-    position: fixed;
+    position: absolute;
     left: 240px;
     width: 150px;
     top: calc(50% - 200px);
@@ -48,7 +53,7 @@
 }
 
 #event-msg {
-    position: fixed;
+    position: absolute;
     width: 300px;
     left: calc(50% - 150px);
     top: 250px;
