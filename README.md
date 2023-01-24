@@ -8,9 +8,9 @@ Web developers can use TRPG.JS library to display the information panel for each
 
 ## Examples
 
-Landing Page: https://trpg-demo.herokuapp.com/
+Landing Page: https://echoztoronto.github.io/TRPG.JS/index.html
 
-API Documentation: https://trpg-demo.herokuapp.com/docs.html
+API Documentation: https://echoztoronto.github.io/TRPG.JS/pub/docs.html
 
 ## Getting Started
 This library is built by vanilla JavaScript, no external module is required.
